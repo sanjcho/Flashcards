@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
+  get 'cards/show'
+
   get 'home', to: 'home#index'
+  get 'cards', to: 'cards#show'
   root to: 'home#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
