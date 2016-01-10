@@ -19,8 +19,8 @@
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 
-en:
-  all_c: "All cards"
-  flash: "Flashcards app"
-  add_c: "Add flashcard"
-  first_flash_manager: "The first ever comfortable flashcard manager. That's right."
+ru:
+  all_c: "Все карточки"
+  flash: "Флешкарточкер"
+  add_c: "Добавить карточку"
+  first_flash_manager: "Первый в мире удобный менеджер флеш-карточек. Именно так."
