@@ -2,9 +2,9 @@
 <table class="table table-hover">
   <thead>
     <tr>
-      <th>Original</th>
-      <th>Translated</th>
-      <th>Last view date</th>
+      <th><%= t('original') %></th>
+      <th><%= t('translated') %></th>
+      <th><%= t('view_date') %></th>
     </tr>
   </thead>
  <tbody>
@@ -12,7 +12,8 @@
 	      <tr>
 	        <td><%= card.original_text %></td>
 	        <td><%= card.translated_text %></td>
-	        <td><%= card.review_date.strftime("%m/%d/%Y") %></td>
+	        <td><%= card.review_date.strftime("%d/%m/%Y") %></td>
+	        <td><%= link_to t('edit_short'), edit_card_path(card) %>  <%= link_to t('delete'), delete_card_path(card) %></td>
 	       </tr>
 	   <% end %>
 	</tbody>

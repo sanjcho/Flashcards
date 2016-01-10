@@ -15,8 +15,8 @@
 	      	<h1> <%= t('flash') %> </h1>
 	      </div>
 	      <ul class="nav nav-pills">
-	        <li><%= link_to t('all_c'), cards_path %></li>
-	        <li><a href="#"><%= t('add_c') %></a></li>
+	        <li><%= link_to t('all_c'), cards_path%></li>
+	        <li><%= link_to t('add_c'), new_card_path %></a></li>
 	      </ul>
 	    </header>
 		<%= yield %>
