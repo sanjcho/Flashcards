@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Флэшкарточкер</title>
+  <title><%= t('flash') %></title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 
@@ -12,11 +12,11 @@
 
 	    <header class="clearfix">
 	      <div class="page-header">
-	      	<h1>Флэшкарточкер</h1>
+	      	<h1> <%= t('flash') %> </h1>
 	      </div>
 	      <ul class="nav nav-pills">
-	        <li><%= link_to 'Все карточки', cards_path %></li>
-	        <li><a href="#">Добавить карточку</a></li>
+	        <li><%= link_to t('all_c'), cards_path %></li>
+	        <li><a href="#"><%= t('add_c') %></a></li>
 	      </ul>
 	    </header>
 		<%= yield %>

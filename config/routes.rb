@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'cards/show'
 
   get 'home', to: 'home#index'
   get 'cards', to: 'cards#show'
