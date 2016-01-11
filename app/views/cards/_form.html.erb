@@ -1,3 +1,12 @@
+<% if @card.errors.any? %>
+    <div id="alert alert-danger">
+      <ul>
+        <% @card.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+<% end %>  	
 <%= simple_form_for @card do |f| %>
   <%= f.input :original_text, label: t('original') %>
   <%= f.input :translated_text, label: t('translated') %>
