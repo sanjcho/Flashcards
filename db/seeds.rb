@@ -13,6 +13,6 @@ a = 14
 100.times do
   orig = page.css("td")[a].text
   transl = page.css("td")[a + 1].text
-  a += 	3
+  a += 3
   Card.create(original_text: orig, translated_text: transl)
 end
