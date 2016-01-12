@@ -12,14 +12,14 @@ page.css('#middle > table tr:not(.first)').each do |item|
   i=1
   2.times do
     orig = item.css('td')[i].text
-    i +=1
+    i += 1
     transl = item.css('td')[i].text
     c = Card.new(original_text: orig, translated_text: transl)
     if c.valid?
-  	  c.save
+      c.save
     else
-  	  puts c.errors.full_messages
-  	end
-  	i +=2
+      puts c.errors.full_messages
+    end
+    i += 2
   end
 end
