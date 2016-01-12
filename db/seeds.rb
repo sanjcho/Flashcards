@@ -8,7 +8,7 @@ require "nokogiri"
 require "open-uri"
 
 page = Nokogiri::HTML(open("http://www.homeenglish.ru/250Popular1.htm"))
-page.css('#middle > table tr:not(.first)').each do |item|
+page.css('#middle > table tr').drop(1).each do |item|
   i=1
   2.times do
     orig = item.css('td')[i].text
