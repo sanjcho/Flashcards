@@ -15,10 +15,10 @@
 	        <td><%= card.review_date.strftime("%d/%m/%Y") %></td>
 	        <td>
 	          <div class="btn-group">
-	        	<button type="button" class="btn btn-default"><%= link_to t('edit_short'), edit_card_path(card) %>   </button>
-	            <button type="button" class="btn btn-default"><%= link_to t('delete'), card_path(card), 
+	        	<%= link_to t('edit_short'), edit_card_path(card), class: 'btn btn-default' %> 
+	            <%= link_to t('delete'), card_path(card), class: 'btn btn-default',
                     method: :delete, 
-                    data: {confirm: t("sure?")} %> </button>
+                    data: {confirm: t("sure?")} %> 
               </div>
             </td>
 	       </tr>
