@@ -1,7 +1,7 @@
 class TextComparisonValidator < ActiveModel::Validator
   def validate(record)
     if record.original_text.downcase == record.translated_text.downcase
-      record.errors.add( both_texts,:must_be_diff)
+      record.errors.add( :original_text,:must_be_diff_w_transl)
     end
   end
 end
