@@ -4,4 +4,22 @@
 # Examples:
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+require "nokogiri"
+require "open-uri"
+
+page = Nokogiri::HTML(open("http://www.homeenglish.ru/250Popular1.htm"))
+page.css('#middle > table tr').drop(1).each do |item|
+  i=1
+  2.times do
+    orig = item.css('td')[i].text
+    i += 1
+    transl = item.css('td')[i].text
+    c = Card.new(original_text: orig, translated_text: transl)
+    if c.valid?
+      c.save
+    else
+      puts c.errors.full_messages
+    end
+    i += 2
+  end
+end
