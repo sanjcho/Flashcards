@@ -6,8 +6,10 @@ scope :expired, ->{ where('review_date <= ?', DateTime.now) }
   before_validation(on: :create) do
     self.review_date = DateTime.now.days_since(3)
   end
-  
 
+  def self.random
+    offset(rand(count))
+  end
 
   def must_not_be_equal
     if self.original_text.downcase == self.translated_text.downcase
