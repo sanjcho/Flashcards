@@ -2,8 +2,8 @@ class Card < ActiveRecord::Base
 validates :original_text, :translated_text, presence: true, uniqueness: { case_sensitive: false }
 validates :review_date, presence: true
 validate :must_not_be_equal
-scope :expired, ->{ where('review_date <= ?', DateTime.now) }
-scope :random, ->{ offset(rand(count))}
+scope :expired, -> { where('review_date <= ?', DateTime.now) }
+scope :random, -> { offset(rand(count))}
   before_validation(on: :create) do
     self.review_date = DateTime.now.days_since(3)
   end
