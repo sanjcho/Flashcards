@@ -42,12 +42,13 @@ class CardsController < ApplicationController
   end
 
   def compare
-    if params[:compared_text] == Card.find(params[:id]).original_text
+    if params[:compared_text].downcase == params[:original_text].downcase
       puts "success"
     else
       puts "wrong"
       #puts Card.find(params[:id]).original_text
       puts params[:compared_text]
+      puts params[:original_text]
     end
     redirect_to cards_path
   end
