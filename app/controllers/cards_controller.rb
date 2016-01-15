@@ -42,14 +42,13 @@ class CardsController < ApplicationController
   end
 
   def compare
-    if params[:compared_text].strip == params[:original_text].strip
-      puts "success"
+    card = Card.find(params[:id])
+    if params[:compared_text].strip == card.original_text.strip
+      card.review_actualize
+      card.save
+      flash[:success] = t("success")
     else
-      puts "wrong"
-      #puts Card.find(params[:id]).original_text
-      puts params[:compared_text]
-      puts params[:original_text]
-
+      flash[:danger] = t("wrong")
     end
     redirect_to cards_path
   end

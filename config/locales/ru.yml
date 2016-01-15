@@ -28,8 +28,6 @@ ru:
   original: "Оригинальный текст"
   translated: "Переведенный текст"
   submit: "Подтвердить"
-  original: "Оригинальный текст"
-  translated: "Переведенный текст"
   view_date: "Дата последнего просмотра"
   edit_c: "Изменение карточки"
   edit_short: "Изменить"
@@ -38,6 +36,8 @@ ru:
   orig&transl_must_be_diff: "Оригинальный и переведенный тексты должны отличаться"
   remember?: "Проверка знания карточек"
   check: "Проверить"
+  success: "Верно!"
+  wrong: "Не верно!"
   activerecord:
     errors:
       models:

@@ -5,7 +5,7 @@ validate :must_not_be_equal
 scope :expired, -> { where('review_date <= ?', DateTime.now) }
 scope :random, -> { offset(rand(count))}
   before_validation(on: :create) do
-    self.review_date = DateTime.now.days_since(3)
+    review_actualize
   end
 
   def must_not_be_equal
@@ -14,6 +14,9 @@ scope :random, -> { offset(rand(count))}
     end
   end
 
+  def review_actualize
+    self.review_date = DateTime.now.days_since(3)
+  end
 
 
 end

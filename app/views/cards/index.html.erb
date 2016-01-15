@@ -1,10 +1,15 @@
 <h2><%=t('remember?')%></h2>
   <body>
-    <% card = @cards.expired.random.first %>
-	  <h3><%= card.translated_text%></h3>
-    <%= simple_form_for card, url: cards_path, method: "post" do |f| %>
-      <%= hidden_field_tag "original_text", card.original_text %>
-      <%= f.input :compared_text, label: t("original"), as: :fake %>
-      <%= f.button :submit, t('check') %>
-    <% end %>
+    <div class="container">
+      <% flash.each do |key, value| %>
+          <div class="alert alert-<%= key %>"><%= value %></div>
+      <% end %>
+      <% card = @cards.expired.random.first %>
+	    <h3><%= card.translated_text%></h3>
+      <%= simple_form_for card, url: cards_path, method: "post" do |f| %>
+        <%= hidden_field_tag "id", card.id %>
+        <%= f.input :compared_text, label: t("original"), as: :fake %>
+        <%= f.button :submit, t('check') %>
+      <% end %>
+    </div>
   </body>
