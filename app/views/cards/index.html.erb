@@ -2,9 +2,8 @@
   <body>
     <% card = @cards.expired.random.first %>
 	  <h3><%= card.translated_text%></h3>
-    <%= simple_form_for card_compare_path, url: { action: "compare" } do |f| %>
+    <%= simple_form_for card, url: { action: "compare" } do |f| %>
       <%= hidden_field_tag "id", card.id %>
-      <%= f.input :compared_text, label: t('original') %>
       <%= f.button :submit, t('check') %>
     <% end %>
   </body>
