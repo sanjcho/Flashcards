@@ -1,27 +1,10 @@
-<h2><%=t('all_c')%></h2>
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th><%= t('original') %></th>
-      <th><%= t('translated') %></th>
-      <th><%= t('view_date') %></th>
-    </tr>
-  </thead>
-  <tbody>
+<h2><%=t('remember?')%></h2>
+  <body>
     <% card = @cards.expired.random.first %>
-	  <tr>
-	    <td><%= card.original_text %></td>
-	    <td><%= card.translated_text %></td>
-	    <td><%= card.review_date.strftime("%d/%m/%Y") %></td>
-	    <td>
-	      <div class="btn-group">
-	        <%= link_to t('edit_short'), edit_card_path(card), class: 'btn btn-default' %> 
-	        <%= link_to t('delete'), card_path(card), class: 'btn btn-default',
-                method: :delete,
-                data: {confirm: t("sure?")} %>
-
-          </div>
-        </td>
-	  </tr>
-  </tbody>
-</table>
+	  <h3><%= card.translated_text%></h3>
+    <%= simple_form_for card_compare_path, url: { action: "compare" } do |f| %>
+      <%= hidden_field_tag "id", card.id %>
+      <%= f.input :compared_text, label: t('original') %>
+      <%= f.button :submit, t('check') %>
+    <% end %>
+  </body>

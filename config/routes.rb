@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   get 'home', to: 'home#index'
+  post 'card_compare', to: 'cards#compare'
   resources :cards, except: [ :show ]
   root to: 'home#index'
 

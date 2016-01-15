@@ -36,6 +36,8 @@ ru:
   delete: "Удалить"
   sure?: "Вы уверены?"
   orig&transl_must_be_diff: "Оригинальный и переведенный тексты должны отличаться"
+  remember?: "Проверка знания карточек"
+  check: "Проверить"
   activerecord:
     errors:
       models:

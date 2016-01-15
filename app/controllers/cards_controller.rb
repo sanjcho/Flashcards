@@ -38,13 +38,24 @@ class CardsController < ApplicationController
     @card = Card.find(params[:id])
     @card.destroy
 
+    render index
+  end
+
+  def compare
+    if params[:compared_text] == Card.find(params[:id]).original_text.downcase
+      puts "success"
+    else
+      puts "wrong"
+      #puts Card.find(params[:id]).original_text
+      puts params[:compared_text]
+    end
     redirect_to cards_path
   end
 
   private
 
   def card_params
-    params.require(:card).permit(:original_text, :translated_text)
+    params.require(:card).permit(:original_text, :translated_text, :id, :compared_text)
   end
 
 end
