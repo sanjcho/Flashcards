@@ -18,5 +18,12 @@ scope :random, -> { offset(rand(count))}
     self.review_date = DateTime.now.days_since(3)
   end
 
+  def original_text_equal_to? (arg)
+    self.original_text.strip == arg.strip
+  end
+
+  def update_review_date!
+    self.update_columns(review_date: DateTime.now.days_since(3))
+  end
 
 end

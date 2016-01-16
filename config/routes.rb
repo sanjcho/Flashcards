@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
 
   get 'home', to: 'home#index'
-  post 'cards', to: 'cards#compare'
-  resources :cards, except: [ :show ]
+  resources :cards, except: [ :show ] do
+    member do
+      post 'compare'
+    end
+  end
   root to: 'home#index'
 
   # The priority is based upon order of creation: first created -> highest priority.

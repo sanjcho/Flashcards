@@ -1,7 +1,7 @@
 class CardsController < ApplicationController
   
   def index
-    @cards = Card.all
+    @card = Card.all.expired.random.first
   end
   
   def show
@@ -43,9 +43,8 @@ class CardsController < ApplicationController
 
   def compare
     card = Card.find(params[:id])
-    if params[:compared_text].strip == card.original_text.strip
-      card.review_actualize
-      card.save
+    if card.original_text_equal_to?(params[:compared_text])
+      card.update_review_date!
       flash[:success] = t("success")
     else
       flash[:danger] = t("wrong")
