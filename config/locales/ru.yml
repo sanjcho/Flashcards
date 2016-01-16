@@ -38,6 +38,8 @@ ru:
   check: "Проверить"
   success: "Верно!"
   wrong: "Не верно!"
+  no_сard_to_verify: "Ни у одной карточки пока еще не истек срок проверки, отдыхайте!"
+  home: "Домой"
   activerecord:
     errors:
       models:

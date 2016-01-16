@@ -1,7 +1,7 @@
 class CardsController < ApplicationController
   
   def index
-    @card = Card.all.expired.random.first
+    @cards = Card.all
   end
   
   def show
@@ -38,7 +38,7 @@ class CardsController < ApplicationController
     @card = Card.find(params[:id])
     @card.destroy
 
-    render index
+    redirect_to cards_path
   end
 
   def compare
@@ -49,7 +49,7 @@ class CardsController < ApplicationController
     else
       flash[:danger] = t("wrong")
     end
-    redirect_to cards_path
+    redirect_to home_path
   end
 
   private

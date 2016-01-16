@@ -1,13 +1,28 @@
-<h2><%=t('remember?')%></h2>
-  <body>
-    <div class="container">
-      <% flash.each do |key, value| %>
-          <div class="alert alert-<%= key %>"><%= value %></div>
-      <% end %>
-	    <h3><%= @card.translated_text%></h3>
-      <%= simple_form_for @card, url: compare_card_path(@card.id), method: "post" do |f| %>
-        <%= f.input :compared_text, label: t("original"), as: :fake %>
-        <%= f.button :submit, t('check') %>
-      <% end %>
-    </div>
-  </body>
+<h2><%=t('all_c')%></h2>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th><%= t('original') %></th>
+      <th><%= t('translated') %></th>
+      <th><%= t('view_date') %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @cards.each do |card| %>
+    <tr>
+      <td><%= card.original_text %></td>
+      <td><%= card.translated_text %></td>
+      <td><%= card.review_date.strftime("%d/%m/%Y") %></td>
+      <td>
+        <div class="btn-group">
+          <%= link_to t('edit_short'), edit_card_path(card), class: 'btn btn-default' %> 
+          <%= link_to t('delete'), card_path(card), class: 'btn btn-default',
+                method: :delete,
+                data: {confirm: t("sure?")} %>
+
+          </div>
+        </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
