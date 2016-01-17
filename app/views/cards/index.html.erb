@@ -9,20 +9,20 @@
   </thead>
   <tbody>
     <% @cards.each do |card| %>
-	  <tr>
-	    <td><%= card.original_text %></td>
-	    <td><%= card.translated_text %></td>
-	    <td><%= card.review_date.strftime("%d/%m/%Y") %></td>
-	    <td>
-	      <div class="btn-group">
-	        <%= link_to t('edit_short'), edit_card_path(card), class: 'btn btn-default' %> 
-	        <%= link_to t('delete'), card_path(card), class: 'btn btn-default',
+    <tr>
+      <td><%= card.original_text %></td>
+      <td><%= card.translated_text %></td>
+      <td><%= card.review_date.strftime("%d/%m/%Y") %></td>
+      <td>
+        <div class="btn-group">
+          <%= link_to t('edit_short'), edit_card_path(card), class: 'btn btn-default' %> 
+          <%= link_to t('delete'), card_path(card), class: 'btn btn-default',
                 method: :delete,
                 data: {confirm: t("sure?")} %>
 
           </div>
         </td>
-	  </tr>
-	<% end %>
+    </tr>
+  <% end %>
   </tbody>
 </table>
