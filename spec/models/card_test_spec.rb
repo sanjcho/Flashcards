@@ -2,15 +2,15 @@ require "rails_helper"
 require "helpers"
 
 RSpec.describe Card,:type => :model do
-  context "#validaes" do
-    it "validate :must_not_be_equal test" do
+  context "validates" do
+    it "#must_not_be_equal" do
       card = card_new("mom", "Mom")
       expect(card).to be_invalid
       card.save
       expect(card.errors[:original_text].any?).to be true
     end
 
-    it "validates :review_date, presence: true test" do
+    it "review_date must be present" do
       allow_any_instance_of(Card).to receive(:review_date).and_return(nil)
       card = card_new("mom", "мама")
       card.review_date = nil
