@@ -1,12 +1,8 @@
 require "rails_helper"
 require "helpers"
 
-RSpec.configure do |c|
-  c.include Helpers
-end
-
 RSpec.describe Card,:type => :model do
-  context "#validation tests" do
+  context "#validaes" do
     it "validate :must_not_be_equal test" do
       card = card_new("mom", "Mom")
       expect(card).to be_invalid
@@ -50,16 +46,16 @@ RSpec.describe Card,:type => :model do
 
   context "other methods tests" do
 
-    it ".review_actualize test" do
+    it "#review_actualize test" do
       expect(card_new("mom", "мама").review_actualize.to_i).to eq DateTime.now.days_since(3).to_i
     end
 
-    it ".original_text_equal_to? test" do
+    it "#original_text_equal_to? test" do
       card = card_new("mom", "мама")
       expect(card.original_text_equal_to?("mom")).to be true
     end
 
-    it ".update_review_date! test" do
+    it "#update_review_date! test" do
       card = card_new("mom", "мама")
       card.save
       card.update_review_date!
