@@ -5,8 +5,7 @@ RSpec.describe Card,:type => :model do
   context "validates" do
     it "#must_not_be_equal" do
       card = card_new("mom", "Mom")
-      expect(card).to be_invalid
-      card.save
+      expect(card.valid?).to be false
       expect(card.errors[:original_text].any?).to be true
     end
 
@@ -17,26 +16,26 @@ RSpec.describe Card,:type => :model do
       expect(card).to be_invalid
     end
 
-    it "validates :original_text presence test" do
+    it "original_text must be present" do
       card = card_new("", "mom")
       expect(card).to be_invalid
       expect(card.errors[:original_text].any?).to be true
     end
 
-    it "validates :translated_text presence test" do
+    it "translated_text must be present" do
       card = card_new("mom", "")
       expect(card).to be_invalid
       expect(card.errors[:translated_text].any?).to be true
     end
 
-    it "validates :original_text uniqueness test" do
+    it "original_text  must be unique" do
       card = card_new("mom", "мама")
       card.save
       expect(card = card_new("mom", "мамочка")).to be_invalid
       expect(card.errors[:original_text].any?).to be true
     end
 
-    it "validates :translated_text uniqueness test" do
+    it "translated_text must be unique" do
       card = card_new("mom", "мама")
       card.save
       expect(card = card_new("mammy", "Мама")).to be_invalid
@@ -44,18 +43,18 @@ RSpec.describe Card,:type => :model do
     end
   end
 
-  context "other methods tests" do
+  context "other methods" do
 
-    it "#review_actualize test" do
+    it "#review_actualize" do
       expect(card_new("mom", "мама").review_actualize.to_i).to eq DateTime.now.days_since(3).to_i
     end
 
-    it "#original_text_equal_to? test" do
+    it "#original_text_equal_to?" do
       card = card_new("mom", "мама")
       expect(card.original_text_equal_to?("mom")).to be true
     end
 
-    it "#update_review_date! test" do
+    it "#update_review_date!" do
       card = card_new("mom", "мама")
       card.save
       card.update_review_date!
