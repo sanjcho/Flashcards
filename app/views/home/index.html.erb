@@ -9,14 +9,14 @@
     <% flash.each do |key, value| %>
         <div class="alert alert-<%= key %>"><%= value %></div>
     <% end %>
-    <% if @card %>
+    <% if @card != nil  %>
       <h3><%= @card.translated_text%></h3>
       <%= simple_form_for @card, url: compare_card_path(@card.id), method: "post" do |f| %>
         <%= f.input :compared_text, label: t("original"), as: :fake %>
         <%= f.button :submit, t('check') %>
       <% end %>
     <% else %>
-      <p><% t.("no_card_to_verify") %></p>
+      <p><%= t('no_card_to_verify') %></p>
     <% end %>
 </div>
 </body>
