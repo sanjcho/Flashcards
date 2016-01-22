@@ -2,7 +2,7 @@ class Card < ActiveRecord::Base
 validates :original_text, :translated_text, presence: true, uniqueness: { case_sensitive: false }
 validates :review_date, presence: true
 validate :must_not_be_equal
-scope :expired, -> { where('review_date <= ?', DateTime.now) }
+scope :expired, -> { where('review_date <= ?', Date.today) }
 scope :random, -> { offset(rand(count))}
   before_validation(on: :create) do
     review_actualize
