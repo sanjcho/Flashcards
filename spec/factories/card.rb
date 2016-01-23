@@ -1,6 +1,6 @@
 FactoryGirl.define do
-  factory :user do
-    email "someemail"
-    password  "somepassword"
+  factory :card do
+    original_text "Mom"
+    translated_text  "Мама"
   end
 end
