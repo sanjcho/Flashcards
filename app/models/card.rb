@@ -1,11 +1,11 @@
 class Card < ActiveRecord::Base
-belongs_to :user
-validates :original_text, :translated_text, presence: true, uniqueness: { case_sensitive: false }
-validates :review_date, presence: true
-validates :user_id, presence: true
-validate :must_not_be_equal
-scope :expired, -> { where('review_date <= ?', Date.today) }
-scope :random, -> { offset(rand(count))}
+  belongs_to :user
+  validates :original_text, :translated_text, presence: true, uniqueness: { case_sensitive: false }
+  validates :review_date, presence: true
+  validates :user_id, presence: true
+  validate :must_not_be_equal
+  scope :expired, -> { where('review_date <= ?', Date.today) }
+  scope :random, -> { offset(rand(count))}
   before_validation(on: :create) do
     review_actualize
   end

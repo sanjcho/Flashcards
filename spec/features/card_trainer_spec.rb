@@ -4,7 +4,7 @@ require "helpers"
 describe "card training process", type: :feature do 
   before :each do
     user = create(:user)
-  	card = create(:card, user: user)
+    card = create(:card, user: user)
     card.review_date = Date.today.days_ago(4)
     card.save
   end
