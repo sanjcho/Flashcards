@@ -2,6 +2,10 @@ require "rails_helper"
 require "helpers"
 
 RSpec.describe Card,:type => :model do
+  before :context do
+    user = user_new("somemail", "somepassword")
+    user.save
+  end
   context "validates" do
     it "#must_not_be_equal" do
       card = card_new("mom", "Mom")
@@ -41,6 +45,11 @@ RSpec.describe Card,:type => :model do
       expect(card = card_new("mammy", "Мама")).to be_invalid
       expect(card.errors[:translated_text].any?).to be true
     end
+    it "user_id must be present" do
+      card = Card.new(original_text: "something", translated_text: "кое-что")
+      expect(card.valid?).to be false
+      expect(card.errors[:user_id].any?).to be true
+    end
   end
 
   context "other methods" do
@@ -59,6 +68,15 @@ RSpec.describe Card,:type => :model do
       card.save
       card.update_review_date!
       expect(Card.find(card.id).review_date.to_s).to eq Date.today.days_since(3).to_s
+    end
+  end
+
+  context "dependent" do
+    it "dependent destroy of user" do
+      card = card_new("mom", "мама")
+      card.save
+      User.first.destroy
+      expect(Card.exists?).to be false
     end
   end
 end
