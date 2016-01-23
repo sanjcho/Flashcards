@@ -3,9 +3,10 @@ require "helpers"
 
 describe "card training process", type: :feature do 
   before :each do
-
-  	card = create(:card)
-    allow_any_instance_of(Card).to receive(:review_date).and_return(Date.today.days_ago(4))
+    user = create(:user)
+  	card = create(:card, user: user)
+    card.review_date = Date.today.days_ago(4)
+    card.save
   end
 
   it "card checking out" do
