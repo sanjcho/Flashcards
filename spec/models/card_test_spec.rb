@@ -2,7 +2,7 @@ require "rails_helper"
 require "helpers"
 
 RSpec.describe Card,:type => :model do
-  before :context do 
+  before :context do
     user = user_new("somemail", "somepassword")
     user.save
   end
@@ -46,7 +46,7 @@ RSpec.describe Card,:type => :model do
       expect(card.errors[:translated_text].any?).to be true
     end
     it "user_id must be present" do
-      card = Card.new(original_text:"something", translated_text:"кое-что")
+      card = Card.new(original_text: "something", translated_text: "кое-что")
       expect(card.valid?).to be false
       expect(card.errors[:user_id].any?).to be true
     end
