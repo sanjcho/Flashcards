@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   get 'home', to: 'home#index'
+  resources :users, only: [:new, :create, :destroy]
   resources :cards, except: [ :show ] do
     member do
       post 'compare'

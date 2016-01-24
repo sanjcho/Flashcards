@@ -40,6 +40,13 @@ ru:
   wrong: "Не верно!"
   no_card_to_verify: "Ни у одной карточки пока еще не истек срок проверки, отдыхайте!"
   home: "Домой"
+  register: "Регистрация"
+  
+  user_created: "Пользователь успешно создан!"
+  login: "Регистрация"
+  email_here: "Введите ваш адрес eMail"
+  password_here: "Введите пароль"
+  password_confirmation_here: "Введите пароль еще раз"
   activerecord:
     errors:
       models:
@@ -52,4 +59,20 @@ ru:
             translated_text:
               blank: "Пожалуйста, введите переведенный текст"
               taken: "Карточка с таким переведенным текстом уже существует"
+  activerecord:
+    errors:      
+        user:
+          attributes:
+            email:
+              blank: "Пожалуйста, укажите свой адрес eMail"
+              taken: "Пользователь с таким eMail уже существует"
+              mail_format_wrong: "Введенная строка не похожа на eMail"
+            password:
+              blank: "Пожалуйста, укажите пароль"
+              confirmation: "Введенные пароли не совпадаю, пожалуйста, попробуйте еще раз."
+              too_short: "Пароль не должен быть короче 3-х символов."
+            password_confirmation:
+              confirmation:"Введенные пароли не совпадаю, пожалуйста, попробуйте еще раз."
+
+
 

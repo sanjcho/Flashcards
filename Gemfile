@@ -26,6 +26,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'pg', '~> 0.18.4'
 gem 'simple_form', '~> 3.2.1'
 gem 'sorcery', '~> 0.9.1'
+gem 'validates_email_format_of', '~> 1.6.3'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
