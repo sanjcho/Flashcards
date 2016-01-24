@@ -42,10 +42,18 @@ ru:
   home: "Домой"
   register: "Регистрация"
   user_created: "Пользователь успешно создан!"
-  login: "Регистрация"
+  sign_up_link: "Регистрация"
+  edit_user_head: "Редактирование профиля"
   email_here: "Введите ваш адрес eMail"
   password_here: "Введите пароль"
   password_confirmation_here: "Введите пароль еще раз"
+  login_successful: "Вы успешно вошли на сайт!"
+  login_unsuccessful: "Вход не выполнен, имя пользователя или пароль - неверны."
+  logout_successful: "Выход выполнен"
+  flashcarder_login: "Вход во флешкарточкер!"
+  logout_link: "Выйти"
+  login_link: "Войти"
+  edit_user_link: "Редактировать профиль"
   activerecord:
     errors:
       models:

@@ -13,7 +13,7 @@ class CardsController < ApplicationController
   end
 
   def create
-    @card = Card.new(card_params)
+    @card = User.first.cards.new(card_params)
     if @card.save
       redirect_to cards_path
     else
@@ -22,6 +22,7 @@ class CardsController < ApplicationController
   end
 
   def edit
+    puts params[:id]
     @card = Card.find(params[:id])
   end
 
