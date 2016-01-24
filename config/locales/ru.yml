@@ -41,7 +41,6 @@ ru:
   no_card_to_verify: "Ни у одной карточки пока еще не истек срок проверки, отдыхайте!"
   home: "Домой"
   register: "Регистрация"
-  
   user_created: "Пользователь успешно создан!"
   login: "Регистрация"
   email_here: "Введите ваш адрес eMail"
@@ -59,8 +58,6 @@ ru:
             translated_text:
               blank: "Пожалуйста, введите переведенный текст"
               taken: "Карточка с таким переведенным текстом уже существует"
-  activerecord:
-    errors:      
         user:
           attributes:
             email:
