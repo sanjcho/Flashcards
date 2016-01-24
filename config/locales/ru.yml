@@ -54,6 +54,7 @@ ru:
   logout_link: "Выйти"
   login_link: "Войти"
   edit_user_link: "Редактировать профиль"
+  user_update_success: "Ваш профиль успешно отредактирован"
   activerecord:
     errors:
       models:
