@@ -20,8 +20,4 @@ class UserSessionsController < ApplicationController
     redirect_to home_path
   end
 
-#  private
-#    def user_sessions_params
-#    	params.require(:user_session).permit(:email, :password)
-#    end
 end
