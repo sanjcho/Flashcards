@@ -14,8 +14,9 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    @user.email.downcase!
     if @user.save
-        login(@user.email, params[:user][:password])
+        login(@user.email.downcase, params[:user][:password])
       	redirect_to home_path
         flash[:success] = t('user_created')
     else
@@ -24,11 +25,11 @@ class UsersController < ApplicationController
   end
 
   def edit
-    #@user = User.find(params[:id])
+    @user = current_user
   end
 
   def update
-    #@user = User.find(params[:id])
+    @user = current_user
     if @user.update(user_params)
       flash[:success] = t('user_update_success')
       redirect_to home_path

@@ -20,10 +20,8 @@
 	        <li><%= link_to t('home'), home_path%></li>
 	      <% if current_user %>  
 	        <li><%= link_to t('my_page'), current_user %></li>
-	        <li><%= link_to t("all_c"), user_cards_path(current_user.id) %></li>
-	        <li><%= link_to t("add_c"), new_user_card_path(current_user.id) %></li>
-	        <li><%= link_to t('logout_link'), :logout, method: :post %></a></li>
 	        <li><%= link_to t('edit_user_link'), edit_user_path(current_user.id) %></a></li>
+	        <li><%= link_to t('logout_link'), :logout, method: :post %></a></li>
 	      <% else %>
 	        <li><%= link_to t('sign_up_link'), signup_path %></a></li>
             <li><%= link_to t('login_link'), :login %></a></li>

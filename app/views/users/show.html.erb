@@ -10,7 +10,7 @@
       <div class="container">
         <% if @card != nil  %>
           <h3><%= @card.translated_text%></h3>
-          <%= simple_form_for @card, url: compare_card_path(@card.id), method: "post" do |f| %>
+          <%= simple_form_for @card, url: compare_user_card_path(current_user, @card.id), method: "post" do |f| %>
             <%= f.input :compared_text, label: t("original"), as: :fake %>
             <%= f.button :submit, t('check') %>
           <% end %>
@@ -25,8 +25,7 @@
       <div class="btn-group-vertical" role="group" aria-label="...">
 
             <%= link_to t("all_c"), user_cards_path(current_user.id), class: "btn btn-default" %>
-
-          <button type="button" class="btn btn-default">2</button>
+            <%= link_to t("add_c"), new_user_card_path(current_user.id), class: "btn btn-default" %>
       </div>
     </div>
   </div>
