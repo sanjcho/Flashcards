@@ -1,6 +1,6 @@
 class Card < ActiveRecord::Base
   belongs_to :user
-  validates :original_text, :translated_text, presence: true, uniqueness: { case_sensitive: false }
+  validates :original_text, :translated_text, presence: true, uniqueness: { case_sensitive: false, scope: :user_id }
   validates :review_date, presence: true
   validates :user_id, presence: true
   validate :must_not_be_equal
