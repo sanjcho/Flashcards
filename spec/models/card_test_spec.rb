@@ -1,9 +1,9 @@
 require "rails_helper"
 require "helpers"
-
+#to run test    rspec spec/models 
 RSpec.describe Card,:type => :model do
   before :context do
-    user = user_new("somemail", "somepassword")
+    user = user_new("someemail@mail.ru", "somepassword")
     user.save
   end
   context "validates" do
@@ -39,6 +39,13 @@ RSpec.describe Card,:type => :model do
       expect(card.errors[:original_text].any?).to be true
     end
 
+    it "original&translated text diff user  must not be unique" do
+      card = card_new("mom", "мама")
+      card.save
+      user = create(:user, email:"someanothermail@mail.ru", password:"somepassword", password_confirmation:"somepassword")
+      expect(card = build(:card, user: user, original_text: "mom", translated_text: "мама")).to be_valid
+    end
+
     it "translated_text must be unique" do
       card = card_new("mom", "мама")
       card.save
@@ -50,6 +57,7 @@ RSpec.describe Card,:type => :model do
       expect(card.valid?).to be false
       expect(card.errors[:user_id].any?).to be true
     end
+
   end
 
   context "other methods" do

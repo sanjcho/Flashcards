@@ -1,6 +1,6 @@
 module Helpers
   def user_new(mail, pass)
-    build(:user, email: mail, password: pass)
+    build(:user, email: mail, password: pass, password_confirmation: pass)
   end
 
   def card_new(orig, transl) # new card without .save
