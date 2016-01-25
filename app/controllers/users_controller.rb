@@ -1,5 +1,13 @@
 class UsersController < ApplicationController
 
+  skip_before_action :require_login, only: [:new, :create]
+  skip_before_action :set_user, only: [:new, :create]
+
+  def show
+    @user = current_user
+    @card = @user.cards.expired.random.first
+  end
+
   def new
     @user = User.new
   end
@@ -16,11 +24,11 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
+    #@user = User.find(params[:id])
   end
 
   def update
-    @user = User.find(params[:id])
+    #@user = User.find(params[:id])
     if @user.update(user_params)
       flash[:success] = t('user_update_success')
       redirect_to home_path

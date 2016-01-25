@@ -5,10 +5,11 @@ Rails.application.routes.draw do
   post 'logout', to: 'user_sessions#destroy', as: 'logout'
   get 'signup', to: 'users#new', as: 'signup'
   resources :user_sessions, only: [:new, :create, :destroy] 
-  resources :users
-  resources :cards, except: [ :show ] do
-    member do
-      post 'compare'
+  resources :users do
+    resources :cards, except: [ :show ] do
+      member do
+        post 'compare'
+      end
     end
   end
   root to: 'home#index'
