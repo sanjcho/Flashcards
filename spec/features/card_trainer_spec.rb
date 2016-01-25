@@ -3,18 +3,15 @@ require "helpers"
 
 describe "card training process", type: :feature do 
   before :each do
-    user = create(:user)
-    card = create(:card, user: user)
-    card.review_date = Date.today.days_ago(4)
-    card.save
+    user_and_card_create
+    login(@user)
   end
 
   it "card checking out" do
-    visit "home"
+    visit user_path(@user.id)
     fill_in "compared_text", with: 'Mom'
-    
-    click_button "Проверить"
-    expect(page).to have_content 'Верно!'
+    click_button I18n.t("check")
+    expect(page).to have_content I18n.t("success")
 
   end
 end
