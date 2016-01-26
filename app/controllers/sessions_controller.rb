@@ -1,4 +1,4 @@
-class UserSessionsController < ApplicationController
+class SessionsController < ApplicationController
   
   skip_before_action :require_login, only: [:new, :create]
 
@@ -7,7 +7,7 @@ class UserSessionsController < ApplicationController
   end
 
   def create
-    if login(params[:user_session][:email], params[:user_session][:password])
+    if login(params[:session][:email], params[:session][:password])
       flash[:success] = t("login_successful")
       puts current_user.id
       redirect_to(home_path)

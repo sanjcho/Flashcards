@@ -8,7 +8,7 @@ module Helpers
   end
 
   def login(user)
-    visit new_user_session_path
+    visit new_session_path
     fill_in I18n.t('email_here'), with: user.email
     fill_in I18n.t('password_here'), with: "password"
     click_button I18n.t('submit')

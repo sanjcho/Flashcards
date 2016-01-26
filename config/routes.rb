@@ -1,10 +1,9 @@
 Rails.application.routes.draw do
-
   get 'home', to: 'home#index'
-  get 'login', to: 'user_sessions#new', as: 'login'
-  post 'logout', to: 'user_sessions#destroy', as: 'logout'
+  get 'login', to: 'sessions#new', as: 'login'
+  post 'logout', to: 'sessions#destroy', as: 'logout'
   get 'signup', to: 'users#new', as: 'signup'
-  resources :user_sessions, only: [:new, :create, :destroy] 
+  resources :sessions, only: [:new, :create, :destroy] 
   resources :users do
     resources :cards, except: [ :show ] do
       member do
