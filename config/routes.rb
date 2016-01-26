@@ -2,9 +2,10 @@ Rails.application.routes.draw do
   get 'home', to: 'home#index'
   get 'login', to: 'sessions#new', as: 'login'
   post 'logout', to: 'sessions#destroy', as: 'logout'
-  get 'signup', to: 'users#new', as: 'signup'
-  resources :sessions, only: [:new, :create, :destroy] 
-  resources :users do
+  get 'signup', to: 'registrations#new', as: 'signup'
+  resources :sessions, only: [:new, :create, :destroy]
+  resources :registrations, only: [:new, :create, :destroy] 
+  resources :users, only: [:show, :edit, :update] do
     resources :cards, except: [ :show ] do
       member do
         post 'compare'
