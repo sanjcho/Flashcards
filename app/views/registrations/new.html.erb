@@ -1,5 +1,5 @@
 <h2><%= t('register') %> </h2>
-<%= simple_form_for @user, url: registrations_path, method: :post, action: :create do |f| %>
+<%= simple_form_for @user, url: registration_path, method: :post, action: :create do |f| %>
   <%= f.input :email, label: t('email_here') %>
   <%= f.input :password, label: t('password_here') %>
   <%= f.input :password_confirmation, label: t('password_confirmation_here') %>

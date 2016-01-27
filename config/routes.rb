@@ -1,8 +1,8 @@
   Rails.application.routes.draw do
   get 'home', to: 'home#index'
-  delete 'session', to: 'sessions#destroy'
-  resources :sessions, only: [:new, :create]
-  resources :registrations, only: [:new, :create, :destroy] 
+  #delete 'session', to: 'sessions#destroy'
+  resource :session, only: [:new, :create, :destroy]
+  resource :registration, only: [:new, :create, :destroy] 
   resource :user, only: [:show, :edit, :update]
   resources :cards, except: [ :show ] do
       member do
