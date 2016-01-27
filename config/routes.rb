@@ -1,8 +1,6 @@
-Rails.application.routes.draw do
+  Rails.application.routes.draw do
   get 'home', to: 'home#index'
-  #get 'login', to: 'sessions#new', as: 'login'
-  post 'session', to: 'sessions#destroy'
-  #get 'signup', to: 'registrations#new', as: 'signup'
+  delete 'session', to: 'sessions#destroy'
   resources :sessions, only: [:new, :create]
   resources :registrations, only: [:new, :create, :destroy] 
   resource :user, only: [:show, :edit, :update]

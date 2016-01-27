@@ -21,7 +21,7 @@
 	      <% if current_user %>  
 	        <li><%= link_to t('my_page'), current_user %></li>
 	        <li><%= link_to t('edit_user_link'), edit_user_path(current_user.id) %></a></li>
-	        <li><%= link_to t('logout_link'), session_path, method: :post %></a></li>
+	        <li><%= link_to t('logout_link'), session_path, method: :delete %></a></li>
 	      <% else %>
 	        <li><%= link_to t('sign_up_link'), new_registration_path %></a></li>
             <li><%= link_to t('login_link'), new_session_path %></a></li>
