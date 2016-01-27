@@ -9,11 +9,10 @@ class SessionsController < ApplicationController
   def create
     if login(params[:session][:email], params[:session][:password])
       flash[:success] = t("login_successful")
-      puts current_user.id
       redirect_to(home_path)
     else
       flash[:danger] = t("login_unsuccessful")
-      redirect_to login_path
+      redirect_to new_session_path
     end
   end
 

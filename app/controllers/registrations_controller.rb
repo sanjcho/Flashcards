@@ -1,7 +1,7 @@
 class RegistrationsController < ApplicationController
 
   skip_before_action :require_login, only: [:new, :create]
-  skip_before_action :set_user, only: [:new, :create]
+
 
   def new
     @user = User.new
@@ -9,7 +9,6 @@ class RegistrationsController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    @user.email.downcase!
     if @user.save
         login(@user.email.downcase, params[:user][:password])
       	redirect_to home_path

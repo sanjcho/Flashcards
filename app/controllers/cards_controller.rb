@@ -5,10 +5,6 @@ class CardsController < ApplicationController
   def index
     @cards = @user.cards.all
   end
-  
-  def show
-    
-  end
 
   def new
     @card = @user.cards.new
@@ -17,7 +13,7 @@ class CardsController < ApplicationController
   def create
     @card = @user.cards.new(card_params)
     if @card.save
-      redirect_to user_cards_path
+      redirect_to cards_path
     else
       render 'new'
     end
@@ -30,7 +26,7 @@ class CardsController < ApplicationController
   def update
     @card = Card.find(params[:id])
     if @card.update(card_params)
-      redirect_to user_cards_path
+      redirect_to cards_path
     else
       render 'edit'
     end
@@ -40,7 +36,7 @@ class CardsController < ApplicationController
     @card = Card.find(params[:id])
     @card.destroy
 
-    redirect_to user_cards_path
+    redirect_to cards_path
   end
 
   def compare

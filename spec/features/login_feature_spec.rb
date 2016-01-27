@@ -40,4 +40,9 @@ describe "login_logoute process and links vision", type: :feature do
     click_link I18n.t("my_page")
     expect(page).to have_content @user.email
   end
+  it "user login must be case insensitive" do
+    @user.email = "SOMEEMAIL@mail.ru"
+    login(@user)
+    expect(page).to have_content I18n.t("my_page")  #only logined in user have my_page link
+  end
 end

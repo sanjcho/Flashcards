@@ -1,17 +1,16 @@
 Rails.application.routes.draw do
   get 'home', to: 'home#index'
-  get 'login', to: 'sessions#new', as: 'login'
-  post 'logout', to: 'sessions#destroy', as: 'logout'
-  get 'signup', to: 'registrations#new', as: 'signup'
-  resources :sessions, only: [:new, :create, :destroy]
+  #get 'login', to: 'sessions#new', as: 'login'
+  post 'session', to: 'sessions#destroy'
+  #get 'signup', to: 'registrations#new', as: 'signup'
+  resources :sessions, only: [:new, :create]
   resources :registrations, only: [:new, :create, :destroy] 
-  resources :users, only: [:show, :edit, :update] do
-    resources :cards, except: [ :show ] do
+  resource :user, only: [:show, :edit, :update]
+  resources :cards, except: [ :show ] do
       member do
         post 'compare'
       end
     end
-  end
   root to: 'home#index'
 
   # The priority is based upon order of creation: first created -> highest priority.

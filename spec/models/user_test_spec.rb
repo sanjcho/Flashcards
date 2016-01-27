@@ -20,6 +20,13 @@ RSpec.describe User, type: :model do
       expect(user.valid?).to be false
       expect(user.errors[:email].any?).to be true
     end
+    it "email must be case insensitive unique" do
+      user = user_new("email@mail.ru", "password")
+      user.save
+      user = user_new("EMAIL@mail.ru", "elsepassword")
+      expect(user.valid?).to be false
+      expect(user.errors[:email].any?).to be true
+    end    
     it "email must have correct format" do
       user = user_new("mail", "password")
       expect(user.valid?).to be false
