@@ -5,7 +5,19 @@ describe "login_logoute process and links vision", type: :feature do
   before :each do
   user_and_card_create
   end
-
+  it "user login must be successfull" do
+    visit new_session_path
+    fill_in I18n.t('email_here'), with: @user.email
+    fill_in I18n.t('password_here'), with: "password"
+    click_button I18n.t('submit')
+    expect(page).to have_content I18n.t("login_successful")
+  end
+  it "user logout must be successfull" do
+    login(@user)
+    visit "home"
+    click_link I18n.t("logout_link")
+    expect(page).to have_content I18n.t("logout_successful")
+  end
   it "unloggined_user must have sign_up link" do
     visit "home"
     expect(page).to have_content I18n.t("sign_up_link")

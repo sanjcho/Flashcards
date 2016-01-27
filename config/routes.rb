@@ -1,7 +1,7 @@
   Rails.application.routes.draw do
   get 'home', to: 'home#index'
   resource :session, only: [:new, :create, :destroy]
-  resource :registration, only: [:new, :create, :destroy] 
+  resource :registration, only: [:new, :create] 
   resource :user, only: [:show, :edit, :update]
   resources :cards, except: [ :show ] do
       member do
