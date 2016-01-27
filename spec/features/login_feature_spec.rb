@@ -1,7 +1,7 @@
 require "rails_helper"
 require "helpers"
 
-describe "login_logoute process and links vision", type: :feature do 
+describe "login_logout process and links vision", type: :feature do 
   before :each do
   user_and_card_create
   end

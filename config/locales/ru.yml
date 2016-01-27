@@ -56,6 +56,7 @@ ru:
   login_link: "Войти"
   edit_user_link: "Редактировать профиль"
   user_update_success: "Ваш профиль успешно отредактирован"
+  Login_with_vk: "Войти через VK"
   activerecord:
     errors:
       models:

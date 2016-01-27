@@ -1,4 +1,10 @@
-  Rails.application.routes.draw do
+Rails.application.routes.draw do
+
+  get 'oauths/oauth'
+
+  post "oauth/callback" => "oauths#callback"
+  get "oauth/callback" => "oauths#callback" # for use with Github, Facebook
+  get "oauth/:provider" => "oauths#oauth", :as => :auth_at_provider
   get 'home', to: 'home#index'
   resource :session, only: [:new, :create, :destroy]
   resource :registration, only: [:new, :create] 

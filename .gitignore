@@ -7,6 +7,7 @@ config/database.yml
 # Ignore bundler config.
 /.bundle
 /config/database.yml
+/config/initializers/sorcery.rb
 
 
 # Ignore the default SQLite database.
