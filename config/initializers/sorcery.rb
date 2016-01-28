@@ -133,8 +133,8 @@ Rails.application.config.sorcery.configure do |config|
    config.google.callback_url = "http://0.0.0.0:3000/oauth/callback?provider=google"
    config.google.user_info_mapping = {email: "email"}
   #
-   config.vk.key = "5242705"
-   config.vk.secret = "0NfGZzWznYP3jhs36s8S"
+   config.vk.key = "#{Rails.application.secrets.sorcery_vk_key}"
+   config.vk.secret = "#{Rails.application.secrets.sorcery_vk_secret}"
    config.vk.callback_url = "http://localhost/oauth/callback?provider=vk"
    config.vk.user_info_mapping = {email: "email"}
   #

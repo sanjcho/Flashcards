@@ -9,7 +9,6 @@ class OauthsController < ApplicationController
 
   def callback
     provider = auth_params[:provider]
-    puts provider
     if @user = login_from(provider)
       flash[:success] = t("You_are_logined_with") + provider.titleize
       redirect_to home_path
