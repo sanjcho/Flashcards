@@ -11,7 +11,7 @@ class OauthsController < ApplicationController
     provider = auth_params[:provider]
     puts provider
     if @user = login_from(provider)
-      flash[:success] = "Logged in from #{provider}!"
+      flash[:success] = t("You_are_logined_with") + provider.titleize
       redirect_to home_path
     else
       begin
@@ -20,11 +20,11 @@ class OauthsController < ApplicationController
 
         reset_session # protect from session fixation attack
         auto_login(@user)
-        flash[:success] = "Logged in from #{provider.titleize}!"
+        flash[:success] = t("You_are_logined_with") + provider.titleize
         redirect_to home_path 
       rescue
-        flash[:danger] = "Failed to login from #{provider.to_s.titleize}!"
-        redirect_to home_path 
+        flash[:danger] = provider.to_s.titleize + t("Vk_login_failed")
+        redirect_to home_path
       end
     end
   end
