@@ -10,16 +10,18 @@ class OauthsController < ApplicationController
   def callback
     provider = auth_params[:provider]
     if @user = login_from(provider)
+      puts "login"
       flash[:success] = t("You_are_logined_with") + provider.titleize
       redirect_to home_path
     else
       begin
         @user = create_from(provider)
+        puts @user.email
         # NOTE: this is the place to add '@user.activate!' if you are using user_activation submodule
 
         reset_session # protect from session fixation attack
         auto_login(@user)
-        flash[:success] = t("You_are_logined_with") + provider.titleize
+        flash[:success] = t("You_are_Signedup_with") + provider.titleize
         redirect_to home_path 
       rescue
         flash[:danger] = provider.to_s.titleize + t("Vk_login_failed")
