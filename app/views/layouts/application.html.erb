@@ -9,15 +9,23 @@
 </head>
 <body>
 	<section id="container">
-
-	    <header class="clearfix">
+     <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+     <% end %>
+        <header class="clearfix">
 	      <div class="page-header">
 	      	<h1> <%= t('flash') %> </h1>
 	      </div>
 	      <ul class="nav nav-pills">
 	        <li><%= link_to t('home'), home_path%></li>
-	        <li><%= link_to t('all_c'), cards_path%></li>
-	        <li><%= link_to t('add_c'), new_card_path %></a></li>
+	      <% if current_user %>  
+	        <li><%= link_to t('my_page'), current_user %></li>
+	        <li><%= link_to t('edit_user_link'), edit_user_path(current_user.id) %></a></li>
+	        <li><%= link_to t('logout_link'), session_path, method: :delete %></a></li>
+	      <% else %>
+	        <li><%= link_to t('sign_up_link'), new_registration_path %></a></li>
+            <li><%= link_to t('login_link'), new_session_path %></a></li>
+          <% end %>
 	      </ul>
 	    </header>
 		<%= yield %>

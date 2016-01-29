@@ -1,19 +1,17 @@
 class CardsController < ApplicationController
   
+  before_action :set_user
+
   def index
-    @cards = Card.all
-  end
-  
-  def show
-    
+    @cards = @user.cards.all
   end
 
   def new
-    @card = Card.new
+    @card = @user.cards.new
   end
 
   def create
-    @card = Card.new(card_params)
+    @card = @user.cards.new(card_params)
     if @card.save
       redirect_to cards_path
     else
@@ -56,6 +54,10 @@ class CardsController < ApplicationController
 
   def card_params
     params.require(:card).permit(:original_text, :translated_text, :id, :compared_text)
+  end
+
+  def set_user
+    @user=current_user
   end
 
 end

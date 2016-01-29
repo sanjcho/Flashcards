@@ -21,6 +21,7 @@
 
 ru:
   all_c: "Все карточки"
+  my_page: "Моя страница"
   flash: "Флешкарточкер"
   add_c: "Добавить карточку"
   first_flash_manager: "Первый в мире удобный менеджер флеш-карточек. Именно так."
@@ -40,6 +41,25 @@ ru:
   wrong: "Не верно!"
   no_card_to_verify: "Ни у одной карточки пока еще не истек срок проверки, отдыхайте!"
   home: "Домой"
+  register: "Регистрация"
+  user_created: "Пользователь успешно создан!"
+  sign_up_link: "Регистрация"
+  edit_user_head: "Редактирование профиля"
+  email_here: "Введите ваш адрес eMail"
+  password_here: "Введите пароль"
+  password_confirmation_here: "Введите пароль еще раз"
+  login_successful: "Вы успешно вошли на сайт!"
+  login_unsuccessful: "Вход не выполнен, имя пользователя или пароль - неверны."
+  logout_successful: "Выход выполнен"
+  flashcarder_login: "Вход во флешкарточкер!"
+  logout_link: "Выйти"
+  login_link: "Войти"
+  edit_user_link: "Редактировать профиль"
+  user_update_success: "Ваш профиль успешно отредактирован"
+  Login_with_vk: "Войти через VK"
+  You_are_logined_with: "Вы зашли через "
+  You_are_Signedup_with: "Вы зарегистрировались через "
+  Vk_login_failed: ": вход не удался"
   activerecord:
     errors:
       models:
@@ -52,4 +72,18 @@ ru:
             translated_text:
               blank: "Пожалуйста, введите переведенный текст"
               taken: "Карточка с таким переведенным текстом уже существует"
+        user:
+          attributes:
+            email:
+              blank: "Пожалуйста, укажите свой адрес eMail"
+              taken: "Пользователь с таким eMail уже существует"
+              mail_format_wrong: "Введенная строка не похожа на eMail"
+            password:
+              blank: "Пожалуйста, укажите пароль"
+              confirmation: "Введенные пароли не совпадаю, пожалуйста, попробуйте еще раз."
+              too_short: "Пароль не должен быть короче 3-х символов."
+            password_confirmation:
+              confirmation:"Введенные пароли не совпадаю, пожалуйста, попробуйте еще раз."
+
+
 

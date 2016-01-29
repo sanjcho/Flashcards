@@ -1,0 +1,7 @@
+<h1><%= t("flashcarder_login") %></h1>
+<%= simple_form_for :session, url: session_path, method: :post, action: :create do |f| %>
+  <%= f.input :email, label: t('email_here') %>
+  <%= f.input :password, label: t('password_here') %>
+  <%= f.button :submit, t('submit') %>
+  <%= link_to t('Login_with_vk'), auth_at_provider_path(provider: :vk), class: "btn btn-default" %>
+ <% end %>

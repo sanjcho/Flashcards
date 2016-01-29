@@ -1,28 +1,38 @@
-<h2><%=t('all_c')%></h2>
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th><%= t('original') %></th>
-      <th><%= t('translated') %></th>
-      <th><%= t('view_date') %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @cards.each do |card| %>
-    <tr>
-      <td><%= card.original_text %></td>
-      <td><%= card.translated_text %></td>
-      <td><%= card.review_date.strftime("%d/%m/%Y") %></td>
-      <td>
-        <div class="btn-group">
-          <%= link_to t('edit_short'), edit_card_path(card), class: 'btn btn-default' %> 
-          <%= link_to t('delete'), card_path(card), class: 'btn btn-default',
+<div class="row">
+  <div class="col-xs-12 col-sm-6 col-md-8">
+    <h2><%=t('all_c')%></h2>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th><%= t('translated') %></th>
+          <th><%= t('view_date') %></th>
+        </tr>
+      <tbody>
+        <% @cards.each do |card| %>
+        <tr>
+          <td><%= card.translated_text %></td>
+          <td><%= card.review_date.strftime("%d/%m/%Y") %></td>
+          <td>
+            <div class="btn-group">
+             <%= link_to t('edit_short'), edit_card_path(card), class: 'btn btn-default' %> 
+             <%= link_to t('delete'), card_path(card), class: 'btn btn-default',
                 method: :delete,
                 data: {confirm: t("sure?")} %>
 
-          </div>
-        </td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
+            </div>
+          </td>
+        </tr>
+  
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-xs-6 col-md-4">
+    <div class="btn-group-vertical" role="group" aria-label="...">
+      <%= link_to t("all_c"), cards_path, class: "btn btn-default" %>
+      <%= link_to t("add_c"), new_card_path, class: "btn btn-default" %>
+    </div>
+  </div>
+</div>
+
+
