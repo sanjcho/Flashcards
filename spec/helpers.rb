@@ -15,8 +15,8 @@ module Helpers
   end
 
   def logout
-  	visit "home"
-  	click_link I18n.t('logout_link')
+    visit "home"
+    click_link I18n.t('logout_link')
   end
 
   def user_and_card_create
