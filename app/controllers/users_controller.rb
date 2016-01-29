@@ -11,11 +11,13 @@ class UsersController < ApplicationController
 
   def update
     @user = current_user
-    if @user.update(user_params)
+    
+    if params[:user][:password]
+      @user.update(user_params)
       flash[:success] = t('user_update_success')
       redirect_to home_path
     else
-      render "edit"
+      update_columns(email: params[:user][:email])
     end
   end
 
