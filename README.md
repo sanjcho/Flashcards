@@ -1,2 +1,2 @@
 master branch [![Build Status](https://travis-ci.org/sanjcho/Flashcards.svg?branch=master)](https://travis-ci.org/sanjcho/Flashcards)
-9th-task branch [![Build Status](https://travis-ci.org/sanjcho/Flashcards.svg?branch=9th-task)](https://travis-ci.org/sanjcho/Flashcards)
+10th-task branch [![Build Status](https://travis-ci.org/sanjcho/Flashcards.svg?branch=10th-task)](https://travis-ci.org/sanjcho/Flashcards)

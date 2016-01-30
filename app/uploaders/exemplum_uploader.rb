@@ -8,9 +8,8 @@ class ExemplumUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
-  storage :file
   
-
+  storage (Rails.env.production? or Rails.env.development? ? :fog : :file)
 
 
   process :resize_to_fit => [360, 360]
