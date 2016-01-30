@@ -60,6 +60,7 @@ ru:
   You_are_logined_with: "Вы зашли через "
   You_are_Signedup_with: "Вы зарегистрировались через "
   Vk_login_failed: ": вход не удался"
+  example_image: "Картинка-пример"
   activerecord:
     errors:
       models:

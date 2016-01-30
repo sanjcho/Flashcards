@@ -9,6 +9,7 @@ class Card < ActiveRecord::Base
   before_validation(on: :create) do
     review_actualize
   end
+  mount_uploader :exemplum, ExemplumUploader
 
   def must_not_be_equal
     if self.original_text.downcase == self.translated_text.downcase

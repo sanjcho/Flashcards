@@ -6,12 +6,14 @@
         <tr>
           <th><%= t('translated') %></th>
           <th><%= t('view_date') %></th>
+          <th><%= t("example_image") %></th>
         </tr>
       <tbody>
         <% @cards.each do |card| %>
         <tr>
           <td><%= card.translated_text %></td>
           <td><%= card.review_date.strftime("%d/%m/%Y") %></td>
+          <td><%= image_tag(card.exemplum.thumb.url) if card.exemplum? %> </td>
           <td>
             <div class="btn-group">
              <%= link_to t('edit_short'), edit_card_path(card), class: 'btn btn-default' %> 
