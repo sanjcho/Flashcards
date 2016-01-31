@@ -2,7 +2,6 @@ class UsersController < ApplicationController
 
   def show
     @user = current_user
-    @card = @user.cards.expired.random.first
   end
 
   def edit

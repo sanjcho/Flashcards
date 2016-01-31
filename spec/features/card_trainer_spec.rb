@@ -8,7 +8,7 @@ describe "card training process", type: :feature do
   end
 
   it "card checking out" do
-    visit user_path
+    visit "home"
     fill_in "compared_text", with: 'mom'
     click_button I18n.t("check")
     expect(page).to have_content I18n.t("success")

@@ -9,7 +9,6 @@ class ExemplumUploader < CarrierWave::Uploader::Base
 
   # Choose what kind of storage to use for this uploader:
   
-  storage :fog
 
 
   process :resize_to_fit => [360, 360]
