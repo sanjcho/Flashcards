@@ -9,7 +9,7 @@ class ExemplumUploader < CarrierWave::Uploader::Base
 
   # Choose what kind of storage to use for this uploader:
   
-  storage (Rails.env.production? or Rails.env.development? ? :fog : :file)
+  storage :fog
 
 
   process :resize_to_fit => [360, 360]

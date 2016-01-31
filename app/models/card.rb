@@ -22,7 +22,7 @@ class Card < ActiveRecord::Base
   end
 
   def original_text_equal_to? (arg)
-    original_text.strip == arg.strip
+    original_text.downcase.strip == arg.downcase.strip
   end
 
   def update_review_date!
