@@ -25,9 +25,13 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'pg', '~> 0.18.4'
 gem 'simple_form', '~> 3.2.1'
+gem 'simple_form_fancy_uploads', "~> 0.2.0"
 gem 'sorcery', '~> 0.9.1'
 gem 'validates_email_format_of', '~> 1.6.3'
 gem 'figaro', '~> 1.1.1'
+gem 'carrierwave', "~> 0.10.0"
+gem 'mini_magick', "~> 4.3.6"
+gem 'fog', "~> 1.37.0"
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -58,4 +62,6 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   #gem 'spring', github: 'sonalkr132/spring', branch: 'bundler-dep'
 end
+group :development, :production do
 
+end

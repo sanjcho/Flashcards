@@ -9,6 +9,7 @@ class Card < ActiveRecord::Base
   before_validation(on: :create) do
     review_actualize
   end
+  mount_uploader :exemplum, ExemplumUploader
 
   def must_not_be_equal
     if self.original_text.downcase == self.translated_text.downcase
@@ -21,7 +22,7 @@ class Card < ActiveRecord::Base
   end
 
   def original_text_equal_to? (arg)
-    original_text.strip == arg.strip
+    original_text.downcase.strip == arg.downcase.strip
   end
 
   def update_review_date!

@@ -47,13 +47,13 @@ class CardsController < ApplicationController
     else
       flash[:danger] = t("wrong")
     end
-    redirect_to home_path
+    redirect_to user_path
   end
 
   private
 
   def card_params
-    params.require(:card).permit(:original_text, :translated_text, :id, :compared_text)
+    params.require(:card).permit(:original_text, :translated_text, :id, :compared_text, :exemplum)
   end
 
   def set_user

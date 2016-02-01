@@ -23,4 +23,20 @@ describe "actions with cards", type: :feature do
     click_button I18n.t("submit")
     expect(page).to have_content "дом"
   end
+  it "uploaded image must be shown in trainer" do
+    visit "cards"
+    click_link I18n.t("edit_short")
+    attach_file I18n.t("example_image"), "#{Rails.root}/spec/images/1.png"
+    click_button I18n.t("submit")
+    visit home_path
+    expect(page).to have_css("img[src*='1.png']")
+  end
+  it "uploaded image must be shown in all cards" do
+    visit "cards"
+    click_link I18n.t("edit_short")
+    attach_file I18n.t("example_image"), "#{Rails.root}/spec/images/1.png"
+    click_button I18n.t("submit")
+    visit cards_path
+    expect(page).to have_css("img[src*='1.png']")
+  end
 end
