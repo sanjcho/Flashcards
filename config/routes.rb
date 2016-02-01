@@ -1,5 +1,17 @@
 Rails.application.routes.draw do
 
+  get 'decks/index'
+
+  get 'decks/new'
+
+  get 'decks/create'
+
+  get 'decks/edit'
+
+  get 'decks/update'
+
+  get 'decks/destroy'
+
   get 'oauths/oauth'
 
   post "oauth/callback", to: "oauths#callback"

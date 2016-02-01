@@ -3,7 +3,7 @@
     <%= t('first_flash_manager')%>
   </p>
 </section>
-
+<% if current_user %>
 <div class="container">
   <% if @card != nil  %>
     <h3><%= @card.translated_text%></h3>
@@ -16,3 +16,4 @@
     <p><%= t('no_card_to_verify') %></p>
   <% end %>
 </div>
+<% end %>

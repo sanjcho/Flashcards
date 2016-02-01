@@ -56,8 +56,4 @@ class CardsController < ApplicationController
     params.require(:card).permit(:original_text, :translated_text, :id, :compared_text, :exemplum)
   end
 
-  def set_user
-    @user=current_user
-  end
-
 end
