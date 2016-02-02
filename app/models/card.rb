@@ -4,6 +4,7 @@ class Card < ActiveRecord::Base
   validates :original_text, :translated_text, presence: true, uniqueness: { case_sensitive: false, scope: :user_id }
   validates :review_date, presence: true
   validates :user_id, presence: true
+  validates :deck_id, presence: true
   validate :must_not_be_equal
   scope :expired, -> { where('review_date <= ?', Date.today) }
   scope :random, -> { offset(rand(count))}

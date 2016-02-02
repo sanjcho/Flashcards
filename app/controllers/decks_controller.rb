@@ -3,11 +3,11 @@ class DecksController < ApplicationController
   before_action :set_user
 
   def index
-    @deck = @user.Deck.all
+    @decks = @user.decks.all
   end
 
   def new
-    @deck = @user.Deck.new
+    @deck = @user.decks.new
   end
 
   def create
@@ -26,6 +26,7 @@ class DecksController < ApplicationController
 
   def update
     @deck = Deck.find(params[:id])
+    #active_process(@deck, params[:active])
     if @deck.update(deck_params)
       redirect_to decks_path
     else
@@ -34,14 +35,20 @@ class DecksController < ApplicationController
   end
 
   def destroy
-    @deck.find(params[:id])
+    @deck = Deck.find(params[:id])
     @deck.destroy
     redirect_to decks_path
   end
 
+  def make_active
+    Deck.find(@user.active_deck_id).deactivate_process if @user.active_deck_id
+    Deck.find(params[:id]).activate_process
+    redirect_to decks_path    
+  end
+
   private
     def deck_params
-      params.require(:deck).permit(:name, :id)
+      params.require(:deck).permit(:name, :id, :active)
     end
 
 end

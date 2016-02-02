@@ -1,2 +1,43 @@
-<h1>Decks#index</h1>
-<p>Find me in app/views/decks/index.html.erb</p>
+<div class="row">
+  <div class="col-xs-12 col-sm-6 col-md-8">
+    <h2><%=t('all_decks')%></h2>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th><%= t('deck_name') %></th>
+       
+        </tr>
+      <tbody>
+        <% @decks.each do |deck| %>
+        <tr>
+          <td><%= deck.name %></td>
+
+          <td>
+            <div class="btn-group">
+              <% if deck.active %>
+              <%= link_to t("active_current"), decks_path, class: 'btn btn-default btn-xs disabled' %>
+              <% else %>
+              <%= link_to t("activate_curernt"), make_active_deck_path(deck), method: "post", class: 'btn btn-default btn-xs' %>
+              <% end %>
+              <%= link_to t("edit_short"), edit_deck_path(deck), class: 'btn btn-default btn-xs' %> 
+              <%= link_to t("all_c"), deck_cards_path(deck), class: 'btn btn-default btn-xs' %>
+              <%= link_to t("add_c"), new_deck_card_path(deck), class: 'btn btn-default btn-xs'%>
+              <%= link_to t("delete"), deck_path(deck), class: 'btn btn-default btn-xs',
+                method: :delete,
+                data: {confirm: t("sure?")} %>
+
+            </div>
+          </td>
+        </tr>
+  
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-xs-6 col-md-4">
+    <div class="btn-group-vertical" role="group" aria-label="...">
+      <%= link_to t("all_decks"), decks_path, class: "btn btn-default" %>
+      <%= link_to t("add_deck"), new_deck_path, class: "btn btn-default" %>
+    </div>
+  </div>
+</div>
