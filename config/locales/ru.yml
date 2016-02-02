@@ -67,6 +67,7 @@ ru:
   deck_card_count: "Количество карточек"
   edit_deck: "Редактирование колоды"
   new_deck: "Создание колоды"
+  of_deck: " колоды "
   active_current: "Текущая"
   activate_curernt: "Выбрать текущей"
   activerecord:

@@ -6,7 +6,6 @@ Rails.application.routes.draw do
   get "oauth/callback", to: "oauths#callback" # for use with Github, Facebook
   get "oauth/:provider", to: "oauths#oauth", as: :auth_at_provider
   get 'home', to: 'home#index'
-  #get "make_active", to: "decks#make_active"
   resource :session, only: [:new, :create, :destroy]
   resource :registration, only: [:new, :create] 
   resource :user, only: [:show, :edit, :update]

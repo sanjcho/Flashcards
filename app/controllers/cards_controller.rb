@@ -3,7 +3,8 @@ class CardsController < ApplicationController
   before_action :set_user
 
   def index
-    @cards = @user.cards.all
+    @deck = Deck.find(params[:deck_id])
+    @cards = @deck.cards.all
   end
 
   def new
