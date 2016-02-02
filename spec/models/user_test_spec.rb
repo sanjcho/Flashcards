@@ -1,5 +1,6 @@
 require "rails_helper"
 require "helpers"
+require "spec_helper"
 
 RSpec.describe User, type: :model do
   context "validates" do
@@ -38,6 +39,7 @@ RSpec.describe User, type: :model do
       expect(user.errors[:password].any?).to be true
     end
     it "passwor must be confirmed" do
+      #puts User.first.email
       user = build(:user, email:"mail@mail.ru", password:"password", password_confirmation:"Password")
       expect(user.valid?).to be false
       expect(user.errors[:password_confirmation].any?).to be true

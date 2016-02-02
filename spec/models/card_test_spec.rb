@@ -1,12 +1,11 @@
 require "rails_helper"
 require "helpers"
+require "spec_helper"
 #to run test    rspec spec/models 
 RSpec.describe Card,:type => :model do
   before :context do
-    user = user_new("someemail@mail.ru", "somepassword")
-    user.save
-    deck = deck_new("somename")
-    deck.save
+    user = create(:user, email: "someemail2@mail.ru", password: "somepassword", password_confirmation: "somepassword")
+    deck = create(:deck, user: user, name: "somename")
   end
   context "validates" do
     it "#must_not_be_equal" do

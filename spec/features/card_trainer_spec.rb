@@ -13,4 +13,13 @@ describe "card training process", type: :feature do
     click_button I18n.t("check")
     expect(page).to have_content I18n.t("success")
   end
+  it "card checking out, active deck" do
+    @deck.activate_process!
+    deck = create(:deck, name: "test2", user: @user)
+    create(:card, original_text:"bunny", translated_text: "заяц", deck: deck, user: @user)
+    visit "home"
+    fill_in "compared_text", with: 'mom'
+    click_button I18n.t("check")
+    expect(page).to have_content I18n.t("success")
+  end
 end

@@ -31,6 +31,5 @@ module Helpers
     #card.review_date = Date.today.days_ago(4)
     @card = card.save
     Card.last.update_columns(review_date: Date.today.days_ago(4))
-    puts Card.last.deck_id  
   end
 end
