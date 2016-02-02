@@ -35,14 +35,14 @@ class DecksController < ApplicationController
 
   def destroy
     @deck = Deck.find(params[:id])
-    @deck.user_active_id_delete if @deck.active
+    @deck.user_active_id_delete! if @deck.active
     @deck.destroy
     redirect_to decks_path
   end
 
   def make_active
-    Deck.find(@user.active_deck_id).deactivate_process if @user.active_deck_id
-    Deck.find(params[:id]).activate_process
+    Deck.find(@user.active_deck_id).deactivate_process! if @user.active_deck_id
+    Deck.find(params[:id]).activate_process!
     redirect_to decks_path    
   end
 
