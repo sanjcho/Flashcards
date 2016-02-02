@@ -28,7 +28,9 @@ module Helpers
     @deck = create(:deck, user: @user)
     card = build(:card, deck: @deck)
     card.user_id = @user.id
-    card.review_date = Date.today.days_ago(4)
+    #card.review_date = Date.today.days_ago(4)
     @card = card.save
+    Card.last.update_columns(review_date: Date.today.days_ago(4))
+    puts Card.last.deck_id  
   end
 end

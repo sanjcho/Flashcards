@@ -11,7 +11,6 @@ RSpec.describe Card,:type => :model do
   context "validates" do
     it "#must_not_be_equal" do
       card = card_new("mom", "Mom")
-      puts card
       expect(card.valid?).to be false
       expect(card.errors[:original_text].any?).to be true
     end

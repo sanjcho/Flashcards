@@ -13,7 +13,7 @@ require "helpers"
       expect(page).to have_content "mymail@gmail.com"
     end
     it "user cant register on existing email" do
-      user_and_card_create
+      user_deck_and_card_create
       visit "home"
       click_link I18n.t('sign_up_link')
       fill_in I18n.t('email_here'), with: "SOMEEMAIL@mail.ru"
