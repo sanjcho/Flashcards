@@ -3,7 +3,7 @@ require "helpers"
 
 describe "actions with cards", type: :feature do
   before :each do
-    user_and_card_create
+    user_deck_and_card_create
     login(@user)
   end
 

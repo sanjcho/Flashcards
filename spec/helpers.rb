@@ -3,8 +3,12 @@ module Helpers
     build(:user, email: mail, password: pass, password_confirmation: pass)
   end
 
+  def deck_new(name)
+    build(:deck, user: User.first, name: name)
+  end
+
   def card_new(orig, transl) # new card without .save
-    build(:card, user: User.first, original_text: orig, translated_text: transl, review_date: DateTime.now)
+    build(:card, user: User.first, deck: Deck.first, original_text: orig, translated_text: transl, review_date: DateTime.now)
   end
 
   def login(user)
@@ -19,10 +23,12 @@ module Helpers
     click_link I18n.t('logout_link')
   end
 
-  def user_and_card_create
+  def user_deck_and_card_create
   	@user = create(:user)
-    card = create(:card, user: @user)
+    @deck = create(:deck, user: @user)
+    card = build(:card, deck: @deck)
+    card.user_id = @user.id
     card.review_date = Date.today.days_ago(4)
-    card.save
+    @card = card.save
   end
 end

@@ -5,10 +5,13 @@ RSpec.describe Card,:type => :model do
   before :context do
     user = user_new("someemail@mail.ru", "somepassword")
     user.save
+    deck = deck_new("somename")
+    deck.save
   end
   context "validates" do
     it "#must_not_be_equal" do
       card = card_new("mom", "Mom")
+      puts card
       expect(card.valid?).to be false
       expect(card.errors[:original_text].any?).to be true
     end
@@ -43,7 +46,8 @@ RSpec.describe Card,:type => :model do
       card = card_new("mom", "мама")
       card.save
       user = create(:user, email:"someanothermail@mail.ru", password:"somepassword", password_confirmation:"somepassword")
-      expect(card = build(:card, user: user, original_text: "mom", translated_text: "мама")).to be_valid
+      deck = create(:deck, user: user, name: "someelsename")
+      expect(card = build(:card, deck: deck, user: user, original_text: "mom", translated_text: "мама")).to be_valid
     end
 
     it "translated_text must be unique" do
