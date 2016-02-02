@@ -8,26 +8,31 @@ class CardsController < ApplicationController
   end
 
   def new
-    @card = @user.cards.new
+    @deck = Deck.find(params[:deck_id])
+    @card = @deck.cards.new
   end
 
   def create
-    @card = @user.cards.new(card_params)
+    @deck = Deck.find(params[:deck_id])
+    @card = @deck.cards.new(card_params)
+    @card.user_id = current_user.id
     if @card.save
-      redirect_to cards_path
+      redirect_to deck_cards_path
     else
       render 'new'
     end
   end
 
   def edit
+    @deck = Deck.find(params[:deck_id])
     @card = Card.find(params[:id])
   end
 
   def update
+    @deck = Deck.find(params[:deck_id])
     @card = Card.find(params[:id])
     if @card.update(card_params)
-      redirect_to cards_path
+      redirect_to deck_cards_path
     else
       render 'edit'
     end
@@ -37,7 +42,7 @@ class CardsController < ApplicationController
     @card = Card.find(params[:id])
     @card.destroy
 
-    redirect_to cards_path
+    redirect_to deck_cards_path
   end
 
   def compare
@@ -54,7 +59,7 @@ class CardsController < ApplicationController
   private
 
   def card_params
-    params.require(:card, :deck).permit(:original_text, :translated_text, :id, :compared_text, :exemplum, :deck_id)
+    params.require(:card).permit(:original_text, :translated_text, :id, :compared_text, :exemplum, :deck_id)
   end
 
 end
