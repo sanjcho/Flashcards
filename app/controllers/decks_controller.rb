@@ -11,9 +11,9 @@ class DecksController < ApplicationController
   end
 
   def create
-    @deck = Deck.new(deck_params)
+    @deck = @user.decks.new(deck_params)
     if @deck.save
-      redirect to decks_path
+      redirect_to decks_path
     else
       render "new"
     end
@@ -26,7 +26,6 @@ class DecksController < ApplicationController
 
   def update
     @deck = Deck.find(params[:id])
-    #active_process(@deck, params[:active])
     if @deck.update(deck_params)
       redirect_to decks_path
     else
@@ -36,6 +35,7 @@ class DecksController < ApplicationController
 
   def destroy
     @deck = Deck.find(params[:id])
+    @deck.user_active_id_delete if @deck.active
     @deck.destroy
     redirect_to decks_path
   end

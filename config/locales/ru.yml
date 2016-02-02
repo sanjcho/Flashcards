@@ -65,7 +65,8 @@ ru:
   example_image: "Картинка-пример"
   deck_name: "Название колоды"
   deck_card_count: "Количество карточек"
-  edit_deck: "редактирование колоды"
+  edit_deck: "Редактирование колоды"
+  new_deck: "Создание колоды"
   active_current: "Текущая"
   activate_curernt: "Выбрать текущей"
   activerecord:

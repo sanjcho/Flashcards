@@ -9,8 +9,8 @@ class User < ActiveRecord::Base
   has_many :authentications, dependent: :destroy
   accepts_nested_attributes_for :authentications
   
-  def active_deck
-    self.decks.find(self.active_deck_id)
+  def active_deck  #return a deck, which is active now
+    self.decks.find(self.active_deck_id)  
   end
 
   private
