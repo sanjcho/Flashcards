@@ -4,7 +4,7 @@ class HomeController < ApplicationController
     if current_user
       if current_user.cards.expired.exists?
         if current_user.active_deck_id?
-          @card = Deck.find(current_user.active_deck_id).cards.expired.random.first 
+          @card = current_user.decks.current.cards.expired.random.first 
         else
           @card = current_user.cards.expired.random.first
         end
