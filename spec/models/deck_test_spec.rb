@@ -22,22 +22,12 @@ RSpec.describe Deck,:type => :model do
   end
   
   context "methods_test" do
-    it "activate_process! must make deck active and make user.active_deck_id = deck.id" do
-      @deck.activate_process!
+    it "activate_it! must make activate Deck, and make inactive current deck (if exist)" do
+      deck_old = create(:deck, user: @user, name: 'somedackname', active: true)
+      @deck.activate_it!
       expect(@deck.active).to be true
-      expect(@deck.user.active_deck_id).to be @deck.id
+      expect(Deck.find(deck_old.id).active).to be false
     end
-    it "deactivate_process! must make deck inactive" do
-      @deck.activate_process!
-      @deck.deactivate_process!
-      expect(@deck.active).to be false
-    end
-    it "user_active_id_delete! must delete active_deck_id from coresponding user" do
-      @deck.activate_process!
-      @deck.user_active_id_delete!
-      expect(@deck.user.active_deck_id).to be nil
-    end
-
   end
 
 
