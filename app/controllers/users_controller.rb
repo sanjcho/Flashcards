@@ -1,16 +1,16 @@
 class UsersController < ApplicationController
 
+  before_action :set_user
+
   def show
-    @user = current_user
+    
   end
 
   def edit
-    @user = current_user
+
   end
 
   def update
-    @user = current_user
-    
     if params[:user][:password]
       @user.update(user_params)
       flash[:success] = t('user_update_success')
@@ -26,4 +26,7 @@ class UsersController < ApplicationController
       params.require(:user).permit(:id, :email, :password, :password_confirmation)
     end
 
+    def set_user
+      @user = current_user
+    end
 end

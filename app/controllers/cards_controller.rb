@@ -1,19 +1,19 @@
 class CardsController < ApplicationController
   
-  before_action :set_user
+  before_action :set_deck , except: [:destroy, :compare]
 
   def index
-    @deck = Deck.find(params[:deck_id])
-    @cards = @deck.cards.all
+
+    @cards = @deck.cards
   end
 
   def new
-    @deck = Deck.find(params[:deck_id])
+
     @card = @deck.cards.new
   end
 
   def create
-    @deck = Deck.find(params[:deck_id])
+
     @card = @deck.cards.new(card_params)
     @card.user_id = current_user.id
     if @card.save
@@ -24,12 +24,11 @@ class CardsController < ApplicationController
   end
 
   def edit
-    @deck = Deck.find(params[:deck_id])
+
     @card = Card.find(params[:id])
   end
 
   def update
-    @deck = Deck.find(params[:deck_id])
     @card = Card.find(params[:id])
     if @card.update(card_params)
       redirect_to deck_cards_path
@@ -62,4 +61,7 @@ class CardsController < ApplicationController
     params.require(:card).permit(:original_text, :translated_text, :id, :compared_text, :exemplum, :deck_id)
   end
 
+  def set_deck
+    @deck = Deck.find(params[:deck_id])
+  end
 end
