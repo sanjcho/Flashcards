@@ -12,4 +12,14 @@ class User < ActiveRecord::Base
   def active_deck  #return a deck, which is active now
     self.decks.find(self.active_deck_id)  
   end
+
+  def card_choose
+    if self.decks.current.exists?
+      self.decks.current.first.cards.expired.random.first 
+    else
+      self.cards.expired.random.first
+    end
+
+
+  end
 end
