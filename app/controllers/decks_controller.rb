@@ -1,9 +1,9 @@
 class DecksController < ApplicationController
 
   before_action :set_user
-
+  before_action :set_deck, only: [:edit, :update, :destroy]
   def index
-    @decks = @user.decks
+    @decks = @user.decks.order("id DESC")
   end
 
   def new
@@ -40,7 +40,7 @@ class DecksController < ApplicationController
   end
 
   def make_active
-    Deck.find(params[:id]).activate_it!
+    Deck.find_by_id(params[:id]).activate_it!
     redirect_to decks_path    
   end
 
@@ -48,5 +48,9 @@ class DecksController < ApplicationController
     def deck_params
       params.require(:deck).permit(:name, :id, :active)
     end
+
+  def set_deck
+    @deck = Deck.find(params[:id])
+  end
 
 end
