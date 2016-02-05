@@ -1,7 +1,7 @@
 class CardsController < ApplicationController
   
   before_action :set_deck , except: [:destroy, :compare]
-
+  before_action :set_card, only: [:edit, :update]
   def index
 
     @cards = @deck.cards
@@ -25,11 +25,11 @@ class CardsController < ApplicationController
 
   def edit
 
-    @card = Card.find(params[:id])
+    # @card = Card.find(params[:id])
   end
 
   def update
-    @card = Card.find(params[:id])
+    # @card = Card.find(params[:id])
     if @card.update(card_params)
       redirect_to deck_cards_path
     else
@@ -38,7 +38,7 @@ class CardsController < ApplicationController
   end
 
   def destroy
-    @card = Card.find(params[:id])
+    @card = current_user.cards.find(params[:id])
     @card.destroy
 
     redirect_to deck_cards_path
@@ -64,4 +64,9 @@ class CardsController < ApplicationController
   def set_deck
     @deck = Deck.find(params[:deck_id])
   end
+
+  def set_card
+    @card = Card.find(params[:id])
+  end
+
 end

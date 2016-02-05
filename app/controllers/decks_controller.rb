@@ -1,7 +1,7 @@
 class DecksController < ApplicationController
 
   before_action :set_user
-  before_action :set_deck, only: [:edit, :update, :destroy]
+  before_action :set_deck, only: [:edit, :update]
   def index
     @decks = @user.decks.order("id DESC")
   end
@@ -20,12 +20,10 @@ class DecksController < ApplicationController
   end
 
   def edit
-    @deck = Deck.find(params[:id])
 
   end
 
   def update
-    @deck = Deck.find(params[:id])
     if @deck.update(deck_params)
       redirect_to decks_path
     else
@@ -34,13 +32,13 @@ class DecksController < ApplicationController
   end
 
   def destroy
-    @deck = Deck.find(params[:id])
+    @deck = current_user.decks.find(params[:id])
     @deck.destroy
     redirect_to decks_path
   end
 
   def make_active
-    Deck.find_by_id(params[:id]).activate_it!
+    Deck.find(params[:id]).activate!
     redirect_to decks_path    
   end
 

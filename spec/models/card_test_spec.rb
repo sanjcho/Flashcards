@@ -60,6 +60,12 @@ RSpec.describe Card,:type => :model do
       expect(card.errors[:user_id].any?).to be true
     end
 
+    it "card_id must be present" do
+      card = Card.new(original_text: "something", translated_text: "кое-что")
+      expect(card.valid?).to be false
+      expect(card.errors[:deck_id].any?).to be true
+    end
+
   end
 
   context "other methods" do

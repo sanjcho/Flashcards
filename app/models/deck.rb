@@ -4,7 +4,7 @@ class Deck < ActiveRecord::Base
   belongs_to :user
   scope :current, -> {where(active: true)}
 
-  def activate_it!
+  def activate!
     self.user.decks.current.last.update_columns(active: false) if self.user.decks.current.exists?
     update_columns(active: true)
   end

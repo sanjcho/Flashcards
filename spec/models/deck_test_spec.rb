@@ -22,9 +22,9 @@ RSpec.describe Deck,:type => :model do
   end
   
   context "methods_test" do
-    it "activate_it! must make activate Deck, and make inactive current deck (if exist)" do
+    it "activate must make activate Deck, and make inactive current deck (if exists)" do
       deck_old = create(:deck, user: @user, name: 'somedackname', active: true)
-      @deck.activate_it!
+      @deck.activate!
       expect(@deck.active).to be true
       expect(Deck.find(deck_old.id).active).to be false
     end

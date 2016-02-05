@@ -14,7 +14,7 @@ describe "card training process", type: :feature do
     expect(page).to have_content I18n.t("success")
   end
   it "card checking out, active deck" do
-    @deck.activate_it!
+    @deck.activate!
     deck = create(:deck, name: "test2", user: @user)
     create(:card, original_text:"bunny", translated_text: "заяц", deck: deck, user: @user)
     visit "home"
