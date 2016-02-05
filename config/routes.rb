@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  get 'oauths/oauth'
+  get 'oauths/oauth'   # is it really need fir us?
 
   post "oauth/callback", to: "oauths#callback"
   get "oauth/callback", to: "oauths#callback" # for use with Github, Facebook
@@ -9,11 +9,16 @@ Rails.application.routes.draw do
   resource :session, only: [:new, :create, :destroy]
   resource :registration, only: [:new, :create] 
   resource :user, only: [:show, :edit, :update]
-  resources :cards, except: [ :show ] do
+  resources :decks do
+    member do
+      post "make_active"
+    end
+    resources :cards, except: [ :show ] do
       member do
         post 'compare'
       end
     end
+  end
   root to: 'home#index'
 
   # The priority is based upon order of creation: first created -> highest priority.

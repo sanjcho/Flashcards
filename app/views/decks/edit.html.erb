@@ -1,13 +1,12 @@
 <div class="row">
   <div class="col-xs-12 col-sm-6 col-md-8">
-    <h2> <%= t("edit_c") %> </h2>
+    <h2> <%= t("edit_deck") %> </h2>
     <%= render 'form' %>
   </div>
   <div class="col-xs-6 col-md-4">
     <div class="btn-group-vertical" role="group" aria-label="...">
       <%= link_to t("all_decks"), decks_path, class: "btn btn-default" %>
       <%= link_to t("add_deck"), new_deck_path, class: "btn btn-default" %>
-      <%= link_to t("all_c"), deck_cards_path(deck), class: 'btn btn-default' %>
     </div>
   </div>
 </div>

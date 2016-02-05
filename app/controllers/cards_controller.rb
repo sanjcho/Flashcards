@@ -1,46 +1,47 @@
 class CardsController < ApplicationController
-  
-  before_action :set_user
 
+  helper_method :deck, :card
   def index
-    @cards = @user.cards.all
+
+    @cards = deck.cards
   end
 
   def new
-    @card = @user.cards.new
+
+    @card = deck.cards.new
   end
 
   def create
-    @card = @user.cards.new(card_params)
+
+    @card = deck.cards.new(card_params)
+    @card.user_id = current_user.id
     if @card.save
-      redirect_to cards_path
+      redirect_to deck_cards_path
     else
       render 'new'
     end
   end
 
   def edit
-    @card = Card.find(params[:id])
+    card
   end
 
   def update
-    @card = Card.find(params[:id])
+    card
     if @card.update(card_params)
-      redirect_to cards_path
+      redirect_to deck_cards_path
     else
       render 'edit'
     end
   end
 
   def destroy
-    @card = Card.find(params[:id])
-    @card.destroy
+    card.destroy
 
-    redirect_to cards_path
+    redirect_to deck_cards_path
   end
 
   def compare
-    card = Card.find(params[:id])
     if card.original_text_equal_to?(params[:compared_text])
       card.update_review_date!
       flash[:success] = t("success")
@@ -53,11 +54,15 @@ class CardsController < ApplicationController
   private
 
   def card_params
-    params.require(:card).permit(:original_text, :translated_text, :id, :compared_text, :exemplum)
+    params.require(:card).permit(:original_text, :translated_text, :id, :compared_text, :exemplum, :deck_id)
   end
 
-  def set_user
-    @user=current_user
+  def deck
+    @deck ||= current_user.decks.find(params[:deck_id])
+  end
+
+  def card
+    @card ||= current_user.cards.find(params[:id])
   end
 
 end

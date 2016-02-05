@@ -21,10 +21,12 @@
 
 ru:
   all_c: "Все карточки"
+  all_decks: "Все колоды"
   my_page: "Моя страница"
   flash: "Флешкарточкер"
   add_c: "Добавить карточку"
   first_flash_manager: "Первый в мире удобный менеджер флеш-карточек. Именно так."
+  add_deck: "Добавить колоду"
   create_c: "Создание карточки"
   original: "Оригинальный текст"
   translated: "Переведенный текст"
@@ -61,6 +63,13 @@ ru:
   You_are_Signedup_with: "Вы зарегистрировались через "
   Vk_login_failed: ": вход не удался"
   example_image: "Картинка-пример"
+  deck_name: "Название колоды"
+  deck_card_count: "Количество карточек"
+  edit_deck: "Редактирование колоды"
+  new_deck: "Создание колоды"
+  of_deck: " колоды "
+  active_current: "----- Текущая -----"
+  activate_curernt: "Выбрать текущей"
   activerecord:
     errors:
       models:
@@ -85,6 +94,12 @@ ru:
               too_short: "Пароль не должен быть короче 3-х символов."
             password_confirmation:
               confirmation:"Введенные пароли не совпадаю, пожалуйста, попробуйте еще раз."
+        deck:
+          attributes:
+            name:
+              blank: "Название колоды не должно быть пустым"
+              taken: "Вы уже используете такое название колоды"
+              
 
 
 

@@ -1,10 +1,11 @@
 require "rails_helper"
 require "helpers"
+require "spec_helper"
 #to run test    rspec spec/models 
 RSpec.describe Card,:type => :model do
   before :context do
-    user = user_new("someemail@mail.ru", "somepassword")
-    user.save
+    user = create(:user, email: "someemail2@mail.ru", password: "somepassword", password_confirmation: "somepassword")
+    deck = create(:deck, user: user, name: "somename")
   end
   context "validates" do
     it "#must_not_be_equal" do
@@ -43,7 +44,8 @@ RSpec.describe Card,:type => :model do
       card = card_new("mom", "мама")
       card.save
       user = create(:user, email:"someanothermail@mail.ru", password:"somepassword", password_confirmation:"somepassword")
-      expect(card = build(:card, user: user, original_text: "mom", translated_text: "мама")).to be_valid
+      deck = create(:deck, user: user, name: "someelsename")
+      expect(card = build(:card, deck: deck, user: user, original_text: "mom", translated_text: "мама")).to be_valid
     end
 
     it "translated_text must be unique" do
@@ -56,6 +58,12 @@ RSpec.describe Card,:type => :model do
       card = Card.new(original_text: "something", translated_text: "кое-что")
       expect(card.valid?).to be false
       expect(card.errors[:user_id].any?).to be true
+    end
+
+    it "card_id must be present" do
+      card = Card.new(original_text: "something", translated_text: "кое-что")
+      expect(card.valid?).to be false
+      expect(card.errors[:deck_id].any?).to be true
     end
 
   end

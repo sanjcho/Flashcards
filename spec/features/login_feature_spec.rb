@@ -3,7 +3,7 @@ require "helpers"
 
 describe "login_logout process and links vision", type: :feature do 
   before :each do
-  user_and_card_create
+  user_deck_and_card_create
   end
   it "user login must be successfull" do
     visit new_session_path

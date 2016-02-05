@@ -1,4 +1,4 @@
-<%= simple_form_for [@card] do |f| %>
+<%= simple_form_for [deck, @card] do |f| %>
   <%= f.input :original_text, label: t("original") %>
   <%= f.input :translated_text, label: t("translated") %>
   <%= f.input :exemplum, type: :file, label: t("example_image") %>

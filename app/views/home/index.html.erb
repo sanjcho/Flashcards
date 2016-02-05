@@ -3,11 +3,11 @@
     <%= t('first_flash_manager')%>
   </p>
 </section>
-
+<% if current_user %>
 <div class="container">
-  <% if @card != nil  %>
+  <% if @card %>
     <h3><%= @card.translated_text%></h3>
-      <%= simple_form_for @card, url: compare_card_path(@card.id), method: "post" do |f| %>
+      <%= simple_form_for @card, url: compare_deck_card_path(@deck.id, @card.id), method: "post" do |f| %>
         <%= image_tag(@card.exemplum.url) if @card.exemplum? %>
         <%= f.input :compared_text, label: t("original"), as: :fake %>
         <%= f.button :submit, t('check') %>
@@ -16,3 +16,4 @@
     <p><%= t('no_card_to_verify') %></p>
   <% end %>
 </div>
+<% end %>

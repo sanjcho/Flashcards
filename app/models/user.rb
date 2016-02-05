@@ -3,14 +3,20 @@ class User < ActiveRecord::Base
     config.authentications_class = Authentication
   end
   validates :email, presence: true, uniqueness: { case_sensitive: false },email_format: { message: :mail_format_wrong }
-  validates :password, length: {minimum: 3}, confirmation: true, if: :new_user?
+  validates :password, length: {minimum: 3}, confirmation: true, if: :new_record?
   has_many :cards, dependent: :destroy
+  has_many :decks, dependent: :destroy
   has_many :authentications, dependent: :destroy
   accepts_nested_attributes_for :authentications
-  
-  private
-  def new_user?
-    new_record?
-  end
 
+
+  def card_choose
+    if self.decks.current.exists?
+      self.decks.current.first.cards.expired.random.first 
+    else
+      self.cards.expired.random.first
+    end
+
+
+  end
 end
