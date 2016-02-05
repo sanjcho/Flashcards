@@ -16,8 +16,8 @@
           <td><%= image_tag(card.exemplum.thumb.url) if card.exemplum? %> </td>
           <td>
             <div class="btn-group">
-             <%= link_to t('edit_short'), edit_deck_card_path(@deck, card), class: 'btn btn-default btn-xs' %> 
-             <%= link_to t('delete'), deck_card_path(@deck, card), class: 'btn btn-default btn-xs',
+             <%= link_to t('edit_short'), edit_deck_card_path(deck, card), class: 'btn btn-default btn-xs' %> 
+             <%= link_to t('delete'), deck_card_path(deck, card), class: 'btn btn-default btn-xs',
                 method: :delete,
                 data: {confirm: t("sure?")} %>
 
@@ -33,7 +33,7 @@
     <div class="btn-group-vertical" role="group" aria-label="...">
       <%= link_to t("all_decks"), decks_path, class: "btn btn-default" %>
       <%= link_to t("add_deck"), new_deck_path, class: "btn btn-default" %>
-      <%= link_to t("add_c"), new_deck_card_path(@deck), class: 'btn btn-default' %>
+      <%= link_to t("add_c"), new_deck_card_path(deck), class: 'btn btn-default' %>
     </div>
   </div>
 </div>

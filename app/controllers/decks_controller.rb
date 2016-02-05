@@ -1,17 +1,16 @@
 class DecksController < ApplicationController
 
-  before_action :set_user
-  before_action :set_deck, only: [:edit, :update]
+  helper_method :deck
   def index
-    @decks = @user.decks.order("id DESC")
+    @decks = current_user.decks.order("id DESC")
   end
 
   def new
-    @deck = @user.decks.new
+    @deck = current_user.decks.new
   end
 
   def create
-    @deck = @user.decks.new(deck_params)
+    @deck = current_user.decks.new(deck_params)
     if @deck.save
       redirect_to decks_path
     else
@@ -20,11 +19,11 @@ class DecksController < ApplicationController
   end
 
   def edit
-
+    deck
   end
 
   def update
-    if @deck.update(deck_params)
+    if deck.update(deck_params)
       redirect_to decks_path
     else
       render "edit"
@@ -32,13 +31,12 @@ class DecksController < ApplicationController
   end
 
   def destroy
-    @deck = current_user.decks.find(params[:id])
-    @deck.destroy
+    deck.destroy
     redirect_to decks_path
   end
 
   def make_active
-    Deck.find(params[:id]).activate!
+    deck.activate!
     redirect_to decks_path    
   end
 
@@ -47,8 +45,8 @@ class DecksController < ApplicationController
       params.require(:deck).permit(:name, :id, :active)
     end
 
-  def set_deck
-    @deck = Deck.find(params[:id])
+  def deck
+    @deck ||= current_user.decks.find(params[:id])
   end
 
 end

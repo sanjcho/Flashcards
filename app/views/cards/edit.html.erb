@@ -7,7 +7,7 @@
     <div class="btn-group-vertical" role="group" aria-label="...">
       <%= link_to t("all_decks"), decks_path, class: "btn btn-default" %>
       <%= link_to t("add_deck"), new_deck_path, class: "btn btn-default" %>
-      <%= link_to t("all_c"), deck_cards_path(@deck), class: 'btn btn-default' %>
+      <%= link_to t("all_c"), deck_cards_path(deck), class: 'btn btn-default' %>
     </div>
   </div>
 </div>
