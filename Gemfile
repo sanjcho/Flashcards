@@ -32,6 +32,7 @@ gem 'figaro', '~> 1.1.1'
 gem 'carrierwave', "~> 0.10.0"
 gem 'mini_magick', "~> 4.3.6"
 gem 'fog', "~> 1.37.0"
+gem 'rails_12factor', group: :production
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
