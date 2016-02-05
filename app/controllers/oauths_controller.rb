@@ -9,7 +9,17 @@ class OauthsController < ApplicationController
 
   def callback
     provider = auth_params[:provider]
-    if @user = login_from(provider)
+    if current_user
+      puts "hellow provider"
+      if @user = add_provider_to_user(provider)
+        flash[:success] = t("connection_success")
+        redirect_to user_path
+      else
+        flash[:danger] = user.errors.full_messages
+        redirect_to user_path
+      end
+  
+    elsif @user = login_from(provider)
       flash[:success] = t("You_are_logined_with") + provider.titleize
       redirect_to home_path
     else
@@ -27,16 +37,7 @@ class OauthsController < ApplicationController
       end
     end
   end
-  def add_provider
-    if @user = add_provider_to_user(provider)
-      flash[:success] = t("connection_success")
-      redirect_to user_path
-    else
-      flash[:danger] = t("connection_failed")
-      puts user.errors.full_messages
-      redirect_to user_path
-    end
-  end
+
   #example for Rails 4: add private method below and use "auth_params[:provider]" in place of 
   #"params[:provider] above.
 
