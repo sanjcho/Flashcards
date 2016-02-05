@@ -27,7 +27,16 @@ class OauthsController < ApplicationController
       end
     end
   end
-
+  def add_provider
+    if @user = add_provider_to_user(provider)
+      flash[:success] = t("connection_success")
+      redirect_to user_path
+    else
+      flash[:danger] = t("connection_failed")
+      puts user.errors.full_messages
+      redirect_to user_path
+    end
+  end
   #example for Rails 4: add private method below and use "auth_params[:provider]" in place of 
   #"params[:provider] above.
 

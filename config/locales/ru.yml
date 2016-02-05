@@ -60,6 +60,8 @@ ru:
   user_update_success: "Ваш профиль успешно отредактирован"
   Login_with_vk: "Войти через VK"
   connect_to_vk: "Подключить профиль к VK"
+  connection_success: "Профиль успешно подключен"
+  connection_failed: "К сожалению профиль не удалось подключить"
   You_are_logined_with: "Вы зашли через "
   You_are_Signedup_with: "Вы зарегистрировались через "
   Vk_login_failed: ": вход не удался"

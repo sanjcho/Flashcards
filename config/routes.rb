@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
 
-  get 'oauths/oauth'   # is it really need fir us?
-
+  get 'oauths/oauth'   # is it really need for us?
+  
   post "oauth/callback", to: "oauths#callback"
   get "oauth/callback", to: "oauths#callback" # for use with Github, Facebook
   get "oauth/:provider", to: "oauths#oauth", as: :auth_at_provider
+  get "oauth/:provider", to: "oauth#add_provider", as: :add_prov_to_user
   get 'home', to: 'home#index'
   resource :session, only: [:new, :create, :destroy]
   resource :registration, only: [:new, :create] 
