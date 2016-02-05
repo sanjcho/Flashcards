@@ -135,7 +135,7 @@ Rails.application.config.sorcery.configure do |config|
   #
    config.vk.key = "#{Rails.application.secrets.sorcery_vk_key}"
    config.vk.secret = "#{Rails.application.secrets.sorcery_vk_secret}"
-   config.vk.callback_url = "http://localhost/oauth/callback?provider=vk"
+   config.vk.callback_url = "#{Rails.application.secrets.sorcery_vk_host}"
    config.vk.user_info_mapping = {email: "email"}
   #
   # To use liveid in development mode you have to replace mydomain.com with
