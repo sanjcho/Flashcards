@@ -3,6 +3,7 @@
       <div class="panel panel-default">
         <div class="panel-heading"> eMail: </div>
         <div class="panel-body"> <%= @user.email %> </div>
+     <%= link_to t('connect_to_vk'), auth_at_provider_path(provider: :vk), class: "btn btn-default" %>
       </div>
     </div>
     <div class="col-xs-6 col-md-4">

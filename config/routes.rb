@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
-  get 'oauths/oauth'   # is it really need fir us?
-
+  get 'oauths/oauth'   # is it really need for us?
+  
   post "oauth/callback", to: "oauths#callback"
   get "oauth/callback", to: "oauths#callback" # for use with Github, Facebook
   get "oauth/:provider", to: "oauths#oauth", as: :auth_at_provider
