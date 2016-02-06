@@ -30,5 +30,4 @@ class Card < ActiveRecord::Base
   def update_review_date!
     update_columns(review_date: DateTime.now.days_since(3))
   end
-
 end
