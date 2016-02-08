@@ -71,7 +71,7 @@ RSpec.describe Card,:type => :model do
   context "other methods" do
 
     it "#review_actualize" do
-      expect(card_new("mom", "мама").review_actualize.to_i).to eq DateTime.now.days_since(3).to_i
+      expect(card_new("mom", "мама").review_actualize.to_i).to eq DateTime.now.to_i
     end
 
     it "#original_text_equal_to?" do

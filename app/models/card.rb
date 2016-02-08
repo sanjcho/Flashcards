@@ -20,7 +20,7 @@ class Card < ActiveRecord::Base
   end
 
   def review_actualize
-    self.review_date = DateTime.now.days_since(3)
+    self.review_date = DateTime.now
   end
 
   def original_text_equal_to? (arg)
