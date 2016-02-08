@@ -44,6 +44,7 @@ class CardsController < ApplicationController
   def compare
     if card.original_text_equal_to?(params[:compared_text])
       card.update_review_date!
+      card.success_compare!
       flash[:success] = t("success")
     else
       flash[:danger] = t("wrong")

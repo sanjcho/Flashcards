@@ -83,7 +83,7 @@ RSpec.describe Card,:type => :model do
       card = card_new("mom", "мама")
       card.save
       card.update_review_date!
-      expect(Card.find(card.id).review_date.to_s).to eq DateTime.now.days_since(3).to_s
+      expect(Card.find(card.id).review_date.in_time_zone("Ekaterinburg").beginning_of_minute).to eq DateTime.now.days_since(3).in_time_zone("Ekaterinburg").beginning_of_minute
     end
   end
 

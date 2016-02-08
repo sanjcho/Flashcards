@@ -5,11 +5,14 @@ class Card < ActiveRecord::Base
   validates :review_date, presence: true
   validates :user_id, presence: true
   validates :deck_id, presence: true
+  validates :correct, presence: true
+  validates :wrong, presence: true
   validate :must_not_be_equal
-  scope :expired, -> { where('review_date <= ?', Date.today) }
+  scope :expired, -> { where('review_date <= ?', DateTime.now.in_time_zone("Ekaterinburg")) }
   scope :random, -> { offset(rand(count))}
   before_validation(on: :create) do
     review_actualize
+    cor_wrong_setup
   end
   mount_uploader :exemplum, ExemplumUploader
 
@@ -20,7 +23,7 @@ class Card < ActiveRecord::Base
   end
 
   def review_actualize
-    self.review_date = DateTime.now
+    self.review_date = DateTime.now.in_time_zone("Ekaterinburg")
   end
 
   def original_text_equal_to? (arg)
@@ -28,6 +31,41 @@ class Card < ActiveRecord::Base
   end
 
   def update_review_date!
-    update_columns(review_date: DateTime.now.days_since(3))
+  count = self.correct
+    if count == 1
+      update_columns(review_date: DateTime.now.in_time_zone("Ekaterinburg") + 12.hours)
+    elsif count == 2
+      update_columns(review_date: DateTime.now.in_time_zone("Ekaterinburg") + 3.days)
+    elsif count == 3
+      update_columns(review_date: DateTime.now.in_time_zone("Ekaterinburg") + 7.days)
+    elsif count == 4
+      update_columns(review_date: DateTime.now.in_time_zone("Ekaterinburg") + 14.days)
+    elsif count >= 5
+      update_columns(review_date: DateTime.now.in_time_zone("Ekaterinburg") + 1.month)
+    end
+  end
+
+
+  def cor_wrong_setup
+    self.correct = 0
+    self.wrong = 0
+  end
+
+  def errored?
+    wrong >= 3   
+  end
+
+  def check_on_error
+    if self.errored?  #is there a lot of error made?
+      update_columns(correct: 0, wrong: 0, review_date: DateTime.now.in_time_zone("Ekaterinburg") + 12.hours)  
+      #reset all counters and review_date, start from begin
+    else
+      update_columns(wrong: self.wrong + 1 )
+      #there are no so lot of errors, second and third chanse avaliable
+    end
+  end
+
+  def success_compare!
+    update_columns(correct: self.correct + 1)
   end
 end
