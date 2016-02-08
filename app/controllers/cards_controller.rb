@@ -48,7 +48,7 @@ class CardsController < ApplicationController
     else
       flash[:danger] = t("wrong")
     end
-    redirect_to user_path
+    redirect_to home_path
   end
 
   private
