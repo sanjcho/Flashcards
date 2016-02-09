@@ -31,21 +31,23 @@ class Card < ActiveRecord::Base
   end
 
   def update_review_date!
-  count = self.correct
-    if count == 0
-      update_columns(review_date: DateTime.now.in_time_zone("Ekaterinburg") + 12.hours, correct: self.correct + 1)
-    elsif count == 1
-      update_columns(review_date: DateTime.now.in_time_zone("Ekaterinburg") + 3.days, correct: self.correct + 1)
-    elsif count == 2
-      update_columns(review_date: DateTime.now.in_time_zone("Ekaterinburg") + 7.days, correct: self.correct + 1)
-    elsif count == 3
-      update_columns(review_date: DateTime.now.in_time_zone("Ekaterinburg") + 14.days, correct: self.correct + 1)
-    elsif count >= 4
-      update_columns(review_date: DateTime.now.in_time_zone("Ekaterinburg") + 1.month, correct: self.correct + 1)
-    end
+    review_date_calc(self.correct)
+    update_columns(review_date: @review, correct: self.correct + 1)
   end
 
-
+  def review_date_calc(count)
+    if count == 0
+      @review = DateTime.now.in_time_zone("Ekaterinburg") + 12.hours
+    elsif count == 1
+      @review = DateTime.now.in_time_zone("Ekaterinburg") + 3.days
+    elsif count == 2
+      @review = DateTime.now.in_time_zone("Ekaterinburg") + 7.days
+    elsif count == 3
+      @review = DateTime.now.in_time_zone("Ekaterinburg") + 14.days
+    elsif count >= 4
+      @review = DateTime.now.in_time_zone("Ekaterinburg") + 1.month
+    end
+  end
 
   def cor_wrong_setup
     self.correct = 0
@@ -53,7 +55,7 @@ class Card < ActiveRecord::Base
   end
 
   def errored?
-    wrong >= 2
+    wrong>=2
   end
 
   def check_on_error!
