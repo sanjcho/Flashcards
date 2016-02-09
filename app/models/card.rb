@@ -32,18 +32,19 @@ class Card < ActiveRecord::Base
 
   def update_review_date!
   count = self.correct
-    if count == 1
-      update_columns(review_date: DateTime.now.in_time_zone("Ekaterinburg") + 12.hours)
+    if count == 0
+      update_columns(review_date: DateTime.now.in_time_zone("Ekaterinburg") + 12.hours, correct: self.correct + 1)
+    elsif count == 1
+      update_columns(review_date: DateTime.now.in_time_zone("Ekaterinburg") + 3.days, correct: self.correct + 1)
     elsif count == 2
-      update_columns(review_date: DateTime.now.in_time_zone("Ekaterinburg") + 3.days)
+      update_columns(review_date: DateTime.now.in_time_zone("Ekaterinburg") + 7.days, correct: self.correct + 1)
     elsif count == 3
-      update_columns(review_date: DateTime.now.in_time_zone("Ekaterinburg") + 7.days)
-    elsif count == 4
-      update_columns(review_date: DateTime.now.in_time_zone("Ekaterinburg") + 14.days)
-    elsif count >= 5
-      update_columns(review_date: DateTime.now.in_time_zone("Ekaterinburg") + 1.month)
+      update_columns(review_date: DateTime.now.in_time_zone("Ekaterinburg") + 14.days, correct: self.correct + 1)
+    elsif count >= 4
+      update_columns(review_date: DateTime.now.in_time_zone("Ekaterinburg") + 1.month, correct: self.correct + 1)
     end
   end
+
 
 
   def cor_wrong_setup
@@ -52,20 +53,17 @@ class Card < ActiveRecord::Base
   end
 
   def errored?
-    wrong >= 3   
+    wrong >= 2
   end
 
-  def check_on_error
+  def check_on_error!
     if self.errored?  #is there a lot of error made?
-      update_columns(correct: 0, wrong: 0, review_date: DateTime.now.in_time_zone("Ekaterinburg") + 12.hours)  
+      update_columns(correct: 0, wrong: 0)  
       #reset all counters and review_date, start from begin
     else
       update_columns(wrong: self.wrong + 1 )
-      #there are no so lot of errors, second and third chanse avaliable
+      #there are no so lot of errors, second or third chanse avaliable
     end
   end
 
-  def success_compare!
-    update_columns(correct: self.correct + 1)
-  end
 end
