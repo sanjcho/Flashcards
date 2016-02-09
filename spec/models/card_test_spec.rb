@@ -79,12 +79,63 @@ RSpec.describe Card,:type => :model do
       expect(card.original_text_equal_to?("mom")).to be true
     end
 
-    #it "#update_review_date!" do
-    #  card = card_new("mom", "мама")
-    #  card.save
-    #  card.update_review_date!
-    #  expect(Card.find(card.id).review_date.in_time_zone("Ekaterinburg").beginning_of_minute).to eq DateTime.now.in_time_zone("Ekaterinburg").beginning_of_minute
-    #end
+    it "#update_review_date! if there are a first correct answer" do
+      card = card_new("mom", "мама")
+      card.save
+      card.update_columns(correct: 0)
+      card.update_review_date!
+      expect(Card.find(card.id).review_date.in_time_zone("Ekaterinburg").beginning_of_minute).to eq DateTime.now.in_time_zone("Ekaterinburg").beginning_of_minute + 12.hours
+    end
+    it "#update_review_date! if there are the second correct answer" do
+      card = card_new("mom", "мама")
+      card.save
+      card.update_columns(correct: 1)
+      card.update_review_date!
+      expect(Card.find(card.id).review_date.in_time_zone("Ekaterinburg").beginning_of_minute).to eq DateTime.now.in_time_zone("Ekaterinburg").beginning_of_minute + 3.days
+    end
+    it "#update_review_date! if there are the third correct answer" do
+      card = card_new("mom", "мама")
+      card.save
+      card.update_columns(correct: 2)
+      card.update_review_date!
+      expect(Card.find(card.id).review_date.in_time_zone("Ekaterinburg").beginning_of_minute).to eq DateTime.now.in_time_zone("Ekaterinburg").beginning_of_minute + 7.days
+    end
+    it "#update_review_date! if there are the 4th correct answer" do
+      card = card_new("mom", "мама")
+      card.save
+      card.update_columns(correct: 3)
+      card.update_review_date!
+      expect(Card.find(card.id).review_date.in_time_zone("Ekaterinburg").beginning_of_minute).to eq DateTime.now.in_time_zone("Ekaterinburg").beginning_of_minute + 14.days
+    end
+    it "#update_review_date! if there are the 5th correct answer" do
+      card = card_new("mom", "мама")
+      card.save
+      card.update_columns(correct: 4)
+      card.update_review_date!
+      expect(Card.find(card.id).review_date.in_time_zone("Ekaterinburg").beginning_of_minute).to eq DateTime.now.in_time_zone("Ekaterinburg").beginning_of_minute + 1.month
+    end
+    it "#check_on_error! if there is a first error" do
+      card = card_new("mom", "мама")
+      card.save
+      card.update_columns(wrong: 0)
+      card.check_on_error!
+      expect(Card.find(card.id).wrong).to be 1
+    end
+    it "#check_on_error! if there is a first error" do
+      card = card_new("mom", "мама")
+      card.save
+      card.update_columns(wrong: 2, correct: 3)
+      card.check_on_error!
+      expect(Card.find(card.id).wrong).to be 0
+      expect(Card.find(card.id).correct).to be 0
+    end
+    it "cor_wrong_setup" do
+      card = card_new("mom", "мама")
+      card.save
+      expect(Card.find(card.id).wrong).to be 0
+      expect(Card.find(card.id).correct).to be 0
+    end
+  
   end
 
   context "dependent" do

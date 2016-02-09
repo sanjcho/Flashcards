@@ -2,11 +2,11 @@ class Card < ActiveRecord::Base
   belongs_to :user
   belongs_to :deck
   validates :original_text, :translated_text, presence: true, uniqueness: { case_sensitive: false, scope: :user_id }
-  validates :review_date, presence: true
-  validates :user_id, presence: true
-  validates :deck_id, presence: true
-  validates :correct, presence: true
-  validates :wrong, presence: true
+  validates :review_date, :user_id, :deck_id, :correct, :wrong, presence: true
+ # validates  presence: true
+ # validates  presence: true
+ # validates  presence: true
+ # validates  presence: true
   validate :must_not_be_equal
   scope :expired, -> { where('review_date <= ?', DateTime.now.in_time_zone("Ekaterinburg")) }
   scope :random, -> { offset(rand(count))}
@@ -55,7 +55,7 @@ class Card < ActiveRecord::Base
   end
 
   def errored?
-    wrong>=2
+    wrong >= 2
   end
 
   def check_on_error!
