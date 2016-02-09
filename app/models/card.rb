@@ -3,10 +3,6 @@ class Card < ActiveRecord::Base
   belongs_to :deck
   validates :original_text, :translated_text, presence: true, uniqueness: { case_sensitive: false, scope: :user_id }
   validates :review_date, :user_id, :deck_id, :correct, :wrong, presence: true
- # validates  presence: true
- # validates  presence: true
- # validates  presence: true
- # validates  presence: true
   validate :must_not_be_equal
   scope :expired, -> { where('review_date <= ?', DateTime.now.in_time_zone("Ekaterinburg")) }
   scope :random, -> { offset(rand(count))}
@@ -31,21 +27,21 @@ class Card < ActiveRecord::Base
   end
 
   def update_review_date!
-    review_date_calc(self.correct)
-    update_columns(review_date: @review, correct: self.correct + 1)
+    review = review_date_calc(self.correct)
+    update_columns(review_date: review, correct: self.correct + 1)
   end
 
   def review_date_calc(count)
     if count == 0
-      @review = DateTime.now.in_time_zone("Ekaterinburg") + 12.hours
+      DateTime.now.in_time_zone("Ekaterinburg") + 12.hours
     elsif count == 1
-      @review = DateTime.now.in_time_zone("Ekaterinburg") + 3.days
+      DateTime.now.in_time_zone("Ekaterinburg") + 3.days
     elsif count == 2
-      @review = DateTime.now.in_time_zone("Ekaterinburg") + 7.days
+      DateTime.now.in_time_zone("Ekaterinburg") + 7.days
     elsif count == 3
-      @review = DateTime.now.in_time_zone("Ekaterinburg") + 14.days
+      DateTime.now.in_time_zone("Ekaterinburg") + 14.days
     elsif count >= 4
-      @review = DateTime.now.in_time_zone("Ekaterinburg") + 1.month
+      DateTime.now.in_time_zone("Ekaterinburg") + 1.month
     end
   end
 
