@@ -129,7 +129,7 @@ RSpec.describe Card,:type => :model do
       expect(Card.find(card.id).wrong).to be 0
       expect(Card.find(card.id).correct).to be 0
     end
-    it "cor_wrong_setup" do
+    it "#cor_wrong_setup" do
       card = card_new("mom", "мама")
       card.save
       expect(Card.find(card.id).wrong).to be 0

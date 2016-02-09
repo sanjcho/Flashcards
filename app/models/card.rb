@@ -27,11 +27,11 @@ class Card < ActiveRecord::Base
   end
 
   def update_review_date!
-    review = review_date_calc(self.correct)
+    review = Card.review_date_calc(self.correct)
     update_columns(review_date: review, correct: self.correct + 1)
   end
 
-  def review_date_calc(count)
+  def Card.review_date_calc(count)
     if count == 0
       DateTime.now.in_time_zone("Ekaterinburg") + 12.hours
     elsif count == 1
