@@ -41,11 +41,10 @@ class CardsController < ApplicationController
   end
 
   def compare
-    if card.original_text_equal_to?(params[:compared_text])
-      card.update_review_date!   # answer is correct
+    #compared_text = params[:compared_text]
+    if CardComparator.call(card: card, compared_text: params[:compared_text])
       flash[:success] = t("success")
     else
-      card.check_on_error!
       flash[:danger] = t("wrong")   # answer is not correct
     end
     redirect_to home_path
