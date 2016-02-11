@@ -41,8 +41,7 @@ class CardsController < ApplicationController
   end
 
   def compare
-    difference = CardComparator.call(card: card, compared_text: params[:compared_text])
-    result = Result.new(difference)
+    result = CardComparator.call(card: card, compared_text: params[:compared_text])
     if result.success?   # absolutely right
       flash[:success] = t("success")
     elsif result.type_error?   # right, but some type errors

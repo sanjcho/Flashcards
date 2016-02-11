@@ -71,7 +71,25 @@ require "spec_helper"
       	@comparator.check_on_error!(@card)
       	expect(Card.find(@card.id).wrong).to be 0
       	expect(Card.find(@card.id).correct).to be 0
-
+      end
+    end
+    context "#CardComparator.call" do
+      
+      it ".call must return result.success? = true if texts is equal" do
+        result = CardComparator.call(card: @card, compared_text: "mom")
+        expect(result.success?).to be true
+      end
+      it ".call must return result.type_error? = true if texts have 1 error" do
+        result = CardComparator.call(card: @card, compared_text: "mam")
+        expect(result.type_error?).to be true
+      end
+      it ".call must return result.success = true if texts is equal" do
+        result = CardComparator.call(card: @card, compared_text: "mag")
+        expect(result.type_error?).to be true
+      end
+      it ".call must return result.success = true if texts is equal" do
+        result = CardComparator.call(card: @card, compared_text: "dad")
+        expect(result.wrong?).to be true
       end
     end
   end

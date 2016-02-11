@@ -10,7 +10,7 @@ class CardComparator
   end
 
   def self.call(params)
-  	new(params).diff
+  	 Result.new(new(params).diff)
   end
 
   def diff
