@@ -10,18 +10,17 @@ class CardComparator
   end
 
   def self.call(params)
-  	new(params).right?
+  	 Result.new(new(params).diff)
   end
 
-  def right?
-  	if @card.original_text.downcase.strip == @compared_text.downcase.strip  # is the answer right?
-      update_card_attr_right!(@card)   # yes, so update correct, reser wrong counters, return true
-      return true
+  def diff
+  	difference = DamerauLevenshtein.distance(@card.original_text.downcase.strip, @compared_text.downcase.strip, 1, 2)
+    if  difference <= 2  # is the answer right?
+      update_card_attr_right!(@card)   # yes, so update correct, reset wrong counters, return true
   	else
       check_on_error!(@card)       # oh, no, so update wrong counter, return false
-      return false
   	end
-
+    return difference
   end
 
   def update_card_attr_right!(card)

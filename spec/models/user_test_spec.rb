@@ -38,9 +38,13 @@ RSpec.describe User, type: :model do
       expect(user.valid?).to be false
       expect(user.errors[:password].any?).to be true
     end
-    it "passwor must be confirmed" do
-      #puts User.first.email
+    it "password must be confirmed" do
       user = build(:user, email:"mail@mail.ru", password:"password", password_confirmation:"Password")
+      expect(user.valid?).to be false
+      expect(user.errors[:password_confirmation].any?).to be true
+    end
+    it "password confirmation must be present" do
+      user = build(:user, email:"mail@mail.ru", password:"password", password_confirmation: nil)
       expect(user.valid?).to be false
       expect(user.errors[:password_confirmation].any?).to be true
     end

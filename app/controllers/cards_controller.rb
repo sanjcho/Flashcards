@@ -41,11 +41,13 @@ class CardsController < ApplicationController
   end
 
   def compare
-    #compared_text = params[:compared_text]
-    if CardComparator.call(card: card, compared_text: params[:compared_text])
+    result = CardComparator.call(card: card, compared_text: params[:compared_text])
+    if result.success?   # absolutely right
       flash[:success] = t("success")
-    else
-      flash[:danger] = t("wrong")   # answer is not correct
+    elsif result.type_error?   # right, but some type errors
+      flash[:warning] = t("success_with_type_error") + params[:compared_text] + t("what_is_need_to_be_typed") + card.original_text
+    elsif result.wrong?    # error
+      flash[:danger] = t("wrong")   
     end
     redirect_to home_path
   end
