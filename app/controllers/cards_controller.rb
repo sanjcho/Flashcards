@@ -37,18 +37,17 @@ class CardsController < ApplicationController
 
   def destroy
     card.destroy
-
     redirect_to deck_cards_path
   end
 
   def compare
-    if card.original_text_equal_to?(params[:compared_text])
-      card.update_review_date!
+    #compared_text = params[:compared_text]
+    if CardComparator.call(card: card, compared_text: params[:compared_text])
       flash[:success] = t("success")
     else
-      flash[:danger] = t("wrong")
+      flash[:danger] = t("wrong")   # answer is not correct
     end
-    redirect_to user_path
+    redirect_to home_path
   end
 
   private

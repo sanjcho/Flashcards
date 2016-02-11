@@ -4,7 +4,7 @@ require "spec_helper"
 #to run test    rspec spec/models 
 RSpec.describe Card,:type => :model do
   before :context do
-    user = create(:user, email: "someemail2@mail.ru", password: "somepassword", password_confirmation: "somepassword")
+    user = create(:user, email: "someNEWemail@mail.ru", password: "somepassword", password_confirmation: "somepassword")
     deck = create(:deck, user: user, name: "somename")
   end
   context "validates" do
@@ -71,20 +71,15 @@ RSpec.describe Card,:type => :model do
   context "other methods" do
 
     it "#review_actualize" do
-      expect(card_new("mom", "мама").review_actualize.to_i).to eq DateTime.now.days_since(3).to_i
+      expect(card_new("mom", "мама").review_setup.to_i).to eq Time.current.to_i
     end
-
-    it "#original_text_equal_to?" do
-      card = card_new("mom", "мама")
-      expect(card.original_text_equal_to?("mom")).to be true
-    end
-
-    it "#update_review_date!" do
+    it "#cor_wrong_setup" do
       card = card_new("mom", "мама")
       card.save
-      card.update_review_date!
-      expect(Card.find(card.id).review_date.to_s).to eq Date.today.days_since(3).to_s
+      expect(Card.find(card.id).wrong).to be 0
+      expect(Card.find(card.id).correct).to be 0
     end
+  
   end
 
   context "dependent" do
