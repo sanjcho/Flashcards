@@ -4,7 +4,7 @@ require "spec_helper"
 #to run test    rspec spec/models 
 RSpec.describe Card,:type => :model do
   before :context do
-    user = create(:user, email: "someemail2@mail.ru", password: "somepassword", password_confirmation: "somepassword")
+    user = create(:user, email: "someNEWemail@mail.ru", password: "somepassword", password_confirmation: "somepassword")
     deck = create(:deck, user: user, name: "somename")
   end
   context "validates" do
@@ -71,7 +71,7 @@ RSpec.describe Card,:type => :model do
   context "other methods" do
 
     it "#review_actualize" do
-      expect(card_new("mom", "мама").review_actualize.to_i).to eq DateTime.now.to_i
+      expect(card_new("mom", "мама").review_setup.to_i).to eq Time.current.to_i
     end
     it "#cor_wrong_setup" do
       card = card_new("mom", "мама")
@@ -80,78 +80,6 @@ RSpec.describe Card,:type => :model do
       expect(Card.find(card.id).correct).to be 0
     end
   
-  end
-
-  context "CardComparator class" do
-
-    it "CardComparator#call must return true if texts is equal" do
-      card = card_new("mom", "мама")
-      card.save
-      expect(CardComparator.call(card: card, compared_text: "mom")).to be true
-    end
-
-    it "CardComparator#call must return false if texts is not equal" do
-      card = card_new("mom", "мама")
-      card.save
-      expect(CardComparator.call(card: card, compared_text: "dad")).to be false
-    end
-
-    it "CardComparator#call must increase card.correct on 1 and review_date on 12 hours if there is a first correct answer" do
-      card = card_new("mom", "мама")
-      card.correct = 0
-      card.save
-      expect(CardComparator.call(card: card, compared_text: "mom")).to be true
-      expect(Card.find(card.id).review_date.in_time_zone("Ekaterinburg").beginning_of_minute).to eq DateTime.now.in_time_zone("Ekaterinburg").beginning_of_minute + 12.hours
-      expect(Card.find(card.id).correct).to be 1
-    end
-    it "CardComparator#call must increase card.correct on 1 and review_date on 3 days if there is a 2nd correct answer" do
-      card = card_new("mom", "мама")
-      card.save
-      card.update(correct: 1)
-      expect(CardComparator.call(card: card, compared_text: "mom")).to be true
-      expect(Card.find(card.id).review_date.in_time_zone("Ekaterinburg").beginning_of_minute).to eq DateTime.now.in_time_zone("Ekaterinburg").beginning_of_minute + 3.days
-      expect(Card.find(card.id).correct).to be 2
-    end
-    it "CardComparator#call must increase card.correct on 1 and review_date on 7 days if there is a 3rd correct answer" do
-      card = card_new("mom", "мама")
-      card.save
-      card.update(correct: 2)
-      expect(CardComparator.call(card: card, compared_text: "mom")).to be true
-      expect(Card.find(card.id).review_date.in_time_zone("Ekaterinburg").beginning_of_minute).to eq DateTime.now.in_time_zone("Ekaterinburg").beginning_of_minute + 7.days
-      expect(Card.find(card.id).correct).to be 3
-    end
-    it "CardComparator#call must increase card.correct on 1 and review_date on 14 days if there is a 4th correct answer" do
-      card = card_new("mom", "мама")
-      card.save
-      card.update(correct: 3)
-      expect(CardComparator.call(card: card, compared_text: "mom")).to be true
-      expect(Card.find(card.id).review_date.in_time_zone("Ekaterinburg").beginning_of_minute).to eq DateTime.now.in_time_zone("Ekaterinburg").beginning_of_minute + 14.days
-      expect(Card.find(card.id).correct).to be 4
-    end
-    it "CardComparator#call must increase card.correct on 1 and review_date on 1 month if there is a 5th correct answer" do
-      card = card_new("mom", "мама")
-      card.save
-      card.update(correct: 4)
-      expect(CardComparator.call(card: card, compared_text: "mom")).to be true
-      expect(Card.find(card.id).review_date.in_time_zone("Ekaterinburg").beginning_of_minute).to eq DateTime.now.in_time_zone("Ekaterinburg").beginning_of_minute + 1.month
-      expect(Card.find(card.id).correct).to be 5
-    end
-    it "CardComparator#call must increase wrong on 1 if there is a first wrong answer" do
-      card = card_new("mom", "мама")
-      card.save
-      card.update(wrong: 0)
-      expect(CardComparator.call(card: card, compared_text: "dad")).to be false
-      expect(Card.find(card.id).wrong).to be 1
-    end
-    it "CardComparator#call must increase wrong on 1 and reset correct to 0 if there is a 3rd wrong answer" do
-      card = card_new("mom", "мама")
-      card.save
-      card.update(wrong: 2)
-      expect(CardComparator.call(card: card, compared_text: "dad")).to be false
-      expect(Card.find(card.id).wrong).to be 0
-      expect(Card.find(card.id).correct).to be 0
-    end
-
   end
 
   context "dependent" do

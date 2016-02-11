@@ -15,7 +15,7 @@ class CardComparator
 
   def right?
   	if @card.original_text.downcase.strip == @compared_text.downcase.strip  # is the answer right?
-      update_review_date!(@card)   # yes, so update correct, reser wrong counters, return true
+      update_card_attr_right!(@card)   # yes, so update correct, reser wrong counters, return true
       return true
   	else
       check_on_error!(@card)       # oh, no, so update wrong counter, return false
@@ -24,22 +24,22 @@ class CardComparator
 
   end
 
-  def update_review_date!(card)
+  def update_card_attr_right!(card)
     review = review_date_calc(card.correct)
     card.update(review_date: review, correct: card.correct + 1, wrong: 0)
   end
 
   def review_date_calc(count)
     if count == 0
-      DateTime.now.in_time_zone("Ekaterinburg") + 12.hours
+      12.hours.from_now
     elsif count == 1
-      DateTime.now.in_time_zone("Ekaterinburg") + 3.days
+      3.days.from_now
     elsif count == 2
-      DateTime.now.in_time_zone("Ekaterinburg") + 7.days
+      7.days.from_now
     elsif count == 3
-      DateTime.now.in_time_zone("Ekaterinburg") + 14.days
+      14.days.from_now
     elsif count >= 4
-      DateTime.now.in_time_zone("Ekaterinburg") + 1.month
+      1.month.from_now
     end
   end
 

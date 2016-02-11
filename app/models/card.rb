@@ -7,7 +7,7 @@ class Card < ActiveRecord::Base
   scope :expired, -> { where('review_date <= ?', DateTime.now.in_time_zone("Ekaterinburg")) }
   scope :random, -> { offset(rand(count))}
   before_validation(on: :create) do
-    review_actualize
+    review_setup
     cor_wrong_setup
   end
   mount_uploader :exemplum, ExemplumUploader
@@ -18,8 +18,8 @@ class Card < ActiveRecord::Base
     end
   end
 
-  def review_actualize
-    self.review_date = DateTime.now.in_time_zone("Ekaterinburg")
+  def review_setup
+    self.review_date = Time.current
   end
   
   def cor_wrong_setup
