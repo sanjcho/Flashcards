@@ -41,6 +41,8 @@ ru:
   check: "Проверить"
   success: "Верно!"
   wrong: "Не верно!"
+  success_with_type_error: "Вы правы, однако вы ввели - "
+  what_is_need_to_be_typed: ", а надо было ввести - "
   no_card_to_verify: "Ни у одной карточки пока еще не истек срок проверки, отдыхайте!"
   home: "Домой"
   register: "Регистрация"

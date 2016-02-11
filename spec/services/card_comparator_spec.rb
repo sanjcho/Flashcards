@@ -11,15 +11,20 @@ require "spec_helper"
       @comparator = CardComparator.new(card: @card, compared_text: "mom")
     end
 
-    context "#right? method" do
+    context "#diff method" do
       
-      it "#right? must return true if texsts is equal" do
-        expect(@comparator.right?).to be true
+      it "#diff must return 0 if texsts is equal" do
+        expect(@comparator.diff).to be 0
       end
 
-      it "#right? must return false if texsts is not equal" do
-        comparator = CardComparator.new(card: @card, compared_text: "dad")
-        expect(comparator.right?).to be false
+      it "#diff must return 1 if texsts have one type error" do
+        comparator = CardComparator.new(card: @card, compared_text: "mam")
+        expect(comparator.diff).to be 1
+      end
+
+      it "#diff must return false if texsts is not equal" do
+        comparator = CardComparator.new(card: @card, compared_text: "daddy")
+        expect(comparator.diff).to be 3
       end
     end
 
