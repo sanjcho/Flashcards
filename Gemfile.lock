@@ -356,7 +356,7 @@ DEPENDENCIES
   fog (~> 1.37.0)
   foreman (~> 0.78.0)
   jbuilder (~> 2.0)
-  jquery-rails
+  jquery-rails (~> 4.0.5)
   mini_magick (~> 4.3.6)
   pg (~> 0.18.4)
   rails (= 4.2.5.1)
