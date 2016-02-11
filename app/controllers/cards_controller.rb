@@ -42,11 +42,12 @@ class CardsController < ApplicationController
 
   def compare
     difference = CardComparator.call(card: card, compared_text: params[:compared_text])
-    if difference == 0   # absolutely right
+    result = Result.new(difference)
+    if result.success?   # absolutely right
       flash[:success] = t("success")
-    elsif difference <= 2   # right, but some type errors
+    elsif result.type_error?   # right, but some type errors
       flash[:warning] = t("success_with_type_error") + params[:compared_text] + t("what_is_need_to_be_typed") + card.original_text
-    elsif difference > 2    # error
+    elsif result.wrong?    # error
       flash[:danger] = t("wrong")   
     end
     redirect_to home_path
