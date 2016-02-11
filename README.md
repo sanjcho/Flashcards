@@ -1,2 +1,3 @@
 master branch [![Build Status](https://travis-ci.org/sanjcho/Flashcards.svg?branch=master)](https://travis-ci.org/sanjcho/Flashcards)
 13th-task branch [![Build Status](https://travis-ci.org/sanjcho/Flashcards.svg?branch=13th-task)](https://travis-ci.org/sanjcho/Flashcards)
+<a href="https://codeclimate.com/github/sanjcho/Flashcards"><img src="https://codeclimate.com/github/sanjcho/Flashcards/badges/gpa.svg" /></a>
