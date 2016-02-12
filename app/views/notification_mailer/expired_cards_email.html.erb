@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1><%= t("hellow_our_user") %></h1>
+    <% if @deck %>
+    <p>
+      <%= t("some_cards_from") + @deck.curent.name + t("was_expired_and_need_to_train")  %>
+    </p>
+    <% else %>
+    <p>
+      <%= t("you_have_expired_card") %>
+    </p>
+    <p><%= t("thank_you_for_using") + link_to t('flash'), home_path %></p>
+  </body>
+</html>

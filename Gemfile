@@ -35,7 +35,8 @@ gem 'fog', "~> 1.37.0"
 gem 'rails_12factor', group: :production
 gem 'foreman', '~> 0.78.0'
 gem 'damerau-levenshtein', '~>1.1.0'
-gem "twitter-bootstrap-rails"
+gem "twitter-bootstrap-rails", '~>3.2.2'
+gem 'whenever', '~> 0.9.4', require: false
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
