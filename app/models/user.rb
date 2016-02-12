@@ -18,26 +18,24 @@ class User < ActiveRecord::Base
     end
   end
   
-  def have_expired_card_mail
-    User.where(expired_cards_exists: true).each do |user|
+  def self.have_expired_card_mail
+    User.where(expired_card_exists: true).each do |user|
       NotificationMailer.expired_cards_email(user).deliver_now
     end
   end
 
   def self.expired_cards_mark
-    User.each do |user|
-      if user.decks.current
-        user.update_columns(expired_cards_exists: true) if user.decks.current.cards.expired
+    User.all.each do |user|
+      if user.decks.current.exists?
+        user.update_columns(expired_card_exists: true) if user.decks.current.first.cards.expired.exists?
       else
-        user.update_columns(expired_cards_exists: true) if user.cards.expired
+        user.update_columns(expired_card_exists: true) if user.cards.expired.exists?
       end
     end
   end
 
   def self.expired_cards_unmark
-    User.each do |user|
-      user.update_columns(expired_cards_exists: false)
-    end
+    User.update_all(expired_card_exists: false)
   end
 end
 

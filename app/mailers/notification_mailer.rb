@@ -3,7 +3,7 @@ class NotificationMailer < ApplicationMailer
 
   def expired_cards_email(user)
     @user = user
-    @deck = user.decks.current
+    @deck = user.decks.current.first
     mail(to: @user.email, subject: t("some_expired_flashcards_exists"))
   end
 end

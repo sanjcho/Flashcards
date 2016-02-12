@@ -37,6 +37,7 @@ gem 'foreman', '~> 0.78.0'
 gem 'damerau-levenshtein', '~>1.1.0'
 gem "twitter-bootstrap-rails", '~>3.2.2'
 gem 'whenever', '~> 0.9.4', require: false
+#gem 'sidekiq', '~> 4.1.0'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -64,7 +65,7 @@ end
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
-
+  gem 'letter_opener', '~> 1.4.1'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   #gem 'spring', github: 'sonalkr132/spring', branch: 'bundler-dep'
 end
