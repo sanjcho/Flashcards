@@ -13,8 +13,7 @@
 #   rake "some:great:rake:task"
 # end
 #
-# every 1.day, at: '18:45' do
- every 5.minutes do
+ every 1.day, at: '21:00' do
    runner "User.expired_cards_mark"
    runner "User.have_expired_card_mail"
    runner "User.expired_cards_unmark"
