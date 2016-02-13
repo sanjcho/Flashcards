@@ -22,6 +22,7 @@ class User < ActiveRecord::Base
     User.where(expired_card_exists: true).each do |user|
       NotificationMailer.expired_cards_email(user).deliver_now
     end
+    logger.debug( "Sending mails to user at #{Time.now}" )
   end
 
   def self.expired_cards_mark
