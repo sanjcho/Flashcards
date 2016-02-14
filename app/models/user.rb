@@ -19,24 +19,9 @@ class User < ActiveRecord::Base
   end
   
   def self.have_expired_card_mail
-    User.where(expired_card_exists: true).each do |user|
+    User.joins(:cards).merge(Card.expired).uniq.each do |user|
       NotificationMailer.expired_cards_email(user).deliver_now
     end
-    logger.debug( "Sending mails to user at #{Time.now}" )
-  end
-
-  def self.expired_cards_mark
-    User.all.each do |user|
-      if user.decks.current.exists?
-        user.update_columns(expired_card_exists: true) if user.decks.current.first.cards.expired.exists?
-      else
-        user.update_columns(expired_card_exists: true) if user.cards.expired.exists?
-      end
-    end
-  end
-
-  def self.expired_cards_unmark
-    User.update_all(expired_card_exists: false)
   end
 end
 
