@@ -5,15 +5,9 @@
   </head>
   <body>
     <h1><%= t("hellow_our_user") %></h1>
-    <% if @deck %>
-    <p>
-      <%= t("some_cards_from") + @deck.name + t("was_expired_and_need_to_train")  %>
-    </p>
-    <% else %>
     <p>
       <%= t("you_have_expired_card") %>
     </p>
-    <% end %>
     <p><%= t("thank_you_for_using")%> <%= link_to t('flash'), home_url %></p>
   </body>
 </html>

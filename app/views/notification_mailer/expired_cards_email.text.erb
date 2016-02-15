@@ -1,10 +1,6 @@
 <%= t("hellow_our_user") %>
 =======================================
-<% if @deck %>
 
-<%= t("some_cards_from") + @deck.name + t("was_expired_and_need_to_train")  %>
-
-<% else %>
 <%= t("you_have_expired_card") %>
-<% end %>
+
 <%= t("thank_you_for_using")%> <%= link_to t('flash'), home_url %>
