@@ -48,6 +48,13 @@ RSpec.describe User, type: :model do
       expect(user.valid?).to be false
       expect(user.errors[:password_confirmation].any?).to be true
     end
-
+  end
+  context "Other_methods" do
+    it ".have_expired_card_mail" do
+      user = create(:user, email: "newmail@mail.ru")
+      deck = create(:deck, user: user)
+      card = create(:card, user: user, deck: deck)
+      expect{ User.have_expired_card_mail }.to change{ ActionMailer::Base.deliveries.count }
+    end
   end
 end

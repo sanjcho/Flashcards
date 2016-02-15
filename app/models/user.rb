@@ -10,14 +10,18 @@ class User < ActiveRecord::Base
   has_many :authentications, dependent: :destroy
   accepts_nested_attributes_for :authentications
 
-
   def card_choose
     if self.decks.current.exists?
       self.decks.current.first.cards.expired.random.first 
     else
       self.cards.expired.random.first
     end
-
-
+  end
+  
+  def self.have_expired_card_mail
+    User.joins(:cards).merge(Card.expired).uniq.each do |user|
+      NotificationMailer.expired_cards_email(user).deliver_now
+    end
   end
 end
+

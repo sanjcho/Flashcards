@@ -75,6 +75,10 @@ ru:
   of_deck: " колоды "
   active_current: "----- Текущая -----"
   activate_curernt: "Выбрать текущей"
+  some_expired_flashcards_exists: "У вас есть некоторое количество карт, которые нужно потренировать!"
+  hellow_our_user: "Доброго вам дня, уважаемый пользователь"
+  you_have_expired_card: "У некоторых карточек из вашего профиля истек срок проверки. Пожалуйста, обновите ваши знания"
+  thank_you_for_using: "Спасибо, что используете "
   activerecord:
     errors:
       models:
