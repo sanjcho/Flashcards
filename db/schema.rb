@@ -55,10 +55,10 @@ ActiveRecord::Schema.define(version: 20160216041317) do
   create_table "users", force: :cascade do |t|
     t.string   "email"
     t.string   "crypted_password"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.string   "salt"
-    t.string   "locale"
+    t.string   "locale",           default: "en"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

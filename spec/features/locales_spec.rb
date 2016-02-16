@@ -1,7 +1,7 @@
 require "rails_helper"
 require "helpers"
 
-describe "actions with cards", type: :feature do
+describe "actions with locales", type: :feature do
   before :each do
     user_deck_and_card_create
   end
@@ -20,7 +20,7 @@ describe "actions with cards", type: :feature do
   it "logined user can choose a locale in the settings" do
   	login(@user)
   	visit edit_user_path
-  	choose("English")
+  	select "English", from: I18n.t("language")
   	click_button I18n.t("submit")
   	expect(I18n.locale).to be(:en)
   end
