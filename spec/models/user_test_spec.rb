@@ -54,7 +54,7 @@ RSpec.describe User, type: :model do
       expect(user.errors[:locale].any?).to be true
     end
     it "locale must be ru or en" do 
-      user = build(:user, email:"mail@mail.ru", password:"password", password_confirmation:"password", locale: "de")
+      user = build(:user, email:"mail@mail.ru", password:"password", password_confirmation:"password", locale: "it")
       expect(user.valid?).to be false
       expect(user.errors[:locale].any?).to be true
     end
