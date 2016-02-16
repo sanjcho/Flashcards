@@ -48,6 +48,16 @@ RSpec.describe User, type: :model do
       expect(user.valid?).to be false
       expect(user.errors[:password_confirmation].any?).to be true
     end
+    it "locale must be present" do
+      user = build(:user, email:"mail@mail.ru", password:"password", password_confirmation:"password", locale: nil)
+      expect(user.valid?).to be false
+      expect(user.errors[:locale].any?).to be true
+    end
+    it "locale must be ru or en" do 
+      user = build(:user, email:"mail@mail.ru", password:"password", password_confirmation:"password", locale: "de")
+      expect(user.valid?).to be false
+      expect(user.errors[:locale].any?).to be true
+    end
   end
   context "Other_methods" do
     it ".have_expired_card_mail" do
