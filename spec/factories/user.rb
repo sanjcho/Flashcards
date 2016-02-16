@@ -3,5 +3,6 @@ FactoryGirl.define do
     email "someemail@mail.ru"
     password  "password"
     password_confirmation "password"
+    locale "en"
   end
 end

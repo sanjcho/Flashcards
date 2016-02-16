@@ -54,7 +54,7 @@ RSpec.describe User, type: :model do
       user = create(:user, email: "newmail@mail.ru")
       deck = create(:deck, user: user)
       card = create(:card, user: user, deck: deck)
-      expect{ User.have_expired_card_mail }.to change{ ActionMailer::Base.deliveries.count }
+      expect{ User.have_expired_card_mail }.to change{ ActionMailer::Base.deliveries.count }.by(1)
     end
   end
 end
