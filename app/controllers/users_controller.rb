@@ -13,8 +13,7 @@ class UsersController < ApplicationController
   def update
     if params[:user][:password]
       @user.update(user_params)
-      puts @user.changed?   # почемуто возвращает false
-      I18n.locale = @user.locale #if @user.locale_changed?
+      I18n.locale = @user.locale if @user.previous_changes.include?("locale")   #if locale was changed
       flash[:success] = t('user_update_success')
       redirect_to home_path
     else

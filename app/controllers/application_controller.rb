@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   def set_locale
     I18n.locale = if current_user
                  current_user.locale
-               elsif  I18n.available_locales.map { |l| l.to_s }.include?(params[:locale])
+               elsif  I18n.available_locales.map(&:to_s).include?(params[:locale])
                	 session[:locale] = params[:locale]
                elsif session[:locale]
                  session[:locale]
