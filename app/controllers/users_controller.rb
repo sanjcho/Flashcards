@@ -13,6 +13,7 @@ class UsersController < ApplicationController
   def update
     if params[:user][:password]
       @user.update(user_params)
+      I18n.locale = @user.locale if @user.previous_changes.include?("locale")   #if locale was changed
       flash[:success] = t('user_update_success')
       redirect_to home_path
     else
@@ -23,7 +24,7 @@ class UsersController < ApplicationController
   private
 
     def user_params
-      params.require(:user).permit(:id, :email, :password, :password_confirmation)
+      params.require(:user).permit(:id, :email, :password, :password_confirmation, :locale)
     end
 
     def set_user

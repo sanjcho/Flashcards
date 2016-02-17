@@ -3,8 +3,7 @@ require "helpers"
 require "spec_helper"
 #to run test    rspec spec/models 
 RSpec.describe Deck,:type => :model do
-  before :context do
-    #puts User.last.email
+  before do
     user_deck_and_card_create
   end
   context "validates" do

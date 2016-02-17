@@ -79,6 +79,7 @@ ru:
   hellow_our_user: "Доброго вам дня, уважаемый пользователь"
   you_have_expired_card: "У некоторых карточек из вашего профиля истек срок проверки. Пожалуйста, обновите ваши знания"
   thank_you_for_using: "Спасибо, что используете "
+  language: "Ваш язык"
   activerecord:
     errors:
       models:
