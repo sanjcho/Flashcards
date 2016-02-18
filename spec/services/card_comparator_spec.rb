@@ -11,21 +11,30 @@ require "spec_helper"
       @comparator = CardComparator.new(card: @card, compared_text: "mom")
     end
 
-    context "#diff method" do
-      
-      it "#diff must return 0 if texsts is equal" do
-        expect(@comparator.diff).to be 0
+    context "#qualify method" do
+      before do
+        @card = card_new("something1", "somethingelse")
       end
 
-      it "#diff must return 1 if texsts have one type error" do
-        comparator = CardComparator.new(card: @card, compared_text: "mam")
-        expect(comparator.diff).to be 1
+      it "#qualify must return 5 if texsts is equal" do
+        comparator = CardComparator.new(card: @card, compared_text: "something1")
+        expect(@comparator.qualify).to be 5
       end
 
-      it "#diff must return false if texsts is not equal" do
-        comparator = CardComparator.new(card: @card, compared_text: "daddy")
-        expect(comparator.diff).to be 3
+      it "#qualify must return 2 if texsts have between 1..10% type errors" do
+        comparator = CardComparator.new(card: @card, compared_text: "something2")
+        expect(comparator.qualify).to be 2
       end
+
+      it "#qualify must return 1 if texsts have between 11..20% type errors" do
+        comparator = CardComparator.new(card: @card, compared_text: "somethinT2")
+        expect(comparator.qualify).to be 1
+      end
+
+      it "#qualify must return 0 if texsts is not equal" do
+        comparator = CardComparator.new(card: @card, compared_text: "dsafewtrfa")
+        expect(comparator.qualify).to be 0
+      end      
     end
 
     context "#review_date_calc" do
@@ -83,16 +92,20 @@ require "spec_helper"
 
     context "#CardComparator" do
       
+      before do
+        @card = card_new("something1", "somethingelse")
+      end
+
       it ".call must return result.success? = true if texts is equal" do
-        result = CardComparator.call(card: @card, compared_text: "mom")
+        result = CardComparator.call(card: @card, compared_text: "something1")
         expect(result.success?).to be true
       end
-      it ".call must return result.type_error? = true if texts have 1 error" do
-        result = CardComparator.call(card: @card, compared_text: "mam")
+      it ".call must return result.type_error? = true if texts have 1..10% error" do
+        result = CardComparator.call(card: @card, compared_text: "something2")
         expect(result.type_error?).to be true
       end
-      it ".call must return result.type_error? = true if texts have 2 error" do
-        result = CardComparator.call(card: @card, compared_text: "mag")
+      it ".call must return result.type_error? = true if texts have 11..20% error" do
+        result = CardComparator.call(card: @card, compared_text: "somethinT2")
         expect(result.type_error?).to be true
       end
       it ".call must return result.wrong = true if texts is not equal" do
@@ -102,17 +115,17 @@ require "spec_helper"
     end
 
     context "#get_quality" do
-      it "must return 5 if difference == 0" do
-        expect(@comparator.get_quality(0)).to be 5
+      it "must return 5 if no type errors" do
+        expect(@comparator.get_quality(0, 10)).to be 5
       end
-      it "must return 2 if difference == 1" do
-        expect(@comparator.get_quality(1)).to be 2
+      it "must return 2 if 1..10% errors" do
+        expect(@comparator.get_quality(1, 10)).to be 2
       end
-      it "must return 1 if difference == 2" do
-        expect(@comparator.get_quality(2)).to be 1
+      it "must return 1 if 11..20% errors" do
+        expect(@comparator.get_quality(2, 10)).to be 1
       end
-      it "must return 5 if difference >= 3" do
-        expect(@comparator.get_quality(3)).to be 0
+      it "must return 5 if more than 20% errors" do
+        expect(@comparator.get_quality(3, 10).to_i).to be 0
       end
     end
 

@@ -9,14 +9,15 @@ class CardComparator
   end
 
   def self.call(params)
-  	 Result.new(new(params).diff)
+  	 Result.new(new(params).qualify)
   end
 
-  def diff
+  def qualify
   	difference = DamerauLevenshtein.distance(@card.original_text.downcase.strip, @compared_text.downcase.strip, 1, 2)
-    q = get_quality(difference)
+    length = @card.original_text.strip.length
+    q = get_quality(difference, length).to_i
     @card.update(review_date_calc(q))
-    return difference
+    return q
   end
 
   def review_date_calc(q)
@@ -53,15 +54,16 @@ class CardComparator
     new_efactor < 1.3 ? 1.3 : new_efactor
   end
 
-  def get_quality(diff)
-     if  diff == 0     # until we have no jQuery timer, we think all answer "perfectly correct"
-      5    
-    elsif diff == 1   # incorrect answer with a little error
-      2
-    elsif diff == 2   # incorrect answer with rather significant error
-      1
-    elsif diff >= 3   # absolytely incorrect answer
-      0
+  def get_quality(diff, length)
+    percent = ((diff.to_f / length) * 100)
+    if  percent == 0              # until we have no jQuery timer, we think all answer "perfectly correct"
+     5    
+    elsif percent.between?(1, 10)   # incorrect answer with a little error
+     2
+    elsif percent.between?(11, 20)   # incorrect answer with rather significant error
+     1
+    elsif percent < 21               # absolytely incorrect answer
+     return 0
     end
   end
 end
