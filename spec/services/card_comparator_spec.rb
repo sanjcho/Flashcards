@@ -11,85 +11,122 @@ require "spec_helper"
       @comparator = CardComparator.new(card: @card, compared_text: "mom")
     end
 
-    context "#diff method" do
-      
-      it "#diff must return 0 if texsts is equal" do
-        expect(@comparator.diff).to be 0
+    context "#qualify method" do
+      before do
+        @card = card_new("something1", "somethingelse")
       end
 
-      it "#diff must return 1 if texsts have one type error" do
-        comparator = CardComparator.new(card: @card, compared_text: "mam")
-        expect(comparator.diff).to be 1
+      it "#qualify must return 5 if texsts is equal" do
+        comparator = CardComparator.new(card: @card, compared_text: "something1")
+        expect(@comparator.qualify).to be 5
       end
 
-      it "#diff must return false if texsts is not equal" do
-        comparator = CardComparator.new(card: @card, compared_text: "daddy")
-        expect(comparator.diff).to be 3
+      it "#qualify must return 2 if texsts have between 1..10% type errors" do
+        comparator = CardComparator.new(card: @card, compared_text: "something2")
+        expect(comparator.qualify).to be 2
       end
+
+      it "#qualify must return 1 if texsts have between 11..20% type errors" do
+        comparator = CardComparator.new(card: @card, compared_text: "somethinT2")
+        expect(comparator.qualify).to be 1
+      end
+
+      it "#qualify must return 0 if texsts is not equal" do
+        comparator = CardComparator.new(card: @card, compared_text: "dsafewtrfa")
+        expect(comparator.qualify).to be 0
+      end      
     end
 
-    context "#update_card_attr_right! method" do
+    context "#review_date_calc" do
+      
+      it "must return a hash with repeate:, review_date: and interval: if q < 3" do
+        @card.repeate = 4
+        @card.interval = 6
+        ef_old = @card.e_factor
+        expect(@comparator.review_date_calc(2)).to include(repeate: 1)
+        expect(@comparator.review_date_calc(2)).to include(:review_date)        
+        expect(@comparator.review_date_calc(2)).to include(interval: 1)
+      end
+
+      it "must return a hash with repeate:, review_date:, e_factor: and interval: if q >= 3" do
+        @card.repeate = 4
+        @card.interval = 6
+        expect(@comparator.review_date_calc(5)).to include(repeate: @card.repeate+1)
+        expect(@comparator.review_date_calc(5)).to include(:review_date)        
+        expect(@comparator.review_date_calc(5)).to include(:interval)
+        expect(@comparator.review_date_calc(5)).to include(:e_factor)
+      end
+    end
+    context "#interval_calc" do
      
-      it "#update_card_attr_right! must increase card.correct on 1 and review_date on 12 hours if there is a first correct answer" do
-        @comparator.update_card_attr_right!(@card)
-        expect(Card.find(@card.id).review_date.beginning_of_minute).to eq 12.hours.from_now.beginning_of_minute
-        expect(Card.find(@card.id).correct).to be 1
+      it "must return 1 if repeate = 1, interval and efactor is no affect" do
+        expect(@comparator.interval_calc( 6, 2.5, 1 )).to be == 1
       end
-      it "#update_card_attr_right! must increase card.correct on 1 and review_date on 3 days if there is a 2nd correct answer" do
-        @card.update(correct: 1)
-        @comparator.update_card_attr_right!(@card)
-        expect(Card.find(@card.id).review_date.beginning_of_minute).to eq 3.days.from_now.beginning_of_minute
-        expect(Card.find(@card.id).correct).to be 2
+
+      it "must return 6 if repeate = 2, interval and efactor is no affect" do
+        expect(@comparator.interval_calc( 6, 2.5, 2 )).to be == 6
       end
-      it "#update_card_attr_right! must increase card.correct on 1 and review_date on 7 days if there is a 3rd correct answer" do
-        @card.update(correct: 2)
-        @comparator.update_card_attr_right!(@card)
-        expect(Card.find(@card.id).review_date.beginning_of_minute).to eq 7.days.from_now.beginning_of_minute
-        expect(Card.find(@card.id).correct).to be 3
-      end
-      it "#update_card_attr_right! must increase card.correct on 1 and review_date on 14 days if there is a 4th correct answer" do
-        @card.update(correct: 3)
-        @comparator.update_card_attr_right!(@card)
-        expect(Card.find(@card.id).review_date.beginning_of_minute).to eq 14.days.from_now.beginning_of_minute
-        expect(Card.find(@card.id).correct).to be 4
-      end
-      it "#update_card_attr_right! must increase card.correct on 1 and review_date on 14 days if there is a 4th correct answer" do
-        @card.update(correct: 4)
-        @comparator.update_card_attr_right!(@card)
-        expect(Card.find(@card.id).review_date.beginning_of_minute).to eq 1.month.from_now.beginning_of_minute
-        expect(Card.find(@card.id).correct).to be 5
+
+      it "must return interval * efactor if repeate = 3, interval = 6 and efactor is 2.5" do
+        expect(@comparator.interval_calc( 6, 2.5, 3 )).to be == 6*2.5
       end
     end
-    context "#update_card_attr_right! method" do
-      it "#check_on error must increase wrong on 1 if there is a first wrong answer" do
-      	@comparator.check_on_error!(@card)
-      	expect(Card.find(@card.id).wrong).to be 1
+
+    context "#efactor_calc" do
+      before do
+        @old_efactor = @card.e_factor
       end
-      it "#check_on error must increase wrong on 1 if there is a first wrong answer" do
-      	@card.wrong = 2
-      	@card.correct = 1
-      	@comparator.check_on_error!(@card)
-      	expect(Card.find(@card.id).wrong).to be 0
-      	expect(Card.find(@card.id).correct).to be 0
+      it "must return efactor greater than it was if q = 5 " do
+        q = 5
+        expect(@comparator.efactor_calc(q, @card.e_factor)).to be > @old_efactor
+      end
+      it "must make efactor near the same than it was if q = 4 " do
+        q = 4
+        expect(@comparator.efactor_calc(q, @card.e_factor).round(1)).to be == @old_efactor
+      end
+      it "must make efactor smaller than it was if q = 3 " do
+        q = 3
+        expect(@comparator.efactor_calc(q, @card.e_factor)).to be < @old_efactor
       end
     end
-    context "#CardComparator.call" do
+
+    context "#CardComparator" do
       
+      before do
+        @card = card_new("something1", "somethingelse")
+      end
+
       it ".call must return result.success? = true if texts is equal" do
-        result = CardComparator.call(card: @card, compared_text: "mom")
+        result = CardComparator.call(card: @card, compared_text: "something1")
         expect(result.success?).to be true
       end
-      it ".call must return result.type_error? = true if texts have 1 error" do
-        result = CardComparator.call(card: @card, compared_text: "mam")
+      it ".call must return result.type_error? = true if texts have 1..10% error" do
+        result = CardComparator.call(card: @card, compared_text: "something2")
         expect(result.type_error?).to be true
       end
-      it ".call must return result.success = true if texts is equal" do
-        result = CardComparator.call(card: @card, compared_text: "mag")
+      it ".call must return result.type_error? = true if texts have 11..20% error" do
+        result = CardComparator.call(card: @card, compared_text: "somethinT2")
         expect(result.type_error?).to be true
       end
-      it ".call must return result.success = true if texts is equal" do
+      it ".call must return result.wrong = true if texts is not equal" do
         result = CardComparator.call(card: @card, compared_text: "dad")
         expect(result.wrong?).to be true
       end
     end
+
+    context "#get_quality" do
+      it "must return 5 if no type errors" do
+        expect(@comparator.get_quality(0, 10)).to be 5
+      end
+      it "must return 2 if 1..10% errors" do
+        expect(@comparator.get_quality(1, 10)).to be 2
+      end
+      it "must return 1 if 11..20% errors" do
+        expect(@comparator.get_quality(2, 10)).to be 1
+      end
+      it "must return 5 if more than 20% errors" do
+        expect(@comparator.get_quality(3, 10).to_i).to be 0
+      end
+    end
+
   end

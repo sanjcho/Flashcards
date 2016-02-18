@@ -73,13 +73,6 @@ RSpec.describe Card,:type => :model do
     it "#review_actualize" do
       expect(card_new("mom", "мама").review_setup.to_i).to eq Time.current.to_i
     end
-    it "#cor_wrong_setup" do
-      card = card_new("mom", "мама")
-      card.save
-      expect(Card.find(card.id).wrong).to be 0
-      expect(Card.find(card.id).correct).to be 0
-    end
-  
   end
 
   context "dependent" do
