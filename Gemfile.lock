@@ -287,6 +287,8 @@ GEM
       nokogiri (>= 1.4.1)
       trollop
     rdoc (4.2.1)
+    rollbar (2.7.1)
+      multi_json
     rspec-core (3.4.1)
       rspec-support (~> 3.4.0)
     rspec-expectations (3.4.0)
@@ -384,6 +386,7 @@ DEPENDENCIES
   pg (~> 0.18.4)
   rails (= 4.2.5.1)
   rails_12factor
+  rollbar (~> 2.7.1)
   rspec-rails (~> 3.4.0)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
