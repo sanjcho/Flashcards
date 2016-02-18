@@ -8,6 +8,7 @@ require "helpers"
       fill_in I18n.t("email_here"), with: "mymail@gmail.com"
       fill_in I18n.t("password_here"), with: "mypassword"
       fill_in I18n.t("password_confirmation_here"), with: "mypassword"
+      select "English", from: I18n.t("language")
       click_button I18n.t("submit")
       click_link I18n.t("my_page")
       expect(page).to have_content "mymail@gmail.com"

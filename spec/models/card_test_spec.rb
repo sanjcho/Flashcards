@@ -3,7 +3,7 @@ require "helpers"
 require "spec_helper"
 #to run test    rspec spec/models 
 RSpec.describe Card,:type => :model do
-  before :context do
+  before do
     user = create(:user, email: "someNEWemail@mail.ru", password: "somepassword", password_confirmation: "somepassword")
     deck = create(:deck, user: user, name: "somename")
   end

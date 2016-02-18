@@ -3,7 +3,7 @@ require "helpers"
 require "spec_helper"
 
 RSpec.describe NotificationMailer do
-  before :context do
+  before do
     @user = create(:user, email: "mymail@mail.ru")
     @deck = create(:deck, user: @user)
   end

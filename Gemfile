@@ -37,6 +37,7 @@ gem 'foreman', '~> 0.78.0'
 gem 'damerau-levenshtein', '~>1.1.0'
 gem "twitter-bootstrap-rails", '~>3.2.2'
 gem 'whenever', '~> 0.9.4', require: false
+gem 'http_accept_language', '~> 2.0.5'
 #gem 'sidekiq', '~> 4.1.0'
 
 # Use ActiveModel has_secure_password

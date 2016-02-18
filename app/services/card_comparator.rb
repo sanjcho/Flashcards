@@ -40,13 +40,9 @@ class CardComparator
   end
 
   def interval_calc(interval, e_factor, repeate)
-    if repeate == 1
-      1
-    elsif repeate == 2
-      6
-    elsif repeate >= 3
-      interval*e_factor
-    end
+    return 1 if repeate == 1
+    return 6 if repeate == 2
+    interval*e_factor
   end
 
   def efactor_calc(q, efactor)
