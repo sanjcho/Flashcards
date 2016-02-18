@@ -39,7 +39,7 @@ gem "twitter-bootstrap-rails", '~>3.2.2'
 gem 'whenever', '~> 0.9.4', require: false
 gem 'http_accept_language', '~> 2.0.5'
 gem 'rollbar', '~> 2.7.1'
-#gem 'sidekiq', '~> 4.1.0'
+gem 'newrelic_rpm'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
