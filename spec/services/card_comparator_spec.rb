@@ -28,52 +28,71 @@ require "spec_helper"
       end
     end
 
-    context "#update_card_attr_right! method" do
+    context "#review_date_calc" do
+      
+      it "must reset interval and repeate to 1 and stay efactor the same if answer is incorrect - q < 3" do
+        @card.repeate = 4
+        @card.interval = 6
+        ef_old = @card.e_factor
+        @comparator.review_date_calc(2)
+        expect(@card.repeate).to be == 1
+        expect(@card.interval).to be == 1
+        expect(@card.e_factor).to be == ef_old
+      end
+
+      it "must increase repeate on 1 if answer is correct q = 5" do
+        @card.repeate = 4
+        @card.interval = 6
+        @comparator.review_date_calc(5)
+        expect(@card.repeate).to be == 5
+      end
+    end
+    context "#interval_calc" do
      
-      it "#update_card_attr_right! must increase card.correct on 1 and review_date on 12 hours if there is a first correct answer" do
-        @comparator.update_card_attr_right!(@card)
-        expect(Card.find(@card.id).review_date.beginning_of_minute).to eq 12.hours.from_now.beginning_of_minute
-        expect(Card.find(@card.id).correct).to be 1
+      it "must make @card.interval = 1 if @card.repeate = 1 and the answer is absolutely right" do
+        @card.repeate = 1
+        q = 5
+        @comparator.interval_calc(q)
+        expect(@card.interval).to eq 1
       end
-      it "#update_card_attr_right! must increase card.correct on 1 and review_date on 3 days if there is a 2nd correct answer" do
-        @card.update(correct: 1)
-        @comparator.update_card_attr_right!(@card)
-        expect(Card.find(@card.id).review_date.beginning_of_minute).to eq 3.days.from_now.beginning_of_minute
-        expect(Card.find(@card.id).correct).to be 2
+      it "must make @card.interval = 6 if @card.repeate = 2 and the answer is absolutely right" do
+        @card.repeate = 2
+        q = 5
+        @comparator.interval_calc(q)
+        expect(@card.interval).to eq 6
       end
-      it "#update_card_attr_right! must increase card.correct on 1 and review_date on 7 days if there is a 3rd correct answer" do
-        @card.update(correct: 2)
-        @comparator.update_card_attr_right!(@card)
-        expect(Card.find(@card.id).review_date.beginning_of_minute).to eq 7.days.from_now.beginning_of_minute
-        expect(Card.find(@card.id).correct).to be 3
-      end
-      it "#update_card_attr_right! must increase card.correct on 1 and review_date on 14 days if there is a 4th correct answer" do
-        @card.update(correct: 3)
-        @comparator.update_card_attr_right!(@card)
-        expect(Card.find(@card.id).review_date.beginning_of_minute).to eq 14.days.from_now.beginning_of_minute
-        expect(Card.find(@card.id).correct).to be 4
-      end
-      it "#update_card_attr_right! must increase card.correct on 1 and review_date on 14 days if there is a 4th correct answer" do
-        @card.update(correct: 4)
-        @comparator.update_card_attr_right!(@card)
-        expect(Card.find(@card.id).review_date.beginning_of_minute).to eq 1.month.from_now.beginning_of_minute
-        expect(Card.find(@card.id).correct).to be 5
+      it "must make @card.interval >6 if @card.repeate = 3, and the answer is absolutely right" do
+        @card.repeate = 3
+        @card.interval = 6
+        q = 5
+        @comparator.interval_calc(q)
+        expect(@card.interval).to be > 6
       end
     end
-    context "#update_card_attr_right! method" do
-      it "#check_on error must increase wrong on 1 if there is a first wrong answer" do
-      	@comparator.check_on_error!(@card)
-      	expect(Card.find(@card.id).wrong).to be 1
+
+    context "#efactor_calc" do
+      it "must make efactor greater than it was if q = 5 " do
+        old_efactor = @card.e_factor
+        q = 5
+        @comparator.efactor_calc(q)
+        expect(@card.e_factor).to be > old_efactor
       end
-      it "#check_on error must increase wrong on 1 if there is a first wrong answer" do
-      	@card.wrong = 2
-      	@card.correct = 1
-      	@comparator.check_on_error!(@card)
-      	expect(Card.find(@card.id).wrong).to be 0
-      	expect(Card.find(@card.id).correct).to be 0
+      it "must make efactor near the same than it was if q = 4 " do
+        old_efactor = @card.e_factor
+        q = 4
+        @comparator.efactor_calc(q)
+        expect((@card.e_factor).round(1)).to be == old_efactor
       end
+      it "must make efactor smaller than it was if q = 3 " do
+        old_efactor = @card.e_factor
+        q = 3
+        @comparator.efactor_calc(q)
+        expect(@card.e_factor).to be < old_efactor
+      end
+
     end
-    context "#CardComparator.call" do
+
+    context "#CardComparator" do
       
       it ".call must return result.success? = true if texts is equal" do
         result = CardComparator.call(card: @card, compared_text: "mom")
@@ -83,11 +102,11 @@ require "spec_helper"
         result = CardComparator.call(card: @card, compared_text: "mam")
         expect(result.type_error?).to be true
       end
-      it ".call must return result.success = true if texts is equal" do
+      it ".call must return result.type_error? = true if texts have 2 error" do
         result = CardComparator.call(card: @card, compared_text: "mag")
         expect(result.type_error?).to be true
       end
-      it ".call must return result.success = true if texts is equal" do
+      it ".call must return result.wrong = true if texts is not equal" do
         result = CardComparator.call(card: @card, compared_text: "dad")
         expect(result.wrong?).to be true
       end
