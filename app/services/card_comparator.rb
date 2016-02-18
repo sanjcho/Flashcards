@@ -14,50 +14,54 @@ class CardComparator
 
   def diff
   	difference = DamerauLevenshtein.distance(@card.original_text.downcase.strip, @compared_text.downcase.strip, 1, 2)
-    if  difference == 0     # until we have no jQuery timer, we think all answer "perfectly correct"
-      q = 5    
-  	elsif difference == 1   # incorrect answer with a little error
-      q = 2
-    elsif difference == 2   # incorrect answer with rather significant error
-      q = 1
-    elsif difference >= 3   # absolytely incorrect answer
-      q = 0
-  	end
-    review_date_calc(q)
-    @card.save
+    q = get_quality(difference)
+    @card.update(review_date_calc(q))
     return difference
   end
 
   def review_date_calc(q)
     if q < 3
-      @card.repeate = 1
-      @card.review_date = 1.day.from_now
-      @card.interval = 1
+      {    repeate: 1,
+       review_date: 1.day.from_now,
+          interval: 1
+      }
     else
-      interval_calc(q)
-      @card.repeate += 1
-      @card.review_date = @card.interval.days.from_now
+      efactor = efactor_calc(q, @card.e_factor) if @card.repeate >= 3
+      efactor = @card.e_factor if @card.repeate < 3
+      interval = interval_calc(@card.interval, efactor, @card.repeate)
+      {
+      e_factor: efactor,
+      interval: interval,
+      repeate: @card.repeate+1,
+      review_date: @card.interval.days.from_now
+      }
     end
   end
 
-  def interval_calc(q)
-
-    if @card.repeate == 1
-      @card.interval = 1
-    elsif @card.repeate == 2
-      @card.interval = 6
-    elsif @card.repeate >= 3
-      efactor_calc(q)
-      @card.interval = @card.interval*@card.e_factor
+  def interval_calc(interval, e_factor, repeate)
+    if repeate == 1
+      1
+    elsif repeate == 2
+      6
+    elsif repeate >= 3
+      interval*e_factor
     end
   end
 
-  def efactor_calc(q)
-    new_efactor = @card.e_factor-0.8+0.28*q-0.02*q*q 
-    if new_efactor < 1.3  # read about SuperMemo2 here https://www.supermemo.com/english/ol/sm2.htm
-      @card.e_factor = 1.3
-    else
-      @card.e_factor = new_efactor
+  def efactor_calc(q, efactor)
+    new_efactor = efactor-0.8+0.28*q-0.02*q*q
+    new_efactor < 1.3 ? 1.3 : new_efactor
+  end
+
+  def get_quality(diff)
+     if  diff == 0     # until we have no jQuery timer, we think all answer "perfectly correct"
+      5    
+    elsif diff == 1   # incorrect answer with a little error
+      2
+    elsif diff == 2   # incorrect answer with rather significant error
+      1
+    elsif diff >= 3   # absolytely incorrect answer
+      0
     end
   end
 end

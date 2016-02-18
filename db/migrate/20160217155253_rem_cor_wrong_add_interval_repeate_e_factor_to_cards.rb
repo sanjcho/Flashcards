@@ -4,7 +4,7 @@ class RemCorWrongAddIntervalRepeateEFactorToCards < ActiveRecord::Migration
     remove_column :cards, :wrong
     add_column :cards, :e_factor, :float, default: 2.5
     add_column :cards, :repeate, :integer, default: 1
-    add_column :cards, :interval, :float
+    add_column :cards, :interval, :float, default: 1
   end
  
   def down

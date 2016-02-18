@@ -30,66 +30,55 @@ require "spec_helper"
 
     context "#review_date_calc" do
       
-      it "must reset interval and repeate to 1 and stay efactor the same if answer is incorrect - q < 3" do
+      it "must return a hash with repeate:, review_date: and interval: if q < 3" do
         @card.repeate = 4
         @card.interval = 6
         ef_old = @card.e_factor
-        @comparator.review_date_calc(2)
-        expect(@card.repeate).to be == 1
-        expect(@card.interval).to be == 1
-        expect(@card.e_factor).to be == ef_old
+        expect(@comparator.review_date_calc(2)).to include(repeate: 1)
+        expect(@comparator.review_date_calc(2)).to include(:review_date)        
+        expect(@comparator.review_date_calc(2)).to include(interval: 1)
       end
 
-      it "must increase repeate on 1 if answer is correct q = 5" do
+      it "must return a hash with repeate:, review_date:, e_factor: and interval: if q >= 3" do
         @card.repeate = 4
         @card.interval = 6
-        @comparator.review_date_calc(5)
-        expect(@card.repeate).to be == 5
+        expect(@comparator.review_date_calc(5)).to include(repeate: @card.repeate+1)
+        expect(@comparator.review_date_calc(5)).to include(:review_date)        
+        expect(@comparator.review_date_calc(5)).to include(:interval)
+        expect(@comparator.review_date_calc(5)).to include(:e_factor)
       end
     end
     context "#interval_calc" do
      
-      it "must make @card.interval = 1 if @card.repeate = 1 and the answer is absolutely right" do
-        @card.repeate = 1
-        q = 5
-        @comparator.interval_calc(q)
-        expect(@card.interval).to eq 1
+      it "must return 1 if repeate = 1, interval and efactor is no affect" do
+        expect(@comparator.interval_calc( 6, 2.5, 1 )).to be == 1
       end
-      it "must make @card.interval = 6 if @card.repeate = 2 and the answer is absolutely right" do
-        @card.repeate = 2
-        q = 5
-        @comparator.interval_calc(q)
-        expect(@card.interval).to eq 6
+
+      it "must return 6 if repeate = 2, interval and efactor is no affect" do
+        expect(@comparator.interval_calc( 6, 2.5, 2 )).to be == 6
       end
-      it "must make @card.interval >6 if @card.repeate = 3, and the answer is absolutely right" do
-        @card.repeate = 3
-        @card.interval = 6
-        q = 5
-        @comparator.interval_calc(q)
-        expect(@card.interval).to be > 6
+
+      it "must return interval * efactor if repeate = 3, interval = 6 and efactor is 2.5" do
+        expect(@comparator.interval_calc( 6, 2.5, 3 )).to be == 6*2.5
       end
     end
 
     context "#efactor_calc" do
-      it "must make efactor greater than it was if q = 5 " do
-        old_efactor = @card.e_factor
+      before do
+        @old_efactor = @card.e_factor
+      end
+      it "must return efactor greater than it was if q = 5 " do
         q = 5
-        @comparator.efactor_calc(q)
-        expect(@card.e_factor).to be > old_efactor
+        expect(@comparator.efactor_calc(q, @card.e_factor)).to be > @old_efactor
       end
       it "must make efactor near the same than it was if q = 4 " do
-        old_efactor = @card.e_factor
         q = 4
-        @comparator.efactor_calc(q)
-        expect((@card.e_factor).round(1)).to be == old_efactor
+        expect(@comparator.efactor_calc(q, @card.e_factor).round(1)).to be == @old_efactor
       end
       it "must make efactor smaller than it was if q = 3 " do
-        old_efactor = @card.e_factor
         q = 3
-        @comparator.efactor_calc(q)
-        expect(@card.e_factor).to be < old_efactor
+        expect(@comparator.efactor_calc(q, @card.e_factor)).to be < @old_efactor
       end
-
     end
 
     context "#CardComparator" do
@@ -111,4 +100,20 @@ require "spec_helper"
         expect(result.wrong?).to be true
       end
     end
+
+    context "#get_quality" do
+      it "must return 5 if difference == 0" do
+        expect(@comparator.get_quality(0)).to be 5
+      end
+      it "must return 2 if difference == 1" do
+        expect(@comparator.get_quality(1)).to be 2
+      end
+      it "must return 1 if difference == 2" do
+        expect(@comparator.get_quality(2)).to be 1
+      end
+      it "must return 5 if difference >= 3" do
+        expect(@comparator.get_quality(3)).to be 0
+      end
+    end
+
   end

@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 20160217155253) do
     t.integer  "deck_id"
     t.float    "e_factor",        default: 2.5
     t.integer  "repeate",         default: 1
-    t.float    "interval"
+    t.float    "interval",        default: 1.0
   end
 
   add_index "cards", ["deck_id"], name: "index_cards_on_deck_id", using: :btree
