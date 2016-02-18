@@ -24,36 +24,40 @@ class CardComparator
       @q = 0
   	end
     review_date_calc
+    @card.save
     return difference
   end
 
   def review_date_calc
     if @q < 3
-      @card.update(repeate: 1, review_date: 1.day.from_now, interval: 1)
+      @card.repeate = 1
+      @card.review_date = 1.day.from_now
+      @card.interval = 1
     else
       interval_calc
-      @card.update(repeate: @card.repeate + 1, review_date: @card.interval.days.from_now)
+      @card.repeate += 1
+      @card.review_date = @card.interval.days.from_now
     end
   end
 
   def interval_calc
 
     if @card.repeate == 1
-      @card.update(interval: 1)
+      @card.interval = 1
     elsif @card.repeate == 2
-      @card.update(interval: 6)
+      @card.interval = 6
     elsif @card.repeate >= 3
       efactor_calc
-      @card.update(interval: @card.interval*@card.e_factor)
+      @card.interval = @card.interval*@card.e_factor
     end
   end
 
   def efactor_calc
     new_efactor = @card.e_factor-0.8+0.28*@q-0.02*@q*@q 
     if new_efactor < 1.3  # read about SuperMemo2 here https://www.supermemo.com/english/ol/sm2.htm
-      @card.update(e_factor: 1.3)
+      @card.e_factor = 1.3
     else
-      @card.update(e_factor: new_efactor)
+      @card.e_factor = new_efactor
     end
   end
 end
