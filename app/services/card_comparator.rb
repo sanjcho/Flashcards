@@ -37,20 +37,23 @@ class CardComparator
   end
 
   def interval_calc
+
     if @card.repeate == 1
       @card.update(interval: 1)
     elsif @card.repeate == 2
       @card.update(interval: 6)
     elsif @card.repeate >= 3
-      @card.update(interval: @card.interval*efactor)
+      efactor_calc
+      @card.update(interval: @card.interval*@card.e_factor)
     end
   end
 
-  def efactor
-    if new_efactor = @card.e_factor-0.8+0.28*@q-0.02*@q*@q < 1.3   # read about SuperMemo2 here https://www.supermemo.com/english/ol/sm2.htm
-      return new_efactor = 1.3
+  def efactor_calc
+    new_efactor = @card.e_factor-0.8+0.28*@q-0.02*@q*@q 
+    if new_efactor < 1.3  # read about SuperMemo2 here https://www.supermemo.com/english/ol/sm2.htm
+      @card.update(e_factor: 1.3)
     else
-      return new_efactor
+      @card.update(e_factor: new_efactor)
     end
   end
 end
