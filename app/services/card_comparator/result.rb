@@ -1,14 +1,14 @@
-class CardComparator::Result < Struct.new(:diff)
+class CardComparator::Result < Struct.new(:q)
 
   def success?
-  	diff == 0
+  	q.between?(3, 5)
   end
 
   def type_error?
-  	diff.between?(0, 2) 
+  	q.between?(1, 2) 
   end
 
   def wrong?
-  	diff > 2
+  	q == 0
   end
 end
