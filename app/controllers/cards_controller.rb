@@ -41,6 +41,7 @@ class CardsController < ApplicationController
   end
 
   def compare
+    flash.clear
     result = CardComparator.call(card: card, compared_text: params[:compared_text])
     if result.success?   # absolutely right
       flash[:success] = t("success")
