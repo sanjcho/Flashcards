@@ -49,7 +49,13 @@ class CardsController < ApplicationController
     elsif result.wrong?    # error
       flash[:danger] = t("wrong")   
     end
-    redirect_to home_path
+    @card = current_user.card_choose if current_user #if there are user loggined in, check cards for training
+    @deck = @card.deck if @card  # if there are some card for training, select deck for link generating
+    @flash = flash
+    respond_to do |format|
+      format.js
+    end
+    #redirect_to home_path
   end
 
   private
