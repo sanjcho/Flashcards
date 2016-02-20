@@ -1,13 +1,8 @@
-<% flash.each do |key, value| %>
-  <div class="alert alert-<%= key %>"><%= value %></div>
-<% end %>
-<% if @card %>
-  <h3><%= card.translated_text %></h3>
-  <%= simple_form_for card, url: compare_deck_card_path(deck.id, card.id), method: "post", remote: true do |f| %>
+  <h3> <div id="translated"> <%= card.translated_text %>  </div> </h3>
+  <%= simple_form_for card, url: compare_deck_card_path(deck_id, card.id), method: "post", html: { class: "card_checkout"}, remote: true do |f| %>
+    <div id="card_exemplum">
     <%= image_tag(card.exemplum.url) if card.exemplum? %>
+    </div>
     <%= f.input :compared_text, label: t("original"), as: :fake %>
     <%= f.button :submit, t('check') %>
   <% end %>
-<% else %>
-  <p><%= t('no_card_to_verify') %></p>
-<% end %>
