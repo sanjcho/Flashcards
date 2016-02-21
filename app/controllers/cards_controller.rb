@@ -1,5 +1,5 @@
 class CardsController < ApplicationController
-
+  after_action :flash_clear, only: :compare
   helper_method :deck, :card
   def index
 
@@ -49,7 +49,12 @@ class CardsController < ApplicationController
     elsif result.wrong?    # error
       flash[:danger] = t("wrong")   
     end
-    redirect_to home_path
+    @flash = flash
+    respond_to do |format|
+      format.js {}
+      format.html {}
+      #format.json { render json: {flash: flash}.to_json }
+    end
   end
 
   private
@@ -64,6 +69,10 @@ class CardsController < ApplicationController
 
   def card
     @card ||= current_user.cards.find(params[:id])
+  end
+
+  def flash_clear
+    flash.clear
   end
 
 end

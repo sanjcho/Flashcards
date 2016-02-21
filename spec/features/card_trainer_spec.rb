@@ -1,7 +1,7 @@
 require "rails_helper"
 require "helpers"
 
-describe "card training process", type: :feature do 
+describe "card training process", type: :feature, js: true do 
   before :each do
     user_deck_and_card_create
     login(@user)

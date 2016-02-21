@@ -1,0 +1,53 @@
+[33mcommit f286654cc27edc40ebb192ac41069f0a1fd6aacf[m
+Author: Aleksandr <sanjcho@gmail.com>
+Date:   Thu Feb 18 20:34:58 2016 +0500
+
+    remove newrelic.yml from repo
+
+[33mcommit 3acef80ec703519481f7996912d16d9d370a1e69[m
+Author: Aleksandr <sanjcho@gmail.com>
+Date:   Thu Feb 18 19:37:00 2016 +0500
+
+    new relic added
+
+[33mcommit 106976659c20d63ee29071b6fccaea83bcee7410[m
+Author: Aleksandr <sanjcho@gmail.com>
+Date:   Thu Feb 18 19:10:02 2016 +0500
+
+    add rollbar
+
+[33mcommit cae723cf1f713c699a4f1b72dcf0276fe1c8c62c[m
+Merge: 977ee25 67b3062
+Author: Aleksandr <sanjcho@gmail.com>
+Date:   Thu Feb 18 18:39:56 2016 +0500
+
+    Merge branch 'master' of github.com:sanjcho/Flashcards
+
+[33mcommit 67b3062b01b4e42dc7e9d1a1de2b10f557da78f2[m
+Merge: 0f51161 93e07c0
+Author: Maxim Pechnikov <parallel588@gmail.com>
+Date:   Thu Feb 18 16:35:38 2016 +0300
+
+    Merge pull request #18 from sanjcho/17th-task
+    
+    17th task
+
+[33mcommit 977ee2505520befc412096512d4db6a76a996001[m
+Merge: 0f51161 93e07c0
+Author: Aleksandr <sanjcho@gmail.com>
+Date:   Thu Feb 18 18:29:45 2016 +0500
+
+    Merge branch '17th-task'
+
+[33mcommit 93e07c089bef1e9d5c528a12a3ef96574237d7af[m
+Merge: 6deb69a 0f51161
+Author: Aleksandr <sanjcho@gmail.com>
+Date:   Thu Feb 18 18:28:32 2016 +0500
+
+    merge forgotten changes from master
+
+[33mcommit 6deb69a3c543220ccf8ee15002cb8cf3a5812b66[m
+Author: Aleksandr <sanjcho@gmail.com>
+Date:   Thu Feb 18 17:51:34 2016 +0500
+
+    move to % and #qualify replace #diff method in CardComporator class
