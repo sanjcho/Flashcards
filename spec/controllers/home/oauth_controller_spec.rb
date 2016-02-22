@@ -1,7 +1,7 @@
 require "rails_helper"
 require "helpers"
 
-describe OauthsController do
+describe Home::OauthsController do
 
 
   describe "#callback" do

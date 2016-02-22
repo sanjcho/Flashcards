@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class Dashboard::UsersController < Dashboard::ApplicationController
 
   before_action :set_user
 
@@ -15,7 +15,7 @@ class UsersController < ApplicationController
       @user.update(user_params)
       I18n.locale = @user.locale if @user.previous_changes.include?("locale")   #if locale was changed
       flash[:success] = t('user_update_success')
-      redirect_to home_path
+      redirect_to user_path
     else
       update_columns(email: params[:user][:email])
     end

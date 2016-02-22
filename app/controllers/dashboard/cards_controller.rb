@@ -1,8 +1,7 @@
-class CardsController < ApplicationController
+class Dashboard::CardsController < Dashboard::ApplicationController
   after_action :flash_clear, only: :compare
   helper_method :deck, :card
   def index
-
     @cards = deck.cards
   end
 
@@ -59,20 +58,20 @@ class CardsController < ApplicationController
 
   private
 
-  def card_params
-    params.require(:card).permit(:original_text, :translated_text, :id, :compared_text, :exemplum, :deck_id)
-  end
+    def card_params
+      params.require(:card).permit(:original_text, :translated_text, :id, :compared_text, :exemplum, :deck_id)
+    end
 
-  def deck
-    @deck ||= current_user.decks.find(params[:deck_id])
-  end
+    def deck
+      @deck ||= current_user.decks.find(params[:deck_id])
+    end
 
-  def card
-    @card ||= current_user.cards.find(params[:id])
-  end
+    def card
+      @card ||= current_user.cards.find(params[:id])
+    end
 
-  def flash_clear
-    flash.clear
-  end
+    def flash_clear
+      flash.clear
+    end
 
 end

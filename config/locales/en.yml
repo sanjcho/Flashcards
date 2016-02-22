@@ -44,7 +44,7 @@ en:
   success_with_type_error: "You are right, but you type - "
   what_is_need_to_be_typed: ", and the correct answer is - "
   no_card_to_verify: "There are no cards for chek you knowlage, relax for a little!"
-  home: "Home"
+  home: "trainer"
   register: "Registration"
   user_created: "The user was successfully created"
   sign_up_link: "Registration"

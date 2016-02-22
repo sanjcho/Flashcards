@@ -52,12 +52,7 @@ gem 'newrelic_rpm'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
 
-  gem 'byebug'
-  
-end
 group :test do
   gem 'rspec-rails', '~> 3.4.0'
   gem 'database_cleaner', '~> 1.5.1'
@@ -71,9 +66,12 @@ group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
   gem 'letter_opener', '~> 1.4.1'
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  #gem 'spring', github: 'sonalkr132/spring', branch: 'bundler-dep'
-end
-group :development, :production do
+  gem 'capistrano-rails'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rbenv'
+  gem 'capistrano3-puma'  
 
+end
+group :production do
+  gem 'puma'
 end

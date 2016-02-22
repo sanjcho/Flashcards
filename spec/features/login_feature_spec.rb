@@ -14,7 +14,7 @@ describe "login_logout process and links vision", type: :feature do
   end
   it "user logout must be successfull" do
     login(@user)
-    visit "home"
+    visit "trainer"
     click_link I18n.t("logout_link")
     expect(page).to have_content I18n.t("logout_successful")
   end
@@ -32,18 +32,18 @@ describe "login_logout process and links vision", type: :feature do
   end
   it "logined user must have my_page link" do
     login(@user)
-    visit "home"
+    visit "trainer"
     expect(page).to have_content I18n.t("my_page")
   end
   it "logined user must have clickable link edit_my_page" do
     login(@user)
-    visit "home"
+    visit "trainer"
     click_link I18n.t("edit_user_link")
     expect(page).to have_content I18n.t("email_here")
   end
   it "logined user must have clickeble link to my_profile" do
     login(@user)
-    visit "home"
+    visit "trainer"
     click_link I18n.t("my_page")
     expect(page).to have_content @user.email
   end

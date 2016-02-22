@@ -1,6 +1,4 @@
-class OauthsController < ApplicationController
-  skip_before_action :require_login
-
+class Home::OauthsController < Home::ApplicationController
   # sends the user on a trip to the provider,
   # and after authorizing there back to the callback url.
   def oauth
@@ -10,7 +8,6 @@ class OauthsController < ApplicationController
   def callback
     provider = auth_params[:provider]
     if current_user
-      puts "hellow provider"
       if @user = add_provider_to_user(provider)
         flash[:success] = t("connection_success")
         redirect_to user_path

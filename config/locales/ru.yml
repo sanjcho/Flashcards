@@ -44,7 +44,7 @@ ru:
   success_with_type_error: "Вы правы, однако вы ввели - "
   what_is_need_to_be_typed: ", а надо было ввести - "
   no_card_to_verify: "Ни у одной карточки пока еще не истек срок проверки, отдыхайте!"
-  home: "Домой"
+  home: "Тренировщик"
   register: "Регистрация"
   user_created: "Пользователь успешно создан!"
   sign_up_link: "Регистрация"

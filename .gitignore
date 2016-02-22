@@ -10,6 +10,9 @@ config/database.yml
 /config/initializers/sorcery.rb
 public/uploads/
 config/newrelic.yml
+config/provision/keys/id_rsa
+config/provision/keys/id_rsa.pub
+config/provision/configs/settings.yml
 /.env
 
 
