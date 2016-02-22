@@ -14,7 +14,7 @@ class Dashboard::TrainerController < ApplicationController
                         }
         end
       else
-        format.json { render json: {message: t('no_card_to_verify'), no_card: true }}
+        format.json { render json: { message: t('no_card_to_verify'), no_card: true } }
       end
     end
   end
