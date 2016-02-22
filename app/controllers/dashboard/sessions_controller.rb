@@ -9,7 +9,7 @@ class Dashboard::SessionsController < ApplicationController
   def create
     if login(params[:session][:email], params[:session][:password])
       flash[:success] = t("login_successful")
-      redirect_to(home_path)
+      redirect_to user_path
     else
       flash[:danger] = t("login_unsuccessful")
       redirect_to new_session_path
