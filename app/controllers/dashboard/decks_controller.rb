@@ -1,4 +1,4 @@
-class Dashboard::DecksController < ApplicationController
+class Dashboard::DecksController < Dashboard::ApplicationController
 
   helper_method :deck
   def index

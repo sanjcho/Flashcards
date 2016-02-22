@@ -1,4 +1,4 @@
-class Dashboard::CardsController < ApplicationController
+class Dashboard::CardsController < Dashboard::ApplicationController
   after_action :flash_clear, only: :compare
   helper_method :deck, :card
   def index

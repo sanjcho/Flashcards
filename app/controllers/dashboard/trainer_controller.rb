@@ -1,4 +1,4 @@
-class Dashboard::TrainerController < ApplicationController
+class Dashboard::TrainerController < Dashboard::ApplicationController
   
   def index
     @card = current_user.card_choose if current_user #if there are user loggined in, check cards for training
