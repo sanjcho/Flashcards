@@ -1,4 +1,4 @@
-class SessionsController < ApplicationController
+class Dashboard::SessionsController < ApplicationController
   
   skip_before_action :require_login, only: [:new, :create]
 

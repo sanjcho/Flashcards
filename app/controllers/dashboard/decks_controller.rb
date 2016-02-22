@@ -1,4 +1,4 @@
-class DecksController < ApplicationController
+class Dashboard::DecksController < ApplicationController
 
   helper_method :deck
   def index
@@ -45,8 +45,8 @@ class DecksController < ApplicationController
       params.require(:deck).permit(:name, :id, :active)
     end
 
-  def deck
-    @deck ||= current_user.decks.find(params[:id])
-  end
+    def deck
+      @deck ||= current_user.decks.find(params[:id])
+    end
 
 end

@@ -1,0 +1,11 @@
+  <% if @card %>
+<div class="flash">
+    <%= render partial: "flash", locals: { } %>
+</div>
+<div class="compare">
+  <%= render partial: "trainer_form", locals: {card: @card, deck_id: @deck.id, } %>
+</div>
+  <% else %>
+<p><%= t('no_card_to_verify') %></p>
+  <% end %>
+<p><div id="message"></div></p>
