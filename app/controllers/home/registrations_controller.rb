@@ -1,7 +1,4 @@
-class Home::RegistrationsController < ApplicationController
-
-  skip_before_action :require_login, only: [:new, :create]
-
+class Home::RegistrationsController < Home::ApplicationController
 
   def new
     @user = User.new

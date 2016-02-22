@@ -1,6 +1,4 @@
-class Home::OauthsController < ApplicationController
-  skip_before_action :require_login
-
+class Home::OauthsController < Home::ApplicationController
   # sends the user on a trip to the provider,
   # and after authorizing there back to the callback url.
   def oauth

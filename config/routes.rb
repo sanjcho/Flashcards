@@ -6,12 +6,12 @@ Rails.application.routes.draw do
     post "oauth/callback", to: "oauths#callback"
     get "oauth/callback", to: "oauths#callback" # for use with Github, Facebook
     get "oauth/:provider", to: "oauths#oauth", as: :auth_at_provider
+    resource :session, only: [:new, :create, :destroy]  
     resource :registration, only: [:new, :create] 
   end
 
   scope "/dashboard", module: "dashboard" do 
     get "trainer", to: "trainer#index"
-    resource :session, only: [:new, :create, :destroy]  
     resource :user, only: [:show, :edit, :update]
     resources :decks do
       member do
