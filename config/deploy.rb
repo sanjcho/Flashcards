@@ -3,7 +3,7 @@ lock '3.4.0'
 
 set :application, 'flashcards'
 set :repo_url, 'git@github.com:sanjcho/Flashcards.git'
-set :branch, 'master'
+set :branch, '20th-task'
 set :deploy_to, '/home/sanjcho/applications/flashcards'
 
 set :log_level, :info
