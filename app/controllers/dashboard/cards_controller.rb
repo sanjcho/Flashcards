@@ -1,17 +1,17 @@
 class Dashboard::CardsController < Dashboard::ApplicationController
+  
   after_action :flash_clear, only: :compare
   helper_method :deck, :card
+  
   def index
     @cards = deck.cards
   end
 
   def new
-
     @card = deck.cards.new
   end
 
   def create
-
     @card = deck.cards.new(card_params)
     @card.user_id = current_user.id
     if @card.save
@@ -41,18 +41,17 @@ class Dashboard::CardsController < Dashboard::ApplicationController
 
   def compare
     result = CardComparator.call(card: card, compared_text: params[:compared_text])
-    if result.success?   # absolutely right
+    if result.success?         # absolutely right
       flash[:success] = t("success")
     elsif result.type_error?   # right, but some type errors
       flash[:warning] = t("success_with_type_error") + params[:compared_text] + t("what_is_need_to_be_typed") + card.original_text
-    elsif result.wrong?    # error
+    elsif result.wrong?        # error
       flash[:danger] = t("wrong")   
     end
     @flash = flash
     respond_to do |format|
       format.js {}
       format.html {}
-      #format.json { render json: {flash: flash}.to_json }
     end
   end
 

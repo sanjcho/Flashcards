@@ -5,7 +5,7 @@ class CardComparator::Result < Struct.new(:q)
   end
 
   def type_error?
-  	q.between?(1, 2) 
+  	q.between?(1, 2)
   end
 
   def wrong?
