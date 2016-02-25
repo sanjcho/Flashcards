@@ -1,3 +1,7 @@
 master branch [![Build Status](https://travis-ci.org/sanjcho/Flashcards.svg?branch=master)](https://travis-ci.org/sanjcho/Flashcards)
-19h-task branch [![Build Status](https://travis-ci.org/sanjcho/Flashcards.svg?branch=19th-task)](https://travis-ci.org/sanjcho/Flashcards)
 <a href="https://codeclimate.com/github/sanjcho/Flashcards"><img src="https://codeclimate.com/github/sanjcho/Flashcards/badges/gpa.svg" /></a>
+# Флешкарточкер
+
+Данное приложение представляет из себя менеджер флеш-карточек. Флеш-карточка это лист бумаги, на которой с двух сторон написан текст: на родном языке с одной стороны, и перевод - с другой. Такие карточки очень популярны для изучения языков. Чаще всего подобные карточки используются при помощи системы интервальных повторений. Это означает, что каждая карточка повторяется через увеличивающиеся интервалы времени. Эффективность подобного метода доказана.
+Пользователь имеет возможность зарегистрироваться, создавать, редактировать и удалять колоды карт и карты в них. Каждая вновь созданная карта сразу же появляется в тренировщике. Интервалы повторений меняются в соответствии с алгоритмом [SuperMemo2](https://www.supermemo.com/english/ol/sm2.htm). К каждой карточке можно подгрузить картинку-пример, для визуализации и упрощения запоминания.
+Для установки приложения rake db:setup
