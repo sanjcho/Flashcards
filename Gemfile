@@ -32,6 +32,7 @@ group :test do
   gem 'capybara', '~> 2.6.0'
   gem "selenium-webdriver", "~> 2.52.0"
   gem 'factory_girl_rails', '~> 4.5.0'
+  gem "codeclimate-test-reporter", require: nil
 end
 
 group :development, :production do
