@@ -7,6 +7,8 @@
 require "nokogiri"
 require "open-uri"
 
+user = User.create(email: "testmail@mail.com", password: "somepassword", password_confirmation: "somepassword" )
+deck = user.decks.create(name: "My first deck", active: true)
 page = Nokogiri::HTML(open("http://www.homeenglish.ru/250Popular1.htm"))
 page.css('#middle > table tr').drop(1).each do |item|
   i=1
@@ -14,7 +16,7 @@ page.css('#middle > table tr').drop(1).each do |item|
     orig = item.css('td')[i].text
     i += 1
     transl = item.css('td')[i].text
-    c = Card.new(original_text: orig, translated_text: transl)
+    c = deck.cards.new(original_text: orig, translated_text: transl)
     if c.valid?
       c.save
     else

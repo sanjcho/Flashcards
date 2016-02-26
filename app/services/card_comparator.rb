@@ -9,11 +9,11 @@ class CardComparator
   end
 
   def self.call(params)
-  	 Result.new(new(params).qualify)
+    Result.new(new(params).qualify)
   end
 
   def qualify
-  	difference = DamerauLevenshtein.distance(@card.original_text.downcase.strip, @compared_text.downcase.strip, 1, 2)
+    difference = DamerauLevenshtein.distance(@card.original_text.downcase.strip, @compared_text.downcase.strip, 1, 2)
     length = @card.original_text.strip.length
     q = get_quality(difference, length).to_i
     @card.update(review_date_calc(q))
@@ -22,19 +22,20 @@ class CardComparator
 
   def review_date_calc(q)
     if q < 3
-      {    repeate: 1,
-       review_date: 1.day.from_now,
-          interval: 1
+      {    
+        repeate: 1,
+        review_date: 1.day.from_now,
+        interval: 1
       }
     else
       efactor = efactor_calc(q, @card.e_factor) if @card.repeate >= 3
       efactor = @card.e_factor if @card.repeate < 3
       interval = interval_calc(@card.interval, efactor, @card.repeate)
       {
-      e_factor: efactor,
-      interval: interval,
-      repeate: @card.repeate+1,
-      review_date: @card.interval.days.from_now
+        e_factor: efactor,
+        interval: interval,
+        repeate: @card.repeate+1,
+        review_date: @card.interval.days.from_now
       }
     end
   end

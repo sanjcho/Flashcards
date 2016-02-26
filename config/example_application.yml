@@ -1,0 +1,21 @@
+# Add configuration values here, as shown below.
+#
+# pusher_app_id: "2954"
+# pusher_key: 7381a978f7dd7f9a1117
+# pusher_secret: abdc3b896a0ffb85d373
+# stripe_api_key: sk_test_2J0l093xOyW72XUYJHE4Dv2r
+# stripe_publishable_key: pk_test_ro9jV5SNwGb1yYlQfzG17LHK
+#
+# production:
+#   stripe_api_key: sk_live_EeHnL644i6zo4Iyq4v1KdV9H
+#   stripe_publishable_key: pk_live_9lcthxpSIHbGwmdO941O1XVU
+SORCERY_VK_KEY: "youre key for VK"   #you can get it here https://vk.com/dev
+SORCERY_VK_SECRET: "youre secret VK"
+SORCERY_VK_HOST: "http://localhost/oauth/callback?provider=vk"
+S3_KEY: "AMAZON AWS S3 key"      #you can get it here for free https://aws.amazon.com/
+S3_SECRET: "S3 secret key"
+S3_BUCKET: "youre bucket name"
+SENDGRID_USERNAME: "sendgrid username if you want to use sendgrid mailer"  # you can take all here for free https://sendgrid.com/
+SENDGRID_PASSWORD: "sendgrid password"
+ROLLBAR_ACCESS_TOKEN: "Rollbar token if you want to use rollbar"  # you can take token here https://rollbar.com, it is free for public repo
+NEW_RELIC_LIC_KEY: "New relic key if you want to use it"   # follow the link, it is free for public repo http://newrelic.com/

@@ -15,15 +15,12 @@ class Home::OauthsController < Home::ApplicationController
         flash[:danger] = user.errors.full_messages
         redirect_to user_path
       end
-  
     elsif @user = login_from(provider)
       flash[:success] = t("You_are_logined_with") + provider.titleize
       redirect_to home_path
     else
       begin
         @user = create_from(provider)
-        # NOTE: this is the place to add '@user.activate!' if you are using user_activation submodule
-
         reset_session # protect from session fixation attack
         auto_login(@user)
         flash[:success] = t("You_are_Signedup_with") + provider.titleize
@@ -35,10 +32,8 @@ class Home::OauthsController < Home::ApplicationController
     end
   end
 
-  #example for Rails 4: add private method below and use "auth_params[:provider]" in place of 
-  #"params[:provider] above.
-
   private
+  
   def auth_params
      params.permit(:code, :provider)
   end

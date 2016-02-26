@@ -1,6 +1,7 @@
 class Dashboard::DecksController < Dashboard::ApplicationController
 
   helper_method :deck
+  
   def index
     @decks = current_user.decks.order("id DESC")
   end
