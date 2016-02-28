@@ -1,4 +1,4 @@
-desc "Task for mark/unmark user's who have exired cards and send an eMail to them"
+desc "Task for mail users who have exired cards"
 task :mailer_feed => :environment do
    User.have_expired_card_mail
- end
+end
