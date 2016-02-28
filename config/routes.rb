@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   scope "/home", module: "home" do 
     get 'oauths/oauth'  
     post "oauth/callback", to: "oauths#callback"
-    get "oauth/callback", to: "oauths#callback" # for use with Github, Facebook
+    get "oauth/callback", to: "oauths#callback" 
     get "oauth/:provider", to: "oauths#oauth", as: :auth_at_provider
     resource :session, only: [:new, :create, :destroy]  
     resource :registration, only: [:new, :create] 

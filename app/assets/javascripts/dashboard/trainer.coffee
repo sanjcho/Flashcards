@@ -12,7 +12,7 @@ refresh_card = ->
         $("#translated").text(json.translated_text)
         $(".card_checkout").attr('action', json.path)
         $(".card_checkout").attr('id', json.card_id)
-        $("#compared_text").empty()
+        $("#compared_text").val("")
 
 
 $ ->
