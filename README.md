@@ -18,10 +18,9 @@ StackEdit stores your documents in your browser, which means all your documents 
 ----
 Работающая версия доступна на [heroku](https://flashcards-sanjcho.herokuapp.com/)
 
-Если ты хочешь запустить локальную версию, используй команды `rake db:create` и `bundle install`
-Также необходимо изучить файл *config/example_aplication.yml*, он содержит переменные окружения, которые необходимо заполнить для успешного запуска приложения. После этого файл необходимо переименовать в application.yml и добавить в .gitignore. Используй ссылки в комментариях, чтобы получить соответствующие ключи.
+Если ты хочешь запустить локальную версию, то необходимо изучить файл *config/aplication_example.yml*, он содержит переменные окружения, которые необходимо заполнить для успешного запуска и переименовать его в application.yml. Далее надо обратить внимание на database_example.yml, заполнить его и переименовать в database.yml. Далее используй команды `rake db:create`, `rake db:migrate` и `bundle install`
 
-Для запуска тестов `rspec spec`
+Для запуска тестов, введи `rspec spec`
 
 ### For english speaker
 ----

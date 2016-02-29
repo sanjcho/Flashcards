@@ -11,7 +11,7 @@
 #   stripe_publishable_key: pk_live_9lcthxpSIHbGwmdO941O1XVU
 SORCERY_VK_KEY: "youre key for VK"   #you can get it here https://vk.com/dev
 SORCERY_VK_SECRET: "youre secret VK"
-SORCERY_VK_HOST: "http://localhost/oauth/callback?provider=vk"
+SORCERY_VK_HOST: "http://localhost/home/oauth/callback?provider=vk"
 S3_KEY: "AMAZON AWS S3 key"      #you can get it here for free https://aws.amazon.com/
 S3_SECRET: "S3 secret key"
 S3_BUCKET: "youre bucket name"
