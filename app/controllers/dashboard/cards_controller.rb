@@ -39,26 +39,12 @@ class Dashboard::CardsController < Dashboard::ApplicationController
     redirect_to deck_cards_path
   end
 
-  def compare
-    result = CardComparator.call(card: card, compared_text: params[:compared_text])
-    if result.success?         # absolutely right
-      flash[:success] = t("success")
-    elsif result.type_error?   # right, but some type errors
-      flash[:warning] = t("success_with_type_error") + params[:compared_text] + t("what_is_need_to_be_typed") + card.original_text
-    elsif result.wrong?        # error
-      flash[:danger] = t("wrong")   
-    end
-    @flash = flash
-    respond_to do |format|
-      format.js {}
-      format.html {}
-    end
-  end
+
 
   private
 
     def card_params
-      params.require(:card).permit(:original_text, :translated_text, :id, :compared_text, :exemplum, :deck_id)
+      params.require(:card).permit(:original_text, :translated_text, :id, :exemplum, :deck_id)
     end
 
     def deck

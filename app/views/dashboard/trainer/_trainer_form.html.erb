@@ -1,5 +1,5 @@
   <h3> <div id="translated"> <%= card.translated_text %>  </div> </h3>
-  <%= simple_form_for card, url: compare_deck_card_path(deck_id, card.id), method: "post", html: { class: "card_checkout"}, remote: true do |f| %>
+  <%= simple_form_for card, url: compare_card_path(card.id), method: "post", html: { class: "card_checkout" }, remote: true do |f| %>
     <div id="card_exemplum">
     <%= image_tag(card.exemplum.url) if card.exemplum? %>
     </div>

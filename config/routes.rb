@@ -12,16 +12,13 @@ Rails.application.routes.draw do
 
   scope "/dashboard", module: "dashboard" do 
     get "trainer", to: "trainer#index"
+    post "compare/card/:id", to: "trainer#compare", as: :compare_card
     resource :user, only: [:show, :edit, :update]
     resources :decks do
       member do
         post "make_active"
       end
-      resources :cards, except: [ :show ] do
-        member do
-          post 'compare'
-        end
-      end
+      resources :cards, except: [ :show ]
     end
   end
 
