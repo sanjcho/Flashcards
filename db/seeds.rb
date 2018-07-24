@@ -7,20 +7,21 @@
 require "nokogiri"
 require "open-uri"
 
-user = User.create(email: "testmail@mail.com", password: "somepassword", password_confirmation: "somepassword" )
-deck = user.decks.create(name: "My first deck", active: true)
+User.find_or_create_by(email: "testmail@mail.com").update_attributes(password: "somepassword", password_confirmation: "somepassword" )
+user = User.first
+deck = user.decks.find_or_create_by(name: "My first deck", active: true)
 page = Nokogiri::HTML(open("http://www.homeenglish.ru/250Popular1.htm"))
 page.css('#middle > table tr').drop(1).each do |item|
   i=1
   2.times do
-    orig = item.css('td')[i].text
+    orig = item.css('td')[i]&.text&.split(' ')&.first
     i += 1
-    transl = item.css('td')[i].text
-    c = deck.cards.new(original_text: orig, translated_text: transl)
-    if c.valid?
+    transl = item.css('td')[i]&.text
+    c = deck.cards.find_or_initialize_by(original_text: orig, translated_text: transl, user: user) if orig && transl
+    if c&.valid?
       c.save
     else
-      puts c.errors.full_messages
+      puts c.errors.full_messages if c&.errors&.present?
     end
     i += 2
   end

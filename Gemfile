@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
 
-ruby '2.3.0'
+ruby '2.3.1'
 
 gem 'rails', '4.2.5.1'
-gem 'bundler', '~> 1.11.2'
+gem 'bundler', '~> 1.16.1'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
@@ -19,7 +19,7 @@ gem 'mini_magick', "~> 4.3.6"
 gem 'fog', "~> 1.37.0"
 gem 'rails_12factor', group: :production
 gem 'foreman', '~> 0.78.0'
-gem 'damerau-levenshtein', '~>1.1.0'
+gem 'damerau-levenshtein', '~>1.3.1'
 gem "twitter-bootstrap-rails", '~>3.2.2'
 gem 'whenever', '~> 0.9.4', require: false
 gem 'http_accept_language', '~> 2.0.5'
